@@ -1,0 +1,19 @@
+﻿<div class="modal-header">
+    <h4 style="margin: 0;">{{ title }}</h4>
+</div>
+<form name="versionForm" novalidate ng-submit="ok()">
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="control-label">Name:</label>
+            <input type="text" class="form-control" ng-model="version.VersionName" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Affiliates:</label>
+            <select kendo-multi-select k-options="affiliateOptions" k-ng-model="version.Affiliates"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary pull-right" ng-disabled="isValid() == false"><i class="fa fa-check-square-o"></i>Ok</button>
+        <a class="cancel pull-left" ng-click="cancel()">Cancel</a>
+    </div>
+</form>

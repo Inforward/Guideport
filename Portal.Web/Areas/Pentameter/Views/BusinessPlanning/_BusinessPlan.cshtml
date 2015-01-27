@@ -1,0 +1,225 @@
+﻿@model BusinessPlan
+
+<div class="businessplan">
+    <div class="page">
+        <section class="section mission">
+            <header>
+                <h2><strong>Mission:</strong> Statement of Existence</h2>
+            </header>
+            @if (string.IsNullOrEmpty(Model.MissionWhat) && string.IsNullOrEmpty(Model.MissionWhy) && string.IsNullOrEmpty(Model.MissionHow))
+            {
+                <span class="missing-data">No data.</span>
+            }
+            @if (!string.IsNullOrEmpty(Model.MissionWhat))
+            {
+                <p class="text-pre">@Model.MissionWhat</p>
+            }
+            @if (!string.IsNullOrEmpty(Model.MissionHow))
+            {
+                <p class="text-pre">@Model.MissionHow</p>
+            }
+            @if (!string.IsNullOrEmpty(Model.MissionWhy))
+            {
+                <p class="text-pre">@Model.MissionWhy</p>
+            }            
+        </section>
+        <section class="section vision">
+            <header>
+                <h2><strong>Vision:</strong> Statement of Change</h2>
+            </header>
+            @if (string.IsNullOrEmpty(Model.VisionOneYear) && string.IsNullOrEmpty(Model.VisionFiveYear))
+            {
+                <span class="missing-data">No data.</span>
+            }
+            @if (!string.IsNullOrEmpty(Model.VisionOneYear))
+            {
+                <p class="text-pre">@Model.VisionOneYear</p>
+            }
+            @if (!string.IsNullOrEmpty(Model.VisionFiveYear))
+            {
+                <p class="text-pre">@Model.VisionFiveYear</p>
+            }
+        </section>
+    </div>
+    <div class="page">
+        <section class="section roles">
+            <header>
+                <h2><strong>Organization:</strong> Roles & Responsibilities</h2>
+            </header>
+            @if (!Model.EmployeeRoles.Any())
+            {
+                <span class="missing-data">No data.</span>
+            }
+            else
+            {
+                <div class="row">
+                    @Html.SeriesSplitter(Model.EmployeeRoles.OrderBy(er => er.Name), 2,
+                        @<div class="col-xs-6">
+                             <h4>@item.Name</h4>
+                             <p class="description text-pre">@item.Description</p>
+                             <ul>
+                                 @foreach (var employee in item.Employees)
+                                 {
+                                     <li>@string.Format("{0} {1} {2}", employee.FirstName, employee.MiddleInitial, employee.LastName)</li>
+                                 }
+                             </ul>
+                         </div>,
+                        @Html.Raw("</div><div class='row'>"))
+                </div>
+                
+                <div class="row orgchart">
+                    <div class="col-xs-12">
+                        <div id="orgchart" class="k-orgchart"></div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+    <div class="page">
+        <section class="section swots">
+            <header>
+                <h2><strong>SWOT:</strong> Strengths, Weaknesses, Opportunities & Threats</h2>
+            </header>
+            <div class="swot strength">
+                <h4>Strengths</h4>
+                <ul>
+                    @foreach (var swot in Model.Swots.Where(s => s.Type == "Strength" ).OrderBy(s => s.Description))
+                    {
+                        <li>@swot.Description</li>
+                    }
+                </ul>
+                <span class="bg-letter">S</span>
+            </div>
+            <div class="swot weakness">
+                <h4>Weaknesses</h4>
+                <ul>
+                    @foreach (var swot in Model.Swots.Where(s => s.Type == "Weakness").OrderBy(s => s.Description))
+                    {
+                        <li>@swot.Description</li>
+                    }
+                </ul>
+                <span class="bg-letter">W</span>
+            </div>
+            <div class="swot opportunity">
+                <h4>Opportunities</h4>
+                <ul>
+                    @foreach (var swot in Model.Swots.Where(s => s.Type == "Opportunity").OrderBy(s => s.Description))
+                    {
+                        <li>@swot.Description</li>
+                    }
+                </ul>
+                <span class="bg-letter">O</span>
+            </div>
+            <div class="swot threat">
+                <h4>Threats</h4>
+                <ul>
+                    @foreach (var swot in Model.Swots.Where(s => s.Type == "Threat").OrderBy(s => s.Description))
+                    {
+                        <li>@swot.Description</li>
+                    }
+                </ul>
+                <span class="bg-letter">T</span>
+            </div>
+        </section>
+    </div>
+    <div class="page">
+        <section class="section objectives">
+            <header>
+                <h2><strong>Objectives:</strong> Measurements of Change</h2>
+            </header>
+            @if (!Model.Objectives.Any())
+            {
+                <span class="missing-data">No data.</span>
+            }
+            else
+            {
+                 foreach (var objective in Model.Objectives.OrderBy(o => o.Name))
+                 {
+                     var value = objective.PercentComplete();
+                     var labelCssClass = value == 100 ? "label-wrap complete" : "label-wrap";
+                     var enabled = (!objective.AutoTrackingEnabled).ToString().ToLower();
+                     
+                     <div class="objective">
+                         <a id="#Objective-@objective.ObjectiveID"></a>
+                         <h4>Objective: <span>@objective.Name</span></h4>
+                         <div class="objective-progress">
+                             <strong>Percent to completion:</strong>
+                             <span 
+                                 data-objective-id="@objective.ObjectiveID"
+                                 data-role="slider" 
+                                 data-enabled="@enabled"
+                                 data-min="0"
+                                 data-max="100"
+                                 data-small-step="5"
+                                 data-large-step="10"
+                                 data-show-buttons="false"
+                                 data-tooltip="{ format: '{0:N0} %' }"
+                                 data-value="@value"></span>
+
+                             <div class="@labelCssClass">
+                                 <label>@string.Format("{0} %", value)</label>
+                                 
+                                 <span class="done">
+                                     Objective Complete!
+                                 </span>
+                             </div>
+
+                         </div>
+                         <p class="goals">
+                             Goal:<span class="text-pre">@objective.FormattedValue()</span>
+                         </p>
+                         
+                         @if (objective.AutoTrackingEnabled)
+                         {
+                              if (!string.IsNullOrEmpty(objective.CurrentValue))
+                              {
+                                  <p class="goals">
+                                     Current:<span class="text-pre">@objective.FormattedCurrentValue()</span><span class="as-of">@string.Format("(as-of {0:MM/dd/yyyy})", objective.CurrentValueDate)</span>
+                                 </p>
+                              }
+
+                             if (!string.IsNullOrEmpty(objective.BaselineValue))
+                             {
+                                 <p class="goals">
+                                     Baseline:<span class="text-pre">@objective.FormattedBaselineValue()</span><span class="as-of">@string.Format("(as-of {0:MM/dd/yyyy})", objective.BaselineValueDate)</span>
+                                 </p>
+                             }
+                         }
+
+                         @if (objective.EstimatedCompletionDate.HasValue)
+                         {
+                             <p class="goals">
+                                 Est. Completion Date:<span class="text-pre">@string.Format("{0:MM/dd/yyyy}", objective.EstimatedCompletionDate)</span>
+                             </p>    
+                         }
+                         
+                         @foreach (var strategy in objective.Strategies.OrderBy(s => s.Name))
+                         {
+                             <p class="strategy">
+                                 Strategy:<span>@strategy.Name</span>
+                             </p>
+
+                             if (strategy.Tactics.Any())
+                             {
+                                 <div class="tactics">
+                                     <p><strong>Tactics</strong></p>
+                                     <ul>
+                                         @foreach (var tactic in strategy.Tactics.OrderBy(s => s.Name))
+                                         {
+                                             var checkMarkCssClass = tactic.IsCompleted ? "checkmark checked" : "checkmark";
+                                             var tooltip = "Click to mark " + (tactic.IsCompleted ? "incomplete." : "complete.");
+                                                 
+                                             <li>@tactic.Name <span title="@tooltip" class="@checkMarkCssClass" data-tactic-id="@tactic.TacticID"></span>
+                                                 <p class="description text-pre">@tactic.Description</p>
+                                             </li>
+                                         }
+                                     </ul>
+                                 </div>
+                             }
+                         }
+                     </div>
+                 }
+            }            
+        </section>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+﻿@model AdvisorViewModel
+@{
+    Layout = "~/Views/Shared/Layouts/_PortalBreadcrumb.cshtml";
+    ViewBag.Title = Html.PageTitle("Advisor View");
+    ViewBag.PageTitle = "Advisor View";
+
+    var isRestricted = ViewBag.IsRestricted ?? true;
+    var width = isRestricted ? "600px" : "800px";
+    var columnClass = isRestricted ? "col-sm-4" : "col-sm-3";
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+
+<div id="advisor-view" class="container">
+    <div class="page-header">
+        <h1>Advisor View</h1>
+    </div>
+    <div class="panel panel-default" style="max-width: @width;margin-top: 30px;">
+        <div class="panel-heading">Optional Filters:</div>
+        <div class="panel-body">
+            <form>
+                <div class="row">
+                    <div class="@columnClass">
+                        <label>First Name:</label>
+                        <input type="text" data-bind="value: criteria.firstName" />
+                    </div>
+                    <div class="@columnClass">
+                        <label>Last Name:</label>
+                        <input type="text" data-bind="value: criteria.lastName" />
+                    </div>
+                    <div class="@columnClass">
+                        <label>Group:</label>
+                        <select data-bind="value: criteria.groupId">
+                            @if (!isRestricted)
+                            {
+                                <option></option>
+                            }
+                            @foreach (var group in Model.Groups.OrderBy(g => g.Name))
+                            {
+                                <option value="@group.GroupID">@group.Name</option>
+                            }
+                        </select>
+                    </div>
+                    @if (!isRestricted)
+                    {
+                        <div class="@columnClass">
+                            <label>Affiliate:</label>
+                            <select data-bind="value: criteria.affiliateId">
+                                <option></option>
+                                @foreach (var affiliate in Model.Affiliates)
+                                {
+                                    <option value="@affiliate.AffiliateID">@affiliate.Name</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                </div>
+                <div class="clearfix mt15">
+                    <div class="pull-left" data-bind="visible: isSearching" style="display: none;">
+                        @Html.Partial("AjaxLoading", new AjaxLoadingStyle(){ Text = "Searching..." })
+                    </div>
+                    <div class="pull-right">
+                        <a href="#" class="mr15" data-bind="click: clearCriteria">Clear</a>
+                        <input type="submit" value="Search" class="btn btn-primary" data-bind="events: { click: search }" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <div data-bind="visible: hasData">
+            <div id="advisorViewGrid" class="advisor-view-results portal-grid"></div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: noResults" style="width: 320px; display: none;">
+            No records were found.  Please try again.
+        </div>
+    </div>
+</div>
+
+@section vendorScripts 
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+
+@section scripts 
+{
+    <script>
+        $(function () {
+            portal.advisorView.init({
+                isRestricted: @isRestricted.ToString().ToLower(),
+                defaultGroupId: '@ViewBag.DefaultGroupID'
+            });
+        });
+    </script>
+}

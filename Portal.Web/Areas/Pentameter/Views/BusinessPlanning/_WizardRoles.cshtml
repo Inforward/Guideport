@@ -1,0 +1,64 @@
+﻿
+<section class="editor-section">
+    <header class="clearfix roles-header-no-canvas">
+        <div class="pull-left mr30">
+            <h2><strong>Organization: </strong>Roles & Responsibilities</h2>
+        </div>
+        <div class="pull-left">
+            <a data-bind="click: addRole" class="btn btn-secondary btn-icon-left btn-add">Add New Role</a>       
+        </div>
+    </header>
+    <div class="editor-section-nav clearfix roles-header-canvas">
+        <ul class="nav nav-pills pull-left">
+            <li data-bind="attr: { class: getRoleNavigationClass }"><a data-bind="click: setRolesVisible">Roles & Responsibilities</a></li>
+            <li data-bind="attr: { class: getOrgNavigationClass }"><a data-bind="click: setOrgChartVisible">Organizational Chart</a></li>
+        </ul>
+        <div class="pull-right">
+            <a data-bind="click: addRole" class="btn btn-secondary btn-icon-left btn-add">Add New Role</a>    
+        </div>    
+    </div>
+    <div data-bind="visible: rolesVisible">
+
+        <div class="alert alert-info" data-bind="invisible: hasRoles">
+            You currently do not have any roles set up.  Click <strong>Add New Role</strong> above to get started.
+        </div>
+        <div data-bind="visible: hasRoles">
+            <table class="editor-table">
+                <thead>
+                    <tr>
+                        <th style="min-width: 200px;">Role</th>
+                        <th>Description</th>
+                        <th>No. of Employees</th>
+                        <th class="edit-buttons">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody data-role="listview"
+                       data-template="role-row-template"
+                       data-bind="source: roles, events: { edit: editRole, remove: removeRole }"></tbody>
+            </table>
+        </div>
+    </div>    
+
+    <div data-bind="invisible: rolesVisible">
+        
+        <div class="alert alert-info" data-bind="invisible: employees.data().length">
+            You currently do not have any employees set up. Please ensure your roles have associated employees.
+        </div>
+        
+        <div data-bind="visible: employees.data().length">
+            <div class="instructions">
+                <i class="fa fa-info-circle"></i> Drag a subordinate onto a supervisor in order to change a relationship.  Link lines can be deleted by selecting a line and pressing the Delete key.
+            </div>
+            <div id="orgchart" 
+                 class="k-orgchart"
+                 data-role="orgchart" 
+                 data-key-field="EmployeeID"
+                 data-parent-field="EmployeeParentID"
+                 data-name-field="FullName"
+                 data-title-field="Roles"
+                 data-auto-scale="false"
+                 data-bind="source: employees, events: { change: orgChartChanged }"></div>
+        </div>
+    </div>
+    
+</section>

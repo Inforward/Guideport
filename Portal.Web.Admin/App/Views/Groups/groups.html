@@ -1,0 +1,24 @@
+﻿<div class="page-head">
+    <h2 class="page-title">Groups</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li class="active">Groups</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="block-flat">
+        <div class="grid-toolbar">
+            <a href="#/groups/detail" class="btn btn-primary btn-add"><i class="fa fa-plus-circle"></i>Add Group</a>
+        </div>
+
+        <div ng-show="recordCount > 0">
+            <kendo-grid options="gridOptions"></kendo-grid>
+        </div>
+
+        <div ng-show="recordCount == 0" class="text-center">
+            <div class="alert alert-info inline-block">
+                This group does not contain any groups.  Click <strong>Add Groups</strong> above.
+            </div>
+        </div>
+    </div>
+</div>

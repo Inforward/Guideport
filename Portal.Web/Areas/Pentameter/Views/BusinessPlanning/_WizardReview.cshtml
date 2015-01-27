@@ -1,0 +1,91 @@
+﻿
+<div class="businessplan">
+    <div class="page">
+        <section class="section mission">
+            <header>
+                <h2><strong>Mission:</strong> Statement of Existence</h2>
+            </header>
+            <div class="section-content">
+                <p class="text-pre" data-bind="text: BusinessPlan.MissionWhat, visible: BusinessPlan.MissionWhat.length"></p>
+                <p class="text-pre" data-bind="text: BusinessPlan.MissionHow, visible: BusinessPlan.MissionHow.length"></p>
+                <p class="text-pre" data-bind="text: BusinessPlan.MissionWhy, visible: BusinessPlan.MissionWhy.length"></p>                
+            </div>
+        </section>
+        <section class="section vision">
+            <header>
+                <h2><strong>Vision:</strong> Statement of Change</h2>
+            </header>
+            <div class="section-content">
+                <p class="text-pre" data-bind="text: BusinessPlan.VisionOneYear, visible: BusinessPlan.VisionOneYear.length"></p>
+                <p class="text-pre" data-bind="text: BusinessPlan.VisionFiveYear, visible: BusinessPlan.VisionFiveYear.length"></p>
+            </div>
+        </section>
+    </div>
+    <div class="page">
+        <section class="section roles">
+            <header>
+                <h2><strong>Organization:</strong> Roles & Responsibilities</h2>
+            </header>
+            <div data-bind="source: roles" data-template="review-roles" class="section-content">
+                    
+            </div>
+        </section>
+    </div>
+    <div class="page">
+        <section class="section swots">
+            <header>
+                <h2><strong>SWOT:</strong> Strengths, Weaknesses, Opportunities & Threats</h2>
+            </header>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="swot strength">
+                        <h4>Strengths</h4>
+                        <ul data-bind="source: swotStrengths" data-template="review-swot-item">
+                    
+                        </ul>
+                        <span class="bg-letter">S</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="swot weakness">
+                        <h4>Weaknesses</h4>
+                        <ul data-bind="source: swotWeaknesses" data-template="review-swot-item">
+                    
+                        </ul>
+                        <span class="bg-letter">W</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="swot opportunity">
+                        <h4>Opportunities</h4>
+                        <ul data-bind="source: swotOpportunities" data-template="review-swot-item">
+                    
+                        </ul>
+                        <span class="bg-letter">O</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="swot threat">
+                        <h4>Threats</h4>
+                        <ul data-bind="source: swotThreats" data-template="review-swot-item">
+                    
+                        </ul>
+                        <span class="bg-letter">T</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="page">
+        <section class="section objectives">
+            <header>
+                <h2><strong>Goals:</strong> Measurements of Change</h2>
+            </header>
+            <div data-bind="source: objectives" data-template="review-objective" class="section-content">
+                
+            </div>          
+        </section>
+    </div>
+</div>

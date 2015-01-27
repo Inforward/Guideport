@@ -1,0 +1,77 @@
+﻿@model Wizard
+@{
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Breadcrumb.cshtml";
+    ViewBag.Title = Html.PageTitle(string.Format("Track My Progress | {0}", Model.Name));
+    ViewBag.PageTitle = string.Format("Track My Progress | {0}", Model.Name);
+}
+@section head
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts 
+{
+    @Scripts.Render(ScriptBundleNames.Pentameter)
+    @Scripts.Render(ScriptBundleNames.PlanningWizard)
+
+    <script type="text/javascript">
+        $(function () {
+            portal.planningWizard.init({
+                baseUrl: '/pentameter/succession-planning/planning-tool/@Model.PlanningWizardID'
+            });
+        });
+    </script>
+}
+@section pageTitle
+{
+    <div>
+        <h1>@Model.Name</h1>
+        <p>@Model.Description</p>
+    </div>
+}
+
+<section id="workflow" class="planning container" style="display: none;">
+    
+    <div class="planning-nav-score-wrap">
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="planning-nav-wrap">
+                    <ul data-template="nav-template" data-bind="source: Phases">
+                
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="planning-score-wrap">
+                    <span class="score" data-bind="text: percentCompleteText">0 %</span>
+                    <span class="score-label">Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="phase-container" data-template="phase-template" data-bind="source: Phases">
+        
+    </div>
+
+</section>
+
+@using (Html.BeginHtmlTemplate("nav-template"))
+{
+    <li data-bind="attr: { class: phaseNavClass }">
+        <a data-bind="click: selectPhase">
+            <div class="circle">
+                <span class="number">#=Number#</span>
+            </div>
+            <span class="name">#=Name#</span>
+        </a>
+    </li>
+}
+
+@{ Html.RenderPartial("_WizardPhase"); }
+@{ Html.RenderPartial("_WizardStep"); }
+@{ Html.RenderPartial("_WizardActionItem"); }
+

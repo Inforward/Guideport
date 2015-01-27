@@ -1,0 +1,189 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{title}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a>Content</a></li>
+        <li><a href="#/content/files">Files</a></li>
+        <li class="active">{{title}}</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="tab-container">
+        <tabset>
+
+            <tab heading="Settings">
+                <div>
+                    <form name="settingsForm" novalidate ng-submit="saveFile(settingsForm)" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Site:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates the site this file belongs in."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select ng-options="option.SiteID as option.SiteName for option in sites" ng-model="content.SiteID" ng-change="siteChanged()" ng-show="isNew()"></select>
+                                <div class="value-only" ng-hide="isNew()">
+                                    {{ content.Site.SiteName }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Title:<span class="required"></span>
+                                <span class="fa fa-info-circle info-icon" tooltip="The title of the file that will appear in search results and within the knowledge library (if elected)."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="content.Title" ng-blur="setPermalink()" required />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="content.Permalink.length">
+                            <label class="col-sm-2 control-label">
+                                Permalink:
+                                <span class="fa fa-info-circle info-icon" tooltip="This is the permanent URL to this file."></span>
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="value-only permalink-label-wrap">
+                                    https://{{ content.Site.DomainName }}{{ content.Permalink }}
+                                    <a class="k-button btn-copy" ui-zeroclip zeroclip-model="content.Permalink"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Description:
+                                <span class="fa fa-info-circle info-icon" tooltip="A brief description of the file that can be search on."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" ng-model="content.Description"></textarea>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                File:
+                            </label>
+                            <div class="col-sm-10" ng-show="uploader.visible">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        <input id="file" name="file" type="file" kendo-upload k-options="uploadOptions" />
+                                    </div>
+                                    <div class="pull-left cancel-wrap" ng-show="content.FileID > 0">
+                                        <a ng-click="uploader.visible=false">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-10" ng-hide="uploader.visible">
+                                <i class="fa fa-file-o"></i>
+                                <a target="_blank" ng-href="{{ content.Permalink }}">{{ content.FileInfo.Name }}</a>
+                                <a class="btn btn-default btn-xs ml30" ng-click="uploader.visible=true"><i class="fa fa-upload"></i>Update File</a>
+                            </div>
+                        </div>
+                        <div ng-hide="uploader.visible">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">File Size:</label>
+                                <div class="col-sm-10">
+                                    <div class="value-only">{{ content.FileInfo.SizeBytes | bytes: 0 }}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">File Type:</label>
+                                <div class="col-sm-10">
+                                    <div class="value-only">{{ content.SiteDocumentType.DocumentTypeName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="topics.length">
+                            <hr />
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    Include in KL?
+                                    <span class="fa fa-info-circle info-icon" tooltip="Indicates whether or not this file will appear in the knowledge library."></span>
+                                </label>
+                                <div class="col-sm-6">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-model="content.IncludeInKnowledgeLibrary">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="content.IncludeInKnowledgeLibrary">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        Topic:<span class="required"></span>
+                                    </label>
+                                    <div class="col-sm-3">
+                                        <select id="Topic" name="Topic" style="width:100%;"
+                                                kendo-dropdownlist
+                                                k-options="topicOptions"
+                                                k-ng-delay="topicOptions"
+                                                ng-required="content.IncludeInKnowledgeLibrary && topics.length"
+                                                k-ng-model="content.KnowledgeLibrary.Topic"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        Sub-topic:
+                                    </label>
+                                    <div class="col-sm-3">
+                                        <select id="Subtopic" name="Subtopic" style="width:100%;"
+                                                kendo-dropdownlist
+                                                k-options="subTopicOptions"
+                                                k-ng-delay="subTopicOptions"
+                                                k-ng-model="content.KnowledgeLibrary.Subtopic"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        Created By:
+                                    </label>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" ng-model="content.KnowledgeLibrary.CreatedBy" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Profile Types:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates which profile types can access this file.  Blank indicates all profiles types can access this file."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <select kendo-multi-select
+                                        k-data-source="profileTypes"
+                                        k-rebind="profileTypes"
+                                        k-data-text-field="'Name'"
+                                        k-data-value-field="'ProfileTypeID'"
+                                        k-ng-model="content.ProfileTypes"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Affiliates:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates which affiliates can access this file.  Blank indicates all affiliates can access this file."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <select kendo-multi-select
+                                        k-data-source="affiliates"
+                                        k-rebind="affiliates"
+                                        k-data-text-field="'Name'"
+                                        k-data-value-field="'AffiliateID'"
+                                        k-ng-model="content.Affiliates"></select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <div class="button-row">
+                                    <button type="submit" class="btn btn-primary pull-left" ng-disabled="settingsForm.$invalid"><i class="fa fa-save"></i>Save File</button>
+                                    <div class="pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </tab>
+
+        </tabset>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+USE [Innova]
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EventLog]') AND type in (N'U'))
+BEGIN
+	DROP TABLE [dbo].[EventLog]	
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[app].[EventType]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [app].[EventType]
+	(
+		EventTypeID TINYINT NOT NULL,
+		Name		VARCHAR( 50 ) NOT NULL
+		CONSTRAINT [PK_EventType] PRIMARY KEY CLUSTERED( EventTypeID ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO

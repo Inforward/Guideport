@@ -1,0 +1,193 @@
+﻿@using evointernal
+@model Portal.Web.Areas.Pentameter.Models.Succession.DashboardViewModel
+@{
+    ViewBag.Title = "Pentameter | Succession Planning - Track Your Progress";
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Breadcrumb.cshtml";
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    <script>
+    $(function () {
+        $("body").termsDialog({
+            validateUrl: '/terms/@ViewBag.TermsKey/validate',
+            acceptUrl: '/terms/@ViewBag.TermsKey/accept',
+            termsContent: $("#terms"),
+            onAccepted: function () {
+                $("[data-role='gauge']").gauge();
+                $(".nano").nanoScroller({ alwaysVisible: true });
+            }
+        });
+    });
+</script>
+}
+
+<div class="container">
+
+    <div class="dashboard-header">
+        <h1>Succession Dashboard</h1>
+        <p>
+            The Succession Dashboard allows you to track the status of your enrollment profile, Qualified Buyer program requisites, and continuity,
+            succession and business acquisition plans. You must initiate enrollment before you can access the Qualified Buyer program pre-assessment
+            form or the continuity planning, succession planning and business acquisition step-by-step tools.
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <div class="widget widget-lg @Model.EnrollmentStatus.State.ToString().ToLower()">
+                <div class="header">
+                    <h2 class="title">Enrollment</h2>
+                </div>
+                <div class="body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div data-role="gauge" data-score="@Math.Round(Model.EnrollmentStatus.PercentComplete * 100)" data-context="Complete"></div>
+                            @if (Model.EnrollmentStatus.State != SurveyState.NotStarted)
+                            {
+                                @EnrollmentButton(Model.EnrollmentStatus.State)
+                            }
+                        </div>
+                        <div class="col-sm-8">
+                            @if (Model.EnrollmentStatus.State == SurveyState.NotStarted)
+                            {
+                                <h3>Get Started:</h3>
+                                <p>
+                                    To unlock your dashboards, you must first begin your enrollment and confirm your specific interests.
+                                </p>
+                                @EnrollmentButton(Model.EnrollmentStatus.State)
+                            }
+                            else
+                            {
+                                <h3>Your Interests:</h3>
+                                <div class="nano">
+                                    <div class="nano-content">
+                                        <ul>
+                                            <li>
+                                                <strong>Continuity Planning</strong>
+                                                @Model.EnrollmentStatus.ContinuityPlanning.Message
+
+                                                @if (Model.EnrollmentStatus.ContinuityPlanning.Interested)
+                                                {
+                                                    @WidgetAction("You have unlocked the Continuity Planning tool.")
+                                                }
+                                            </li>
+                                            <li>
+                                                <strong>Succession Planning</strong>
+                                                @Model.EnrollmentStatus.SuccessionPlanning.Message
+
+                                                @if (Model.EnrollmentStatus.SuccessionPlanning.Interested)
+                                                {
+                                                    @WidgetAction("You have unlocked the Succession Planning tool.")
+                                                }
+                                            </li>
+                                            <li>
+                                                <strong>Business Acquisition & Funding</strong>
+                                                @Model.EnrollmentStatus.BusinessAcquisition.Message
+
+                                                @if (Model.EnrollmentStatus.BusinessAcquisition.Interested)
+                                                {
+                                                    @WidgetAction("You have unlocked the Business Acquisition tool.")
+                                                }
+                                                @if (Model.EnrollmentStatus.BusinessAcquisitionFunding.Interested)
+                                                {
+                                                    @WidgetAction("You have unlocked the Qualified Buyer Program assessment.")
+                                                }
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            @Widget(Model.QualifiedBuyerStatus, Model.EnrollmentStatus.State, "Qualified")
+        </div>
+        <div class="col-sm-6 col-md-4">
+            @Widget(Model.ContinuityPlanningStatus, Model.EnrollmentStatus.State)
+        </div>
+        <div class="col-sm-6 col-md-4">
+            @Widget(Model.SuccessionPlanningStatus, Model.EnrollmentStatus.State)
+        </div>
+        <div class="col-sm-6 col-md-4">
+            @Widget(Model.BusinessAcquisitionStatus, Model.EnrollmentStatus.State)
+        </div>
+
+    </div>
+</div>
+
+<div id="terms" style="display: none;">
+    <p>
+        Use of this site and the materials contained or referenced herein is expressly conditioned on your acceptance of the Terms of Use accompanying the site.
+        While the Center, Cetera Financial Group, certain third party providers and their respective personnel may provide the Services and facilitate
+        and allow business transfers, combinations and other transactions, none of these parties (even their attorneys and accountants), are acting as
+        attorneys or accountants on behalf or for the benefit of any user of the Site or party to such a transaction.  Cetera Financial Group,
+        <strong>THE CENTER AND THEIR PERSONNEL (COLLECTIVELY,</strong> "Cetera Financial Group"
+        <strong>DO NOT PROVIDE LEGAL, ACCOUNTING OR TAX ADVICE, AND MAY NOT BE RELIED UPON THEREFOR.</strong>
+        Cetera Financial Group expresses no opinion as to the enforceability or adequacy of the contracts and other documentation, or advisability
+        of the transaction as it will be consummated, including the adequacy or appropriateness of the pricing in any transaction.  Parties utilizing the site
+        and the Materials remain responsible for their own compliance with the securities laws, rules and regulations notwithstanding any information
+        presented on the Site or by Cetera Financial Group. Cetera Financial Group strongly recommends that users seek their own professional advice with
+        respect to every transaction, including legal and tax counsel.
+    </p>
+    <p>
+        By using this site or any of the materials, you signify your assent to and acceptance of the above and of the Terms of Use. If you do not agree
+        with any part of the Terms of Use set forth, you must not use this Site or the Materials.
+    </p>
+</div>
+
+@helper EnrollmentButton(SurveyState state)
+{
+    var text = state == SurveyState.NotStarted ? "Enroll Now" : "Update Enrollment";
+    <a class="btn btn-primary btn-assessment btn-md btn-icon" href="@Url.RouteUrl("Pentameter.Succession.Enrollment", new { surveyName = Settings.SurveyNames.Enrollment })">@text</a>
+}
+
+@helper Widget(Status status, SurveyState enrollmentState, string context = "Complete")
+{
+    var cssClass = string.Format("widget {0} {1}", status.Unlocked ? "unlocked" : "locked", status.State.ToString().ToLower());
+
+    <div class="@cssClass">
+        <div class="header">
+            <h2 class="title">@status.Title</h2>
+            <span class="icon"></span>
+        </div>
+        <div class="body text-center">
+            <div data-role="gauge" data-score="@status.PercentComplete" data-context="@context"></div>
+            <div class="lock"></div>
+            <div>
+                <a class="btn btn-primary btn-md btn-icon btn-go" href="@status.ButtonUrl">@status.ButtonText</a>
+            </div>
+        </div>
+        <div class="overlay">
+            <div class="header">
+                <h2 class="title">@status.Title</h2>
+                <span class="icon"></span>
+            </div>
+            <div class="body">
+                <div class="message">
+                    @Html.Raw(status.Message)
+                </div>
+                @if (status.Unlocked && status.State == SurveyState.NotStarted)
+                {
+                    <a class="btn btn-primary btn-md btn-icon btn-go" href="@status.ButtonUrl">@status.ButtonText</a>
+                }
+                else
+                {
+                    @EnrollmentButton(enrollmentState)
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@helper WidgetAction(string text)
+{
+    <table class="action"><tr><td><span></span></td><td>@text</td></tr></table>
+}

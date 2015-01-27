@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = Html.PageTitle();
+    Layout = "~/Views/Shared/Layouts/_PortalDefault.cshtml";
+}
+@section scripts
+{
+    <script>
+        $('[data-toggle="tooltip"]').tooltip({
+            placement: 'top',
+            trigger: 'hover click'
+        });
+    </script>
+}
+<div class="welcome-wrap container">
+    <div class="hero">
+        <h1 class="headline">Welcome to <strong>Guideport</strong></h1>
+        <p>Inside you will find the <strong>tools and resources</strong> you need <span class="break"></span> to <strong>develop and grow</strong> your business.</p>
+    </div>
+    <div class="row promo-wrap">
+        @if (ViewBag.SuccessionPlanningEnabled ?? false)
+        {
+            @PentameterButton("col-sm-6 col-md-3")
+            @SuccessionButton("col-sm-6 col-md-3")
+            @RetirementButton("col-sm-6 col-sm-push-6 col-md-3 col-md-push-0")
+            @ConnectButton("col-sm-6 col-sm-pull-6 col-md-3 col-md-pull-0", ViewBag.EnableConnect2Clients ?? false)
+        }
+        else
+        {
+            @PentameterButton("col-sm-4")
+            @RetirementButton("col-sm-4 col-sm-push-4")
+            @ConnectButton("col-sm-4 col-sm-pull-4", ViewBag.EnableConnect2Clients ?? false)
+        }
+    </div>
+</div>
+
+@helper PentameterButton(string cssClass)
+{
+    <div class="@cssClass">
+        <a href="@Url.Content("~/pentameter")">
+            @Html.Image("~/Assets/Images/pentameter-button.png", "Pentameter", new { @class = "img-responsive" })
+        </a>
+    </div>
+}
+
+@helper RetirementButton(string cssClass)
+{
+    <div class="@cssClass">
+        <a href="@Url.Content("~/guided-retirement-solutions")">
+            @Html.Image("~/Assets/Images/grs-button.png", "Guided Retirement Solutions", new { @class = "img-responsive" })
+        </a>
+    </div>
+}
+
+@helper SuccessionButton(string cssClass)
+{
+    <div class="@cssClass">
+        <a href="@Url.Content("~/pentameter/succession-planning")">
+            @Html.Image("~/Assets/Images/sp-button.png", "Succession Planning", new { @class = "img-responsive" })
+        </a>
+    </div>
+}
+
+@helper ConnectButton(string cssClass, bool enabled)
+{
+    <div class="@cssClass">
+        @if (enabled)
+        {
+            <a href="http://www.connect2clients.com" target="_blank">
+                @Html.Image("~/Assets/Images/c2c-button.png", "Connect2Clients", new { @class = "img-responsive" })
+            </a>
+        }
+        else
+        {
+            <a href="#" data-toggle="tooltip" title="@ViewBag.Connect2ClientsTooltip" class="disabled">
+                @Html.Image("~/Assets/Images/c2c-button.png", "Connect2Clients", new { @class = "img-responsive disabled" })
+            </a>
+        }
+    </div>
+}

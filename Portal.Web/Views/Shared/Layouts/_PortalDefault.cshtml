@@ -1,0 +1,152 @@
+﻿@{
+    Layout = "~/Views/Shared/Layouts/_Default.cshtml";
+    var siteName = ViewBag.SiteName != null && !ViewBag.SiteName.Equals("Guideport", StringComparison.InvariantCultureIgnoreCase) ? ViewBag.SiteName : "";
+    var selectedSite = Request.QueryString["s"] ?? siteName;
+    var searchText = Request.QueryString["q"];
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Portal)
+    @RenderSection("head", required: false)
+}
+@section vendorScripts 
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts 
+{
+    @RenderSection("scripts", required: false)
+}
+
+<div id="full-wrap">
+    <div id="wrap">
+        @if (ViewBag.IsAssisting ?? false)
+        {
+            var displayName = ((User)ViewBag.AssistedUser).DisplayName;
+            
+            using (Html.BeginForm("EndSession", "AdvisorView", new {Area=""}, FormMethod.Post))
+            {
+                <div class="viewing-as-banner">
+                    <div>
+                        You are viewing as <span>@displayName<button type="submit" class="fa fa-times-circle"></button></span>
+                    </div>
+                </div>
+            }
+        }
+        <header id="header">
+            <div class="container">
+                <a href="#slide-nav" class="slide-nav-menu-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+
+                @RenderSection("logo", required: false)
+
+                <div class="nav-wrap">
+                    <div class="top-nav-wrap">
+                        <ul>
+                            @if (ViewBag.AdvisorViewEnabled ?? false)
+                            {
+                                <li><a href="@Url.RouteUrl("AdvisorView")">advisor view<i class="fa fa-eye"></i></a></li>
+                            }
+                            @if (ViewBag.AdminEnabled ?? false)
+                            {
+                                <li><a href="@Url.AdminConsoleUrl()" target="_blank">admin console<i class="fa fa-wrench"></i></a></li>
+                            }
+                            @if (ViewBag.ContactUrl != null)
+                            {
+                                <li><a href="@ViewBag.ContactUrl">contact<i class="fa fa-envelope-o"></i></a></li>
+                            }
+                            <li><a href="@Url.RouteUrl("Signout")">sign out<i class="fa fa-sign-in"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix">
+                        <div class="search-wrap">
+                            <form id="quick-search" class="search-form clearfix" method="GET" action="@Url.Content("~/Search")">
+                                <div class="input-wrap">
+                                    <input name="q" type="text" value="@searchText" placeholder="@selectedSite" required />
+                                </div>
+                                <a href="#" class="dropdown-toggle" id="siteSelectToggle" data-toggle="dropdown"></a>
+                                <div class="submit-wrap">
+                                    <button name="search" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="siteSelectToggle" id="siteSelectDropdown">
+                                    <li>All</li>
+                                    <li>Pentameter</li>
+                                    <li>Guided Retirement Solutions</li>
+                                </ul>
+                                <input name="s" type="hidden" value="@selectedSite" />
+                            </form>
+                        </div>
+                        <div class="menu-wrap">
+                            <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                Programs
+                                <i class="fa fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><i class="fa fa-home"></i><a role="menuitem" tabindex="-1" href="@Url.Content("~/")">Guideport</a></li>
+                                <li role="presentation"><i class="icon-pentameter-dial"></i><a role="menuitem" tabindex="-1" href="@Url.Content("~/pentameter")">Pentameter</a></li>
+                                @if (ViewBag.SuccessionPlanningEnabled ?? false)
+                                {
+                                    <li role="presentation"><i class="fa fa-share-square"></i><a role="menuitem" tabindex="-1" href="@Url.Content("~/pentameter/succession-planning")">Succession Planning</a></li>
+                                }
+                                <li role="presentation"><i class="fa fa-clock-o"></i><a role="menuitem" tabindex="-1" href="@Url.Content("~/guided-retirement-solutions")">Guided Retirement Solutions</a></li>
+                                @if (ViewBag.EnableConnect2Clients ?? false)
+                                {
+                                    <li role="presentation"><i class="c2c"></i><a role="menuitem" tabindex="-1" target="_blank" href="http://www.connect2clients.com">Connect2Clients</a></li>
+                                }
+                                else
+                                {
+                                    <li role="presentation" class="disabled" title="@ViewBag.Connect2ClientsTooltip"><i class="c2c"></i><a role="menuitem" tabindex="-1">Connect2Clients</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div id="main">
+            <div class="main-wrap">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="container">
+            <div class="clearfix">
+                <div class="footer-nav-wrap">
+                    <ul>
+                        <li><a href="@Url.Content("~/")">Home</a></li>
+                        @if (ViewBag.ContactUrl != null)
+                        {
+                            <li><a href="@ViewBag.ContactUrl">Contact</a></li>
+                        }
+                        @if (ViewBag.AdvisorViewEnabled ?? false)
+                        {
+                            <li><a href="@Url.RouteUrl("AdvisorView")">Advisor View</a></li>
+                        }
+                        @if (ViewBag.AdminEnabled ?? false)
+                        {
+                            <li><a href="@Url.AdminConsoleUrl()" target="_blank">Admin Console</a></li>
+                        }
+                        @if (ViewBag.TermsUrl != null)
+                        {
+                            <li><a href="@ViewBag.TermsUrl">Terms of Use</a></li>
+                        }
+                        <li><a href="@Url.RouteUrl("Signout")">Sign out</a></li>
+                    </ul>
+                </div>
+                
+                @RenderSection("footerLogo", required: false)
+                
+            </div>
+            <div class="footer-copyright">
+                &copy; @string.Format("2013-{0:yy} Cetera Financial Group, Inc.", DateTime.Today)
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- Mobile Nav -->
+@{ Html.RenderPartial("SlideMenu"); }

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbScriptCombine", "DbScriptCombine\DbScriptCombine.csproj", "{B6356989-286F-4DF6-93FB-A33F45E5E9E7}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://pcoltfs01.ad.corp:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DbScriptCombine\\DbScriptCombine.csproj
+		SccProjectName1 = DbScriptCombine
+		SccLocalPath1 = DbScriptCombine
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6356989-286F-4DF6-93FB-A33F45E5E9E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6356989-286F-4DF6-93FB-A33F45E5E9E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6356989-286F-4DF6-93FB-A33F45E5E9E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6356989-286F-4DF6-93FB-A33F45E5E9E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

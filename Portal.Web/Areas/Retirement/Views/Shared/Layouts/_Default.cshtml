@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/Layouts/_PortalDefault.cshtml";
+}
+@section head 
+{
+    @RenderSection("head", required: false)
+}
+@section logo
+{
+    <div class="logo-wrap grs-logo">
+        <a href="@Url.Content("~/guided-retirement-solutions")">
+            <img src="@Url.StaticContent("~/Assets/Images/grs-logo-reverse-2.png")" alt="Guided Retirement Solutions" />
+        </a>
+    </div>
+}
+@section footerLogo
+{
+    <div class="footer-logo-wrap grs-logo">
+        <img src="@Url.StaticContent("~/Assets/Images/grs-logo.png")" alt="Guided Retirement Solutions" />
+    </div>
+}
+@section vendorScripts 
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts 
+{
+    @RenderSection("scripts", required: false)
+}
+
+@RenderBody()

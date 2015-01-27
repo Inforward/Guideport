@@ -1,0 +1,41 @@
+﻿
+<section class="editor-section">
+    <header>
+        <h2><strong>Mission: </strong>Statement of Existence</h2>                  
+    </header>        
+    <div class="panel panel-default panel-textbox">
+        <div class="panel-heading">Currently, what does your company do?</div>
+        <div class="panel-body">
+            <textarea data-role="flextext" data-value-update="keyup" data-bind="value: BusinessPlan.MissionWhat, events: { blur: saveBusinessPlan }"></textarea>
+        </div>
+    </div>
+    <div class="panel panel-default panel-textbox">
+        <div class="panel-heading">How does it do it?</div>
+        <div class="panel-body">
+            <textarea data-role="flextext" data-value-update="keyup" data-bind="value: BusinessPlan.MissionHow, events: { blur: saveBusinessPlan }"></textarea>
+        </div>
+    </div>
+    <div class="panel panel-default panel-textbox">
+        <div class="panel-heading">Why does it do it?</div>
+        <div class="panel-body">
+            <textarea data-role="flextext" data-value-update="keyup" data-bind="value: BusinessPlan.MissionWhy, events: { blur: saveBusinessPlan }"></textarea>
+        </div>
+    </div>
+</section>
+<section class="editor-section">
+    <header>
+        <h2><strong>Vision: </strong>Statement of Change</h2>
+    </header>        
+    <div class="panel panel-default panel-textbox">
+        <div class="panel-heading">Within the next year, how will your company be different? How will you innovate?</div>
+        <div class="panel-body">
+            <textarea data-role="flextext" data-value-update="keyup" data-bind="value: BusinessPlan.VisionOneYear, events: { blur: saveBusinessPlan }"></textarea>
+        </div>
+    </div>
+    <div class="panel panel-default panel-textbox">
+        <div class="panel-heading">Within the next five years, how will your company be different? How will you innovate?</div>
+        <div class="panel-body">
+            <textarea data-role="flextext" data-value-update="keyup" data-bind="value: BusinessPlan.VisionFiveYear, events: { blur: saveBusinessPlan }"></textarea>
+        </div>
+    </div>
+</section>

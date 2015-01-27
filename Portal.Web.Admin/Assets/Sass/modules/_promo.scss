@@ -1,0 +1,49 @@
+
+.promo-container {
+    margin: 40px 60px;
+}
+
+.promo {
+    background-color: #fff;
+    padding: 30px;
+    margin: 15px;
+    text-align: center;
+    @include radius(4px);
+    border-left: 1px solid #efefef;
+	border-right: 1px solid #efefef;
+	border-bottom: 1px solid #e2e2e2;
+	box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.04);	
+    float: left;
+    height: 300px;
+    width: 300px;
+    display: none;
+
+    .promo-title {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 30px;
+        color: #000;
+    }
+
+    .promo-logo {
+        font-size: 60px; 
+        color: #007cdf;       
+    }
+
+    .promo-purpose {
+        margin: 30px 0;
+    }
+
+    .btn {
+        min-width: 100px;
+    }
+}
+
+.portalcontentadmin  .promo.content-admin,
+.portalsurveyadmin  .promo.survey-admin,
+.portalaffiliateadmin  .promo.affiliate-admin,
+.portaluseradmin  .promo.user-admin,
+.portalgroupadmin .promo.group-admin,
+.portalreporting  .promo.report-admin {
+    display: block;
+}

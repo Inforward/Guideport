@@ -1,0 +1,69 @@
+
+.pill-tabs {	
+	&.k-tabstrip {
+		box-shadow: none;
+
+		.k-tabstrip-items {
+			padding-top: 0;
+			margin-bottom: 20px;
+			list-style-type: none;
+
+			.k-item {
+				border: none;
+				border-top-style: none;
+				border-top-width: 0;
+				border-top-color: #fff;
+				margin-right: 12px;
+
+				.k-link {
+					background-color: #ACCBDB;
+					color: $white;
+					padding: 6px 12px;
+					border-top: none;
+					@include radius(6px);
+				}
+
+				&.k-state-active {
+					border-top-style: none;
+					border-top-width: 0;
+					border-top-color: #fff;
+
+					.k-link {
+						background-color: $fasi-light-blue;
+						color: $white;
+					}
+				}
+
+			}
+
+		}
+
+		&.k-tabstrip.k-header {
+			background-color: transparent;
+			border: none;
+		}
+
+		.k-content {
+			&.k-state-active {
+				border-top: none;
+			}
+		}
+	}
+
+//	li {
+//		margin-right: 10px;
+//
+//		a {
+//			display: block;
+//			padding: 5px 8px;
+//			
+//			text-decoration: none;
+//			cursor: pointer;
+//			
+//
+//			&.active {
+//				background-color: $fasi-light-blue;
+//			}
+//		}
+//	}
+}

@@ -1,0 +1,45 @@
+﻿@using Portal.Infrastructure.Configuration
+@model List<Affiliate>
+@{
+    ViewBag.Title = Html.PageTitle("");
+    Layout = "~/Views/Shared/Layouts/_Default.cshtml";
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Portal)
+}
+
+<div class="login">
+    <div class="login-header">
+        
+    </div>
+    <section class="container providers">
+        <header>
+            <h2 class="title">Select Your Broker / Dealer</h2>
+        </header>
+        <div>
+            <div class="row">
+                @{
+                    foreach (var affiliate in Model.Where(a => a.HasFeature(Features.LoginPage)).OrderBy(a => a.SamlDisplayOrder))
+                    {
+                        var samlLoginUrl = affiliate.SamlConfiguration.GetSetting("SingleSignOnServiceUrl", Settings.CurrentEnvironment);
+                        var samlConfigName = affiliate.SamlConfiguration.GetSetting("Name", Settings.CurrentEnvironment);
+                        var ssoLink = string.IsNullOrEmpty(samlLoginUrl) ? "#" : Url.Action("SingleSignOn", new { idp = samlConfigName, sourceDomain = affiliate.SamlSourceDomain, returnUrl = ViewBag.ReturnUrl });
+                        var logo = affiliate.Logos.FirstOrDefault(l => l.AffiliateLogoTypeID == (int) AffiliateLogoTypes.Tile);
+
+                        <div class="col-sm-6 col-md-3">
+                            <a class="provider @affiliate.Name.Slugify()" href="@ssoLink">
+                                @if (logo != null && logo.FileID > 0)
+                                {
+                                    <img src="@Url.Action("File", "Content", new { fileId = logo.FileID })" alt="@affiliate.Name" />
+                                }
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+</div>
+
+

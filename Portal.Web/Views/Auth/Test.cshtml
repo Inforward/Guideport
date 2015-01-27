@@ -1,0 +1,100 @@
+﻿@model SamlAttributesViewModel
+@{
+    ViewBag.Title = Html.PageTitle("Test");
+    Layout = "~/Views/Shared/Layouts/_Default.cshtml";
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Portal)
+}
+
+<div class="login">
+    <div class="login-header">
+        
+    </div>
+    <div class="container user-info">
+        
+        <div class="alert alert-success clearfix" role="alert">
+            <div style="margin-bottom: 20px;">
+                <div>
+                    Upload a SAML Response                        
+                </div>
+            </div>
+            <div>
+                @using (Html.BeginForm("UploadSaml", "Auth", FormMethod.Post, new { enctype = "multipart/form-data"}))
+                {
+                    <div class="pull-left mt5">
+                        <input type="file" name="SamlFile" />
+                    </div>
+                    <div class="pull-right">                        
+                        <input type="submit" value="Upload" class="btn btn-success" />
+                    </div>
+                }
+            </div>
+        </div>     
+
+        @if (Model != null)
+        {
+            if (Model.Attributes != null && Model.Attributes.Length > 0)
+            {
+                <h3 style="font-weight: bold;">SAML Attributes</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var attribute in Model.Attributes)
+                        {
+                            <tr>
+                                <td>@attribute.Name</td>
+                                <td>
+                                    @Html.Raw(string.Join("<br />", attribute.Values))
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-danger clearfix" role="alert">
+                    <div class="pull-left mt5">
+                        <i class="fa fa-thumbs-o-down"></i><strong>Could not retrieve any attributes</strong>    
+                    </div>
+                    <div class="pull-right">
+                        @using (Html.BeginForm("Login", "Auth"))
+                        {
+                            <input type="submit" value="Login" class="btn btn-warning" />
+                        }
+                    </div>
+                </div>
+            }
+        }           
+
+        @if(Model != null && Model.ErrorMessages != null && Model.ErrorMessages.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Errors / Warnings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul>
+                                @foreach (var errorMessage in Model.ErrorMessages)
+                                {
+                                    <li>@errorMessage</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>                
+        }
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model ResourcesViewModel
+@{
+    var resources = Model.SiteMap.Items.FindRecursive(map => map.Title == "Resources");
+    var children = resources != null ? resources.Children.ToList() : new List<SiteMapItem>();
+}
+@if (children.Any())
+{
+    var itemCount = children.Count;
+    var itemsPerColumn = itemCount / Model.Columns;
+    var current = 0;
+
+    if (itemCount % Model.Columns > 0)
+    {
+        itemsPerColumn++;
+    }
+
+    for (var column = 0; column < Model.Columns; column++)
+    {
+        var i = 0;
+        
+        <div class="@Model.CssClass">
+            <ul class="content-list">
+                @while (i < itemsPerColumn && children.Count > current)
+                {
+                    <li><a href="@children[current].Url">@children[current].Title</a></li>
+
+                    i++;
+                    current++;
+                }
+            </ul>
+        </div>
+    }
+}

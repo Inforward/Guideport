@@ -1,0 +1,101 @@
+﻿
+<section class="editor-section editor-swot">
+    <header>
+        <h2><strong>SWOT: </strong>Strengths, Weaknesses, Opportunities &amp; Threats</h2>
+    </header>
+    <div>
+        <div class="add-swot">
+            <div>
+                <label>Add new</label>
+                <input type="text" data-bind="value: swot.Description" />
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <select data-bind="value: swot.Type">
+                    <option>Strength</option>
+                    <option>Weakness</option>
+                    <option>Opportunity</option>
+                    <option>Threat</option>
+                </select>
+            </div>
+            <div>
+                <a class="btn btn-secondary" data-bind="click: addSwot">Add</a>
+            </div>
+        </div>
+            
+        <div class="swot-sections color" data-bind="attr: { class: getSwotContainerClass }">
+            <div class="swot-row">
+                <div class="swot-row-label">
+                    <span>Internal</span>
+                </div>
+                <div class="swot-section swot-strength">
+                    <span class="background-letter">S</span>
+                    <span class="title">Strengths</span>
+                    <div class="nano">
+                        <div class="nano-content">
+                            <ul data-role="listview"
+                                data-edit-template="swot-edit-template"
+                                data-template="swot-template"
+                                data-bind="source: swotStrengths, events: { save: saveSwot, remove: removeSwot, cancel: cancelEditSwot }"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="swot-section swot-weakness">
+                    <span class="background-letter">W</span>
+                    <span class="title">Weaknesses</span>
+                    <div class="nano">
+                        <div class="nano-content">
+                            <ul data-role="listview"
+                                data-edit-template="swot-edit-template"
+                                data-template="swot-template"
+                                data-bind="source: swotWeaknesses, events: { save: saveSwot, remove: removeSwot }"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swot-row">
+                <div class="swot-row-label">
+                    <span>External</span>
+                </div>
+                <div class="swot-section swot-opportunity">
+                    <span class="background-letter">O</span>
+                    <span class="title">Opportunities</span>
+                    <div class="nano">
+                        <div class="nano-content">
+                            <ul data-role="listview"
+                                data-edit-template="swot-edit-template"
+                                data-template="swot-template"
+                                data-bind="source: swotOpportunities, events: { save: saveSwot, remove: removeSwot }"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="swot-section swot-threat">
+                    <span class="background-letter">T</span>
+                    <span class="title">Threats</span>
+                    <div class="nano">
+                        <div class="nano-content">
+                            <ul data-role="listview"
+                                data-edit-template="swot-edit-template"
+                                data-template="swot-template"
+                                data-bind="source: swotThreats, events: { save: saveSwot, remove: removeSwot }"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swot-row mt10">
+                <div class="pull-right">
+                    <div class="onoffswitch">
+                        <input data-bind="checked: swotColorEnabled" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="swot-color-switch">
+                        <label class="onoffswitch-label" for="swot-color-switch">
+                            <div class="onoffswitch-inner"></div>
+                            <div class="onoffswitch-switch"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <span class="switch-label">color: </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

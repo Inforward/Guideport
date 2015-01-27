@@ -1,0 +1,17 @@
+USE [Innova]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[usr].[BranchUser]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [usr].[BranchUser]
+	(
+		BranchID			INT NOT NULL,
+		UserID				INT NOT NULL,
+		IsPrimary			BIT NOT NULL,
+		TerminatedDate		DATETIME,
+		CreateDate			DATETIME NOT NULL CONSTRAINT [DF_BranchUser_CreateDate] DEFAULT GETDATE(),
+		ModifyDate			DATETIME NOT NULL CONSTRAINT [DF_BranchUser_ModifyDate] DEFAULT GETDATE(),
+		CONSTRAINT [PK_BranchUser] PRIMARY KEY CLUSTERED( BranchID, UserID ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO

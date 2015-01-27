@@ -1,0 +1,30 @@
+
+.promo-wrap {
+
+    img {
+        margin-bottom: 20px;
+    }
+
+    a.disabled {
+       pointer-events: none;
+       cursor: default;
+    }
+
+    img.disabled {
+        opacity: 0.4;
+        filter: alpha(opacity=40); 
+    }
+
+    [class*="col"] {
+	    padding-left: 10px;
+	    padding-right: 10px;
+    }
+
+    a {
+	    text-decoration: none;
+    }
+}
+
+.jumbotron {
+	// Removed
+}

@@ -1,0 +1,24 @@
+﻿
+@using (Html.BeginHtmlTemplate("phase-template"))
+{
+    <table class="planning-phase" data-bind="fade: Selected">
+        <colgroup>
+            <col style="width: 25%;" />
+            <col style="width: 75%;" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <td class="border-right">
+                    <ul class="planning-steps-nav" data-template="step-nav-template" data-bind="source: Steps">
+            
+                    </ul>
+                </td>
+                <td>
+                    <div class="planning-steps" data-template="step-template" data-bind="source: Steps">
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

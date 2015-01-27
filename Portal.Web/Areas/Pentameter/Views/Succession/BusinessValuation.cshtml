@@ -1,0 +1,64 @@
+﻿@model MyBusinessPlansViewModel
+@{
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_SubPage.cshtml";
+    ViewBag.Title = Html.PageTitle("Business Valuation");
+    ViewBag.PageTitle = "Business Valuation";
+}
+@section head
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    <script>
+    $(function () {
+        $("body").termsDialog({
+            validateUrl: '/terms/@ViewBag.TermsKey/validate',
+                acceptUrl: '/terms/@ViewBag.TermsKey/accept',
+                termsContent: $("#terms"),
+                onAccepted: function () {
+                    $("[data-role='qlikviewFrame']").qlikviewFrame();
+                }
+            });
+        });
+    </script>
+}
+    
+<div class="page-header">
+    <h3>Your Business Valuation</h3>
+</div>
+<div>
+    <p>
+        Knowing the value of your financial services business is critically important for many business planning activities. Whether you are considering a continuity plan, buying or selling a business, or defining your firm’s long-term growth plans, understanding valuation and the elements that influence value is essential. This valuation resource looks at gross revenues—one of the many factors that contribute to the value of your business. Specifically, it looks at the difference between recurring revenue and non-recurring revenue and applies multiples that are often referenced in our industry. 
+    </p>
+    <p>
+        Additional variables that are not included in this resource are: location, client demographics, demand, revenue trends, total assets trends, transition risks, product mix, and systems. A comprehensive valuation will typically include these, and other metrics, to define the current market value of your firm.  There are firms that specialize in providing third-party valuations for the financial services industry that should be retained for a comprehensive valuation. 
+    </p>
+    <p>
+        While this resource does not include all factors, it does provide a good starting point so you can begin to evaluate other attributes that impact value and make it possible for you to begin making informed decisions and create business plans to achieve your objectives. 
+    </p>
+    <p>
+        If you have any questions about this tool, please call your dedicated regional Business Consultant or Dan Mayes, SVP, Succession Planning and Business Acquisition, at 619-702-9604 or dmayes@firstallied.com. You may also visit the Succession Planning and Business Acquisition Center for additional resources.    
+    </p>
+</div>
+<div>
+    <div class="center-block business-valuation">
+        <div class="frame"
+             data-role="qlikviewFrame"
+             data-document-name="PEAK_PMP.qvw%26select=LB_SheetName,Valuation"
+             data-height="100px"
+             data-width="400px"
+             data-timeout="60000"
+             data-error-message="We're sorry.  Business Valuation is currently unavailable.  Please try again later."
+             data-error-class="ajax-error alert alert-danger"
+             data-loading-text="Calculating...">
+        </div>
+    </div>
+    <div id="terms">
+        @Html.Partial("BusinessValuationTerms")        
+    </div>
+</div>

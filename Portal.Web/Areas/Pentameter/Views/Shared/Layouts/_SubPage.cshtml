@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Breadcrumb.cshtml";
+    var siteMap = (Portal.Model.SiteMap)ViewBag.SiteMap;
+    var summary = ViewBag.BusinessAssessmentSummary as SurveyPageSummary;
+    var isAdvisor = ViewBag.IsFinancialAdvisor ?? false;
+}
+@section head 
+{
+    @RenderSection("head", required: false)
+}
+@section vendorScripts 
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts 
+{
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(function() {
+            $("[data-role='gauge']").gauge();
+        });
+    </script>
+}
+@section pageTitle 
+{
+    <h1>@Html.Raw(ViewBag.PageTitle ?? ViewBag.Title)</h1>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-lg-9 col-sm-push-4 col-lg-push-3">
+            @if (IsSectionDefined("pageDescription"))
+            {
+                <div class="content-description">
+                    @RenderSection("pageDescription")
+                </div>
+            }
+            <div class="content-body">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-3 col-sm-pull-8 col-lg-pull-9 sidebar">
+            @Html.Menu(siteMap, new { id = "accordion", @class = "accordion" })
+            <div>
+                @if (summary == null && isAdvisor)
+                {
+                    <a class="btn btn-primary btn-sidebar btn-icon btn-assessment" href="@Url.PentameterSurveyUrl()">Launch Assessment</a>
+                    <br />
+                }
+                <a class="btn btn-primary btn-sidebar btn-icon btn-resources" href="@Url.Action("Index", "Resources", new { Area="Pentameter"})">Resources</a>
+            </div>
+            @RenderSection("belowMenu", required: false)
+        </div>
+    </div>
+</div>
+@if (summary != null)
+{
+    <div class="page-content-footer">
+        <div class="container recommended-content">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <h3>Your <strong>@summary.PageName</strong> summary</h3>
+                    <p>@Html.Raw(summary.ScoreSummary)</p>
+
+                    @if (summary.SuggestedContent.Any())
+                    {
+                        <p>The following resources are recommended to you based on your <a href="@Url.PentameterSurveyUrl()">assessment</a> answers:</p>
+                        <ul>
+                            @foreach (var content in summary.SuggestedContent)
+                            {
+                                <li><a href="@content.Url">@content.Title</a></li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <div data-role="gauge" 
+                         data-score="@summary.DisplayScore" 
+                         data-enabled="true"
+                         data-animate="false"
+                         data-title="update assessment" 
+                         data-title-url="@Url.PentameterSurveyUrl()"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

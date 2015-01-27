@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://firstallied.com/webservices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://firstallied.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://firstallied.com/webservices/">
+      <s:element name="FolderExists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FolderExistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FolderExistsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileExists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileExistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FileExistsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileSize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileSizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FileSizeResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountChunks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iChunkSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountChunksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountChunksResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadChunkBytes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iBeginByte" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="iEndByte" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadChunkBytesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownloadChunkBytesResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadChunk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iChunkSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iStartChunk" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadChunkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownloadChunkResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadChunk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="baChunk" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="iChunkSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iStartChunk" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadChunkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadChunkResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadChunkWithFilename">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubFolder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="baChunk" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="iChunkSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iStartChunk" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadChunkWithFilenameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadChunkWithFilenameResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FolderExistsSoapIn">
+    <wsdl:part name="parameters" element="tns:FolderExists" />
+  </wsdl:message>
+  <wsdl:message name="FolderExistsSoapOut">
+    <wsdl:part name="parameters" element="tns:FolderExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileExistsSoapIn">
+    <wsdl:part name="parameters" element="tns:FileExists" />
+  </wsdl:message>
+  <wsdl:message name="FileExistsSoapOut">
+    <wsdl:part name="parameters" element="tns:FileExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileSizeSoapIn">
+    <wsdl:part name="parameters" element="tns:FileSize" />
+  </wsdl:message>
+  <wsdl:message name="FileSizeSoapOut">
+    <wsdl:part name="parameters" element="tns:FileSizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="CountChunksSoapIn">
+    <wsdl:part name="parameters" element="tns:CountChunks" />
+  </wsdl:message>
+  <wsdl:message name="CountChunksSoapOut">
+    <wsdl:part name="parameters" element="tns:CountChunksResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownloadChunkBytesSoapIn">
+    <wsdl:part name="parameters" element="tns:DownloadChunkBytes" />
+  </wsdl:message>
+  <wsdl:message name="DownloadChunkBytesSoapOut">
+    <wsdl:part name="parameters" element="tns:DownloadChunkBytesResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownloadChunkSoapIn">
+    <wsdl:part name="parameters" element="tns:DownloadChunk" />
+  </wsdl:message>
+  <wsdl:message name="DownloadChunkSoapOut">
+    <wsdl:part name="parameters" element="tns:DownloadChunkResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadChunkSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadChunk" />
+  </wsdl:message>
+  <wsdl:message name="UploadChunkSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadChunkResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadChunkWithFilenameSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadChunkWithFilename" />
+  </wsdl:message>
+  <wsdl:message name="UploadChunkWithFilenameSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadChunkWithFilenameResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FileIOSoap">
+    <wsdl:operation name="FolderExists">
+      <wsdl:input message="tns:FolderExistsSoapIn" />
+      <wsdl:output message="tns:FolderExistsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FileExists">
+      <wsdl:input message="tns:FileExistsSoapIn" />
+      <wsdl:output message="tns:FileExistsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FileSize">
+      <wsdl:input message="tns:FileSizeSoapIn" />
+      <wsdl:output message="tns:FileSizeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CountChunks">
+      <wsdl:input message="tns:CountChunksSoapIn" />
+      <wsdl:output message="tns:CountChunksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadChunkBytes">
+      <wsdl:input message="tns:DownloadChunkBytesSoapIn" />
+      <wsdl:output message="tns:DownloadChunkBytesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadChunk">
+      <wsdl:input message="tns:DownloadChunkSoapIn" />
+      <wsdl:output message="tns:DownloadChunkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadChunk">
+      <wsdl:input message="tns:UploadChunkSoapIn" />
+      <wsdl:output message="tns:UploadChunkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadChunkWithFilename">
+      <wsdl:input message="tns:UploadChunkWithFilenameSoapIn" />
+      <wsdl:output message="tns:UploadChunkWithFilenameSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FileIOSoap" type="tns:FileIOSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FolderExists">
+      <soap:operation soapAction="http://firstallied.com/webservices/FolderExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileExists">
+      <soap:operation soapAction="http://firstallied.com/webservices/FileExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileSize">
+      <soap:operation soapAction="http://firstallied.com/webservices/FileSize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountChunks">
+      <soap:operation soapAction="http://firstallied.com/webservices/CountChunks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadChunkBytes">
+      <soap:operation soapAction="http://firstallied.com/webservices/DownloadChunkBytes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadChunk">
+      <soap:operation soapAction="http://firstallied.com/webservices/DownloadChunk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadChunk">
+      <soap:operation soapAction="http://firstallied.com/webservices/UploadChunk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadChunkWithFilename">
+      <soap:operation soapAction="http://firstallied.com/webservices/UploadChunkWithFilename" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FileIOSoap12" type="tns:FileIOSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FolderExists">
+      <soap12:operation soapAction="http://firstallied.com/webservices/FolderExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileExists">
+      <soap12:operation soapAction="http://firstallied.com/webservices/FileExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileSize">
+      <soap12:operation soapAction="http://firstallied.com/webservices/FileSize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountChunks">
+      <soap12:operation soapAction="http://firstallied.com/webservices/CountChunks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadChunkBytes">
+      <soap12:operation soapAction="http://firstallied.com/webservices/DownloadChunkBytes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadChunk">
+      <soap12:operation soapAction="http://firstallied.com/webservices/DownloadChunk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadChunk">
+      <soap12:operation soapAction="http://firstallied.com/webservices/UploadChunk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadChunkWithFilename">
+      <soap12:operation soapAction="http://firstallied.com/webservices/UploadChunkWithFilename" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FileIO">
+    <wsdl:port name="FileIOSoap" binding="tns:FileIOSoap">
+      <soap:address location="http://fileserver.firstallied.com/fileio.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FileIOSoap12" binding="tns:FileIOSoap12">
+      <soap12:address location="http://fileserver.firstallied.com/fileio.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

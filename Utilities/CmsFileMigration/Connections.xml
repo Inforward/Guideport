@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connections encrypted="false">
+  <!-- QA -->
+<!--    
+  <connection id="Innova" string="Network Library=DBMSSOCN; Data Source=qcolsql00; Initial Catalog=Innova; User ID=svc_innova_qa; Password=KC_R0ya13!" />
+-->
+  <connection id="Innova" string="Network Library=DBMSSOCN; Data Source=dcolsql00; Initial Catalog=Innova; User ID=svc_innova_qa; Password=CHANGE_ME" />
+</connections>

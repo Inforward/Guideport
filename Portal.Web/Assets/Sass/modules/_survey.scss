@@ -1,0 +1,319 @@
+
+$q-indent:		25px;
+
+.survey-page {
+	margin: 20px 0 0 0;
+
+	.q-wrap {
+		margin: 25px 0;
+		page-break-inside:avoid;
+
+		&:first-child {
+			margin: 0 0 20px 0;
+		}
+
+		&.Left,
+		&.Right {
+			margin-bottom: 5px;
+			margin-top: 5px;
+
+			.q-text-wrap {
+				span:first-child {
+					display: inline-block;
+					padding-left: $q-indent;
+
+					input {
+						display: inline-block;
+					}					
+				}
+			}
+		}
+
+		&.Left span {
+			input {
+				margin-left: 10px;
+			}
+		}
+
+		&.Right span {
+			input {
+				margin-right: 10px;
+			}
+		}
+
+		&.Right.error,
+		&.Left.error {
+			.q-error-wrap {
+				border-bottom: none;
+			}
+		}
+
+		.q-text-wrap {
+			display: block;
+			display: table-row;
+
+			.q-num {
+				display: inline-block;
+				min-width: $q-indent;
+				text-align: left;
+				display: table-cell;
+			}
+
+			.q-text {
+				display: table-cell;
+				line-height: 20px;
+			}
+
+			.q-req {
+				color: Red;
+				display: inline-block;
+				padding: 0 3px;
+			}
+
+			.q-num-wrap {
+				font-weight: 700;
+				font-size: 14px;
+				color: #002949;
+			}
+		}
+
+		.q-answers {
+			padding-left: $q-indent;
+			margin-top: 5px;
+			padding-bottom: 25px;
+			border-bottom: solid 1px #dddddd;			
+
+			.q-checkbox {
+				display: block;
+				margin-bottom: 3px;
+
+				label {
+					display: inline-block;
+					margin-left: 10px;
+				}
+			}
+		}
+
+		.q-error-wrap {
+			padding-left: $q-indent;
+			padding-top: 5px;
+
+			span {
+				display: inline-block;
+				line-height: 17px;
+				padding-left: 21px;
+				background: url('../Images/exclamation-red.png') no-repeat;
+				font-weight: bold;
+				font-size: 12px;
+				color: $red20;
+			}
+		}
+
+		&.error {
+
+			.q-answers {
+				border-bottom: none;
+				padding-bottom: 0;
+			}
+
+			.q-error-wrap {
+				padding-bottom: 15px;
+				border-bottom: solid 1px #dddddd;
+			}
+		}
+	}
+
+	input[type='text'] {
+		&.percent,
+		&.number {
+			width: 45px;
+		}
+	}
+
+	select, 
+	textarea, 
+	input[type="text"]  {
+		display: inline;
+		width: auto;
+	}
+
+	textarea {
+		width: 700px;
+		height: 70px;
+		resize: none;
+	}
+
+	h2 {
+		border-bottom: 2px solid #C1CDE1;
+		color: #27527E;
+		font-size: 16px;
+		font-weight: bold;
+		text-transform: uppercase;
+		margin: 15px 0 20px 0;
+		padding-bottom: 5px;
+		//min-width: 940px;
+	}
+	
+	.q-review-wrap {
+		a {
+			text-decoration: none;
+			cursor: pointer;
+		}
+		.q-wrap {
+			&.Left,
+			&.Right {
+				.q-num-wrap {
+					font-weight: normal;
+				}
+			}
+		}
+		.q-answers {
+			border-bottom: none;
+			padding-bottom: 0;
+
+			span {
+				display: block;
+			}
+			ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+	
+	.survey-page-score {
+		.page-score-header {
+			h2 {
+				border-bottom: none;
+				margin-bottom: 10px;
+				margin-top: 20px;
+			}
+
+			span {
+				color: $gray40;
+				float: right;
+				margin-top: -32px;
+				display: inline-block;
+				em {
+					font-style: normal;
+					font-weight: bold;
+				}
+			}
+		}
+
+		&:last-of-type {
+			margin-bottom: 50px;
+		}
+	}		
+}
+
+.survey-intro {
+	margin: 20px 0;
+	line-height: 20px;
+}
+
+.survey-page-wrap {
+	margin-bottom: 15px;
+	position: relative !important;
+
+	.button-wrap {
+		margin-bottom: 10px;
+		@include clearfix();
+
+		.auto-save-wrap {
+			float: right;
+			margin-top: 5px;
+		}
+
+		.buttons {
+			float: right;
+
+			a {
+				display: inline-block;
+				margin-left: 10px;
+				padding: 0 20px;	
+				
+				&:first-child:not(.btn) {
+					margin-left: 0;
+					padding-left: 0;
+				}	
+			}
+		}		
+	}
+}
+
+.confirm-message {
+	margin-bottom: 20px;
+}
+
+#survey-wrap {
+	position: relative;
+
+	//
+	// Fix for tabs
+	//
+	.k-tabstrip .k-content {
+		position: static;
+		border-top-style: solid;
+		border-top-width: 1px;
+		padding: .3em .92em;
+		zoom: 1;
+	}
+
+	.k-tabstrip .k-tabstrip-items .k-item .k-link {
+		max-width: 115px;
+		text-align: center;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	#survey-wrap .k-tabstrip .k-tabstrip-items .k-item .k-link {
+		max-width: none;
+	}
+}
+
+
+#survey-status-wrap {
+	position: absolute;
+	top: 28px;
+	font-size: 14px;
+	color: $blue30;
+	right: 0;
+
+	label {
+		font-weight: bold;
+		display: inline-block;
+		margin-right: 5px;
+	}
+}
+
+.view-as-pdf {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	background: url('../Images/pdf-icon.png') no-repeat;
+	display: block;
+	padding-left: 22px;
+	color: #0068b1;
+
+	&:visited {
+		color: #0068b1;
+	}
+}
+
+.survey-page-suggested-content {
+	span {
+		display: block;
+		margin: 5px 0;
+		font-size: 14px;
+		color: #666;
+	}
+	ul {
+		margin: 15px 0 25px 0;
+
+		li {
+			margin-bottom: 5px;
+		}
+	}
+}

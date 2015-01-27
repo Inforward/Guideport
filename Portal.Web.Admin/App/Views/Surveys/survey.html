@@ -1,0 +1,118 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{survey.SurveyName}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#">Surveys</a></li>
+        <li class="active">{{survey.SurveyName}}</li>
+    </ol>
+</div>
+<div class="page-content">
+    <form name="surveyForm" novalidate ng-submit="saveSurvey(survey)">
+        <div class="tab-container">
+            <tabset>
+                <tab heading="General">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="field">
+                                <label>Description:</label>
+                                <textarea ng-model="survey.SurveyDescription" required></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Completion Message:</label>
+                                <textarea ng-model="survey.CompleteMessage" required></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Review Tab Text:</label>
+                                <input type="text" ng-model="survey.ReviewTabText" required />
+                            </div>
+                            <div class="field">
+                                <label>Completion Redirect Url:</label>
+                                <input type="text" ng-model="survey.CompleteRedirectUrl" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button type="submit" class="btn btn-primary pull-left" ng-disabled="surveyForm.$invalid || isSaving"><i class=" fa fa-floppy-o"></i>Save Survey</button>
+                        <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                    </div>
+                </tab>
+                <tab ng-repeat="page in survey.Pages" heading="{{ page.PageName }}">
+                    
+                    <tabset type="pills" class="tabs-pills">
+                        <tab heading="General">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="field">
+                                        <label>Description / Tooltip:</label>
+                                        <textarea ng-model="page.Tooltip"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-row">
+                                <button type="submit" class="btn btn-primary pull-left" ng-disabled="isSaving"><i class=" fa fa-floppy-o"></i>Save Survey</button>
+                                <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                            </div>
+                        </tab>
+                        <tab heading="Score Ranges" ng-show="page.ScoreRanges.length">
+                            <div class="row">
+                                <div class="survey-accordion">
+                                    <accordion close-others="true">
+                                        <accordion-group ng-repeat="range in page.ScoreRanges" is-open="status.open">
+                                            <accordion-heading>
+                                                <span class="table-row">
+                                                    <span class="table-cell">
+                                                        <i class="pull-left fa" ng-class="{'fa-chevron-down': status.open, 'fa-chevron-right': !status.open}"></i>
+                                                    </span>
+                                                    <span class="table-cell">
+                                                        Range: {{ range.RangeText }}
+                                                    </span>
+                                                </span>
+                                            </accordion-heading>
+                                            <textarea ng-model="range.Description"></textarea>
+                                        </accordion-group>
+                                    </accordion>
+                                </div>
+                            </div>
+                            <div class="button-row">
+                                <button type="submit" class="btn btn-primary pull-left" ng-disabled="surveyForm.$invalid || isSaving"><i class=" fa fa-floppy-o"></i>Save Survey</button>
+                                <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                            </div>
+                        </tab>
+                        <tab heading="Suggested Content" ng-show="survey.SuggestedContentSiteID">
+                            <div class="row">
+                                <div class="survey-accordion">
+                                    <accordion close-others="true">
+                                        <accordion-group ng-repeat="question in page.Questions | orderBy: 'SortOrder'" is-open="status.open">
+                                            <accordion-heading>
+                                                <span class="table-row">
+                                                    <span class="table-cell">
+                                                        <i class="pull-left fa" ng-class="{'fa-chevron-down': status.open, 'fa-chevron-right': !status.open}"></i>
+                                                    </span>
+                                                    <span class="table-cell">
+                                                        {{ question.QuestionText }}
+                                                    </span>
+                                                </span>
+                                            </accordion-heading>
+                                            <ul class="inner-list">
+                                                <li ng-repeat="answer in question.PossibleAnswers">
+                                                    <label class="answer-label">{{ answer.AnswerText }}</label>
+                                                    <select kendo-multi-select
+                                                            k-options="suggestedContentSelectOptions"
+                                                            k-ng-model="answer.SuggestedContents"></select>
+                                                </li>
+                                            </ul>
+                                        </accordion-group>
+                                    </accordion>
+                                </div>
+                            </div>
+                            <div class="button-row">
+                                <button type="submit" class="btn btn-primary pull-left" ng-disabled="surveyForm.$invalid || isSaving"><i class=" fa fa-floppy-o"></i>Save Survey</button>
+                                <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </tab>
+            </tabset>
+        </div>
+    </form>
+</div>

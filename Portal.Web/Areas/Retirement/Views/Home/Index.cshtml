@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Guided Retirement Solutions";
+    Layout = "~/Areas/Retirement/Views/Shared/Layouts/_Default.cshtml";
+}
+
+<div class="hero pointed blue slim">
+    <div class="container">
+        <div class="row tiles">
+            <div class="col-xs-6">
+                <a href="/guided-retirement-solutions/guided-retirement-solutions">                
+                    <div class="tile tile-lg tile-teal">
+                        <i class="fa fa-clock-o"></i>
+                        <h1><strong>Guided Retirement</strong><br>Solutions</h1>
+                        <iframe class="video" allowfullscreen="" frameborder="0" mozallowfullscreen="" src="//player.vimeo.com/video/102964813" webkitallowfullscreen=""></iframe>
+                        <p>
+                            Inside <strong>Cetera Financial Group Guided Retirement Solutions</strong> you will find the tools you need to optimize
+                            and grow your retirement plan business.
+                        </p>  
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <a href="/guided-retirement-solutions/advisor-training">
+                    <div class="tile tile-sm tile-green">
+                        <i class="flaticon-seo tile-icon-md"></i> 
+                        <h4>Advisor Training</h4>
+                        <p>
+                            Everything you need to know about retirement plans <span class="break"></span>and the industry to get started.
+                        </p>
+                    </div>
+                </a>
+                <a href="/guided-retirement-solutions/prospecting">
+                    <div class="tile tile-sm tile-blue">
+                        <i class="flaticon-binoculars tile-icon-md"></i>
+                        <h4>Prospecting</h4>
+                        <p>
+                            Materials to help you prospect for new retirement <span class="break"></span>plan clients, including tips, ideas and marketing pieces.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row tiles">
+            <div class="col-xs-4">
+                <a href="/guided-retirement-solutions/closing">
+                    <div class="tile tile-md tile-orange">
+                        <i class="flaticon-peace tile-icon"></i>
+                        <h4>Closing</h4>
+                        <p>
+                            Retirement plan proposal and <span class="break"></span>
+                            presentation materials to help you <span class="break"></span>
+                            win the business.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-4">
+                <a href="/guided-retirement-solutions/onboarding">     
+                    <div class="tile tile-md tile-mustard">
+                        <i class="flaticon-person tile-icon-lg"></i>
+                        <h4>Onboarding</h4>
+                        <p>
+                            Items you need to onboard<span class="break"></span>
+                            a new client, including forms and <span class="break"></span>
+                            communication guidelines.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-4">
+                <a href="/guided-retirement-solutions/client-service-and-retention">
+                    <div class="tile tile-md tile-lightblue">
+                        <i class="flaticon-premium tile-icon"></i>
+                        <h4>Client Service <span class="break"></span>&amp; Retention</h4>
+                        <p>
+                            Resources for maintaining client relationships, including instructions for presenting employee enrollment seminars.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="retirement-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 mb15">
+                <h4 class="link">Third-Party Content</h4>
+                <p>
+                    Our partnered platform that allows you to set up, manage and deliver retirement consulting services.
+                    <a href="/guided-retirement-solutions/third-party-partnership">Click here to learn more »</a>
+                </p>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <h4 class="external-link">Resources</h4>
+                <div class="row">
+                    @Html.Partial("Resources", new ResourcesViewModel(){ SiteMap = ViewBag.SiteMap, Columns = 2, CssClass = "col-xs-12 col-sm-6"} )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@{
+    var settings = ViewBag.JsonSettings as JsonSettings;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv='Pragma' content='no-cache'>
+        <meta http-equiv='Cache-Control' content='no-cache'> 
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        @if (ViewBag.EnableResponsive ?? true)
+        {
+            if (ViewBag.DisableZoom ?? false)
+            {
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+            }
+            else
+            {
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+            }
+        }
+        <title>@Html.Raw(ViewBag.Title)</title>
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css" />
+        @Styles.Render(StyleBundleNames.Core)
+        @RenderSection("head", required: false)
+        @Scripts.Render(ScriptBundleNames.Modernizr)
+        <!--[if lt IE 9]>
+            @Scripts.Render(ScriptBundleNames.Shims)
+        <![endif]-->
+        @{ Html.RenderPartial("Analytics"); }
+    </head>
+<body class="@ViewBag.BodyCssClass @Html.BodyCssClass()">
+        
+    @RenderBody()
+
+    @Scripts.Render(ScriptBundleNames.Vendor)
+    @RenderSection("vendorScripts", required: false)
+
+    <script type="text/javascript">
+        (function (portal) {
+            portal.rootUrl = '@Url.Content("~")';
+            portal.config = @settings.ToHtmlJson();
+
+        }(this.portal = this.portal || {}));
+    </script>
+
+    @Scripts.Render(ScriptBundleNames.Core)
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

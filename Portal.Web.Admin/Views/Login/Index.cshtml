@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Stub Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head
+{
+    <style type="text/css">
+        .panel { max-width: 330px; margin: 200px auto; }
+        .btn { margin-top: 20px; }
+    </style>
+}
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Login
+        </div>
+        <div class="panel-body">
+            <form method="post" action="@Url.Action("login")" class="form-login">
+                <label>Select User:</label>
+                <select name="profileId" class="form-control">
+                    <option value="3424">Paul Panuco</option>
+                    <option value="1525">Roanne Martinez</option>
+                </select>
+                <button class="btn btn-lg btn-primary btn-clock" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>

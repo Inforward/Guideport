@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = Html.PageTitle("Search Results");
+    Layout = "~/Views/Shared/Layouts/_PortalDefault.cshtml";
+}
+@section head
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    <script>
+        $(function () {
+            portal.search.init({
+                baseUrl: '@Url.Action("Index", "Search")',
+                pageSize: 10,
+                textMaxChars: 250,
+                documentTypeIconClass: { Image: "image", Document: "document", Default: "link" }
+            });
+        });
+    </script>
+}
+<div id="results" class="search-results container">
+    <div class="page-header mt20">
+        <h1>Search Results</h1>
+        <span data-bind="text: searchResultText"></span>
+    </div>
+    <div class="pull-left" data-bind="visible: isSearching" style="display: none;">
+        @Html.Partial("AjaxLoading", new AjaxLoadingStyle() { Text = "Searching..." })
+    </div>
+    <div>
+        <div>
+            <div data-role="listview"
+                 data-template="search-results-template"
+                 data-pageable="true"
+                 data-bind="source: data"></div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: noResults" style="display: none;">
+            No records were found.  Please try again.
+        </div>
+        <div data-bind="visible: hasData" class="pager-wrap">
+            <div data-role="pager"
+                 data-page-size="10"
+                 data-page-sizes="false"
+                 data-button-count="6"
+                 data-info="false"
+                 data-change="portal.search.pageChanged"
+                 data-link-template="pager-link-template"
+                 data-select-template="pager-select-template"
+                 data-messages="{ display: '', empty: '', previous: 'Previous', next: 'Next' }"
+                 data-bind="source: data"></div>
+        </div>
+    </div>
+</div>
+
+<script id="search-results-template" type="text/template">
+    <div class="search-result-item">
+        <div>
+            <div class="title">
+                <i title="#=SiteName#" class="#=SiteIconCssClass#" />
+                <a href="#=Url#" target="#=UrlTarget#">
+                    <span class="item-title">#:Title#</span>
+                </a>
+            </div>
+            <div class="meta">
+                <span class="item-path #=ItemCssClass#">#=ShortUrl#</span>
+            </div>
+            <span class="item-text">
+                #if(Text != null)
+                {#
+                #:Text#
+                #}#                
+            </span>
+        </div>
+    </div>
+</script>
+
+<script id="pager-link-template" type="text/template">
+    <li><a href="\\#" class="k-link" data-#=ns#page ="#=idx#"><strong>#=text#</strong></a></li>
+</script>
+
+<script id="pager-select-template" type="text/template">
+    <li><span class="k-link selected-page">#=text#</span></li>
+</script>

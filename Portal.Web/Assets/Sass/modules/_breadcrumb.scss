@@ -1,0 +1,33 @@
+
+.breadcrumb {
+	padding: 20px 0 10px;
+	margin-bottom: 20px;
+	list-style: none;
+	background-color: transparent;
+	border-radius: 0;
+	display: none;	
+
+	li {
+		font-size: 12px;
+	}
+}
+
+.breadcrumb > li + li:before {
+	@include font-awesome();
+	padding: 0 7px;
+	color: #cccccc;
+	content: "\f054";
+	font-size: 10px;
+}
+
+@media only screen and (min-width: 720px) {
+	.breadcrumb { 
+		display: block; 
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.breadcrumb li { 
+		font-size: 14px;
+	}
+}

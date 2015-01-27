@@ -1,0 +1,50 @@
+
+.rolodex {
+	@include radius(4px);
+	border: solid 1px $gray20;
+	background-color: $gray60;
+
+	a {
+		color: $gray20;
+		line-height: 42px;
+		display: inline-block;
+		text-align: center;
+		text-decoration: none;
+		cursor: pointer;
+		width: 3.703703703703704%;
+
+		&:hover {
+			background-color: $white20;
+		}
+
+		&.active {
+			background-color: $gray20;
+			color: $white;
+			position: relative;
+
+			&:after {
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -8px;
+				content:'';
+				width: 0;
+				height: 0;
+				border-top: solid 6px $gray20;
+				border-left: solid 8px transparent;
+				border-right: solid 8px transparent;
+			}
+		}
+	}
+}
+
+.rolodex-wrap {
+	display: none;
+	margin-bottom: 35px;	
+}
+
+@media only screen and (min-width: 480px) {
+	.rolodex-wrap {
+		display: block;
+	}
+}

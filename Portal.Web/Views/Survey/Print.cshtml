@@ -1,0 +1,129 @@
+﻿@model SurveyViewModel
+@{
+    ViewBag.Title = "Print";
+    Layout = "~/Views/Shared/Layouts/_Default.cshtml";
+    var currentUser = ViewBag.SurveyUser as User;
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Portal)
+}
+<div class="print-view">
+    <div class="user-summary">
+        <table>
+            <colgroup>
+                <col style="width: 10%"/>
+                <col style="width: 32%"/>
+                <col style="width: 10%"/>
+                <col style="width: 48%"/>
+            </colgroup>
+            <tr>
+                <td class="label">Name:</td><td>@currentUser.DisplayName</td>
+                <td class="label">Phone:</td><td>@currentUser.PrimaryPhone.FormatAsPhoneNo()</td>
+            </tr>
+            <tr>
+                <td class="label">Email:</td><td>@currentUser.Email</td>
+                <td class="label">Address:</td><td>@Html.Raw(currentUser.Address.Replace(Environment.NewLine, ", "))</td>
+            </tr>
+        </table>
+    </div>
+    <div class="survey-page survey-summary">
+        @foreach (var page in Model.Pages.Where(p => !string.IsNullOrEmpty(p.ScoreDescription)))
+        {
+            <h1 class="title">Business Assessment Summary</h1>
+            <div class="survey-page-score">
+                <div class="page-score-header">
+                    <h2>@page.Name</h2>
+                    <span>
+                        Your Score: <em>@page.Score</em>
+                    </span>
+                </div>
+                <p>
+                    @Html.Raw(@page.ScoreDescription)
+                </p>
+                @if (page.SuggestedContents.Any())
+                {
+                    <div class="survey-page-suggested-content">
+                        <p>The following resources are recommended to you based on your answers:</p>
+                        <ul>
+                            @foreach (var content in page.SuggestedContents)
+                            {
+                                <li><a target="_blank" href="@content.Url">@content.Title</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div class="survey-page">
+        <div class="q-review-wrap">
+            @foreach(var page in Model.Pages.Where(p => p.IsVisible && !p.IsSummary))
+            {
+                <div>
+                    <h2>@page.Name</h2>
+                    @foreach(var question in page.Questions.Where(q => q.IsVisible && q.InputType != "None"))
+                    {
+                        var answer = question.Answer == "None Selected" ? "" : question.Answer;
+                    
+                        <div class="q-wrap @question.Layout">
+                            <div class="q-text-wrap">
+                                @if(question.Layout == "Right" || question.Layout == "Left")
+                                {   
+                                    if(question.Layout == "Right")
+                                    {
+                                        <span>@answer</span>Html.Raw(":&nbsp;");<span class="q-text">@Html.Raw(question.Text)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="q-text">@Html.Raw(question.Text)</span>Html.Raw(":&nbsp;");<span>@answer</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="q-num-wrap">
+                                        <span class="q-num">@question.Number</span><span class="q-text">@Html.Raw(question.Text)</span>
+                                    </span>
+                                }
+                            </div>
+                            @if (question.Layout == "None")
+                            {
+                                <div class="q-answers">
+                                    @if(question.AnswerType == "Text" || question.InputType == "Select")
+                                    {
+                                        if (question.InputType == "MultiText")
+                                        {
+                                            if(question.Answers.Any())
+                                            {
+                                                <ul>
+                                                    @foreach(var a in question.Answers)
+                                                    {
+                                                        <li>@a.Text</li>
+                                                    }
+                                                </ul>
+                                            }   
+                                        }
+                                        else
+                                        {
+                                            <span>@answer</span>     
+                                        }
+                                        
+                                    }
+                                    else
+                                    {
+                                        <ul>
+                                            @foreach(var possibleAnswer in question.PossibleAnswers.Where(a => a.IsSelected))
+                                            {
+                                                <li>@possibleAnswer.ReviewText</li>
+                                            }
+                                        </ul>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

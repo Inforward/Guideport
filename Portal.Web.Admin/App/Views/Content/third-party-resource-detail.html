@@ -1,0 +1,97 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{name}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a>Content</a></li>
+        <li><a href="#/content/third-party-resources">Third Party Resources</a></li>
+        <li class="active">{{name}}</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="block-flat">
+        <form name="form" novalidate ng-submit="saveResource(form)">
+            <div class="row">
+                <div class="col-md-8 col-lg-8">
+                    <div class="form-group">
+                        <label class="required">Company Name:</label>
+                        <input type="text" class="form-control" required maxlength="50" ng-model="resource.Name" />
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Description:</label>
+                        <input class="form-control" type="text" required maxlength="250" ng-model="resource.Description" />
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Services:</label>
+                        <select required kendo-multiselect k-options="servicesOptions" ng-model="resource.ServicesList"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Affiliates:
+                            <span class="fa fa-info-circle info-icon" tooltip="Indicates which affiliates can see this resource.  Blank indicates all affiliates can see this resource."></span>
+                        </label>
+                        <select kendo-multi-select
+                                k-data-source="affiliates"
+                                k-rebind="affiliates"
+                                k-data-text-field="'Name'"
+                                k-data-value-field="'AffiliateID'"
+                                k-ng-model="resource.Affiliates"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label>Address Line 1:</label>
+                        <input type="text" class="form-control" maxlength="100" ng-model="resource.AddressLine1" />
+                    </div>
+                    <div class="form-group">
+                        <label>Address Line 2:</label>
+                        <input type="text" class="form-control" maxlength="100" ng-model="resource.AddressLine2" />
+                    </div>
+                    <div class="form-group">
+                        <label>City:</label>
+                        <input type="text" class="form-control" maxlength="50" ng-model="resource.City" />
+                    </div>
+                    <div class="form-group">
+                        <label>Country:</label>
+                        <select class="form-control" ng-options="option.CountryCode as option.Name for option in countries" ng-model="resource.Country" ng-change="setStateProvinces()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>State / Province:</label>
+                        <select class="form-control" ng-options="option.StateCode as option.Name for option in stateProvinces" ng-model="resource.State"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Zip / Postal Code:</label>
+                        <input type="text" class="form-control" ng-attr-pattern="{{ postalCodeRegEx }}" ng-model="resource.PostalCode" />
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label>Phone No:</label>
+                        <input type="tel" class="form-control" ng-model="resource.PhoneNo" pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$" placeholder="555-555-5555" />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone No Extension:</label>
+                        <input type="text" class="form-control" ng-model="resource.PhoneNoExt" maxlength="25" />
+                    </div>
+                    <div class="form-group">
+                        <label>Fax No:</label>
+                        <input type="tel" class="form-control" ng-model="resource.FaxNo" pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$" placeholder="555-555-5555" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" class="form-control" ng-model="resource.Email" placeholder="name@example.com" maxlength="100" />
+                    </div>
+                    <div class="form-group">
+                        <label>Website:</label>
+                        <input type="url" class="form-control" ng-model="resource.WebsiteUrl" placeholder="http://www.example.com" maxlength="256" />
+                    </div>
+                </div>
+            </div>
+            <div class="button-row">
+                <button type="submit" class="btn btn-primary pull-left" ng-disabled="form.$invalid || isSaving"><i class=" fa fa-floppy-o"></i>Save Resource</button>
+                <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+            </div>
+        </form>
+    </div>
+</div>

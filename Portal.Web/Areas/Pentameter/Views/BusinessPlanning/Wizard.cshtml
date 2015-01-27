@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Breadcrumb.cshtml";
+    ViewBag.Title = Html.PageTitle("Business-Planning Wizard");
+    ViewBag.PageTitle = "Business-Planning Wizard";
+}
+@section head
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.GoJs)
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    @Scripts.Render(ScriptBundleNames.Pentameter)
+    @Scripts.Render(ScriptBundleNames.BusinessPlanningWizard)
+
+    <script>
+        $(function() {
+            portal.businessPlanningWizard.init({
+                baseUrl: '@Url.Content("~/pentameter/business-management/strategic-planning/business-planning")',
+                selectedYear: @ViewBag.SelectedYear,
+                maximumObjectives: @ViewBag.MaximumObjectives
+            });
+        });
+    </script>
+}
+@section pageTitle
+{
+    <div class="editor-header">
+        <div class="clearfix">
+            <div class="header">
+                <h1>Business-Planning Wizard</h1>
+            </div>
+            <div class="toolbar-wrap">
+                <div>
+                    @{ Html.RenderPartial("_WizardToolbar"); }
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>
+                This template will help you think more deeply about your business and walk you through the creation of a customized business plan. 
+                Goals are more often accomplished if they are written down and easier to complete if they can be tracked. Having a written plan 
+                gives you a road map for growth that is more likely to succeed. You will identify specific, measureable goals for your business 
+                and then select strategies to meet them. The template will suggest some possible goals and strategies to choose from, and you can enter your own.
+            </p>
+            <p>
+                The tool starts with a broad view to help you identify your overall vision for your business, and then continually narrows the view 
+                to help you identify your next steps. Once you enter your objectives, you will be able to track your progress and update your 
+                business plan as you go. You will also receive a printable plan your business consultant will work with you to help you follow the plan and keep on track.
+            </p>
+        </div>
+    </div>
+}
+
+<div id="editor" class="container editor" style="display: none;">
+    <div id="tab-nav" data-role="tabstrip" data-animation="false" data-bind="events: { select: tabSelected }">
+        <ul>
+            <li class="k-state-active"><a>Mission &amp; Vision</a></li>
+            <li><a>Roles &amp; Responsibilities</a></li>
+            <li><a>SWOT Analysis</a></li>
+            <li><a>Business Goals</a></li>
+            <li><a>Review</a></li>
+        </ul>
+        
+        <div class="editor-step">
+            @{ Html.RenderPartial("_WizardMission"); }
+        </div>
+
+        <div class="editor-step">
+            @{ Html.RenderPartial("_WizardRoles"); }
+        </div>
+
+        <div class="editor-step">
+            @{ Html.RenderPartial("_WizardSwot"); }
+        </div>
+
+        <div class="editor-step">
+            @{ Html.RenderPartial("_WizardGoals"); }
+        </div>
+
+        <div class="editor-step">
+            @{ Html.RenderPartial("_WizardReview"); }
+        </div>
+
+    </div>
+
+    <div class="editor-bottom-nav-buttons">
+        <div class="pull-left">
+            <div class="alert alert-success">
+                <span id="auto-save" data-toggle="tooltip" title="Every change you make is automatically saved" data-bind="invisible: isSaving">
+                    All changes saved
+                </span>
+                <span class="save-progress" data-bind="visible: isSaving">
+                    Saving...
+                </span>
+            </div>
+        </div>
+        <div class="pull-right">
+            <a data-bind="click: previousTab, disabled: isTabSelected(0)" class="btn btn-primary btn-icon-left btn-previous">Previous</a>
+            <a data-bind="click: nextTab, disabled: isTabSelected(4), invisible: isTabSelected(4)" class="btn btn-primary btn-icon btn-next">Next</a>
+            <a data-bind="click: completeClicked, enabled: isTabSelected(4), visible: isTabSelected(4)" class="btn btn-secondary btn-icon">Complete</a>
+        </div>
+    </div>
+    
+    @{ Html.RenderPartial("_WizardRoleDialog"); }
+    @{ Html.RenderPartial("_WizardGoalDialog"); }
+    @{ Html.RenderPartial("_WizardNewPlanDialog"); }
+
+</div>
+
+@{ Html.RenderPartial("_WizardTemplates"); }

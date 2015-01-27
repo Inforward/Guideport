@@ -1,0 +1,112 @@
+﻿
+<div id="objective-dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog editor-wizard-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Objective Wizard</h4>
+                <span class="modal-context" data-bind="visible: currentObjective.Name.length">
+                    (<span data-bind="text: currentObjective.Name"></span>)
+                </span>
+            </div>
+            <div class="modal-body">
+                
+                <div class="step" data-bind="visible: isObjectiveStepSelected(1)">
+                    <h2><strong>Step 1 of 3:</strong> <span data-bind="text: getObjectiveStepOneText">Create an objective</span></h2>
+                    <div>
+                        <label>Objective title</label>
+                    </div>
+
+                    <div class="field" data-bind="invisible: isNewObjective">
+                        <input type='text' data-bind="value: currentObjective.Name, disabled: currentObjective.AutoTrackingEnabled, attr:{ title: getObjectiveNameTooltip }" placeholder="Enter an objective" maxlength="100" />
+                    </div>
+
+                    <div class="field" data-bind="visible: isNewObjective">
+                        <input type="text" maxlength="100"
+                               data-role="combobox"
+                               data-placeholder="Begin typing or click arrow to select..."
+                               data-value-field="uid" 
+                               data-text-field="Name" 
+                               data-value-primitive="true"
+                               data-bind="value: selectedObjective, source: Objectives, events: { change: selectedObjectiveChanged }" />
+                    </div>
+                    <div class="field">
+                        <label>Enter a goal for this objective</label>
+                        <input data-value-update="keyup" data-bind="value: currentObjective.Value, visible: isTextObjective" maxlength="1000" type="text" />
+                        <input data-value-update="keyup" data-bind="value: currentObjective.Value, visible: isIntegerObjective" maxlength="1000" type="text" placeholder="Enter a whole number" data-role="numerictextbox" data-spinners="false" data-min="0" data-decimals="0" data-format="n0" />
+                        <input data-value-update="keyup" data-bind="value: currentObjective.Value, visible: isDecimalObjective" maxlength="1000" type="text" placeholder="Enter a number with up to two decimals" data-role="numerictextbox" data-spinners="false" data-min="0" data-decimals="2" data-format="c2" />
+                        <input data-value-update="keyup" data-bind="value: currentObjective.Value, visible: isPercentObjective" maxlength="1000" type="text" placeholder="Enter a percentage with up to two decimals" data-role="numerictextbox" data-spinners="false" data-min="0" data-decimals="2" data-format="#,##0.00 \%" />
+                    </div>
+                    <div class="field">
+                        <label>Enter an estimated completion date</label>
+                        <input data-value-update="keyup" data-role="extdatepicker" data-bind="value: currentObjective.EstimatedCompletionDate, max: getMaxObjectiveDate, min: getMinObjectiveDate" type="text" />
+                    </div>
+                </div>
+                
+                <div class="step strategies" data-bind="visible: isObjectiveStepSelected(2)">
+                    <h2><strong>Step 2 of 3:</strong> Select strategies to accomplish your objective</h2>
+                    <div class="editor-manage-list" data-bind="attr: { class: getStrategyManageListCssClass }">
+                        
+                        <div class="editor-add-new">
+                            <input type="text" placeholder="Create a name for your new strategy" data-bind="value: newStrategyName, events: { focus: addStrategyFocus }" maxlength="100" />
+                            <div class="edit-buttons">
+                                <a class="k-button k-button-icontext k-update-button" data-bind="click: addStrategy"><span class="fa fa-floppy-o"></span>save</a>
+                                <a class="k-button k-button-icontext k-cancel-button" data-bind="click: resetAddStrategy"><span class="fa fa-times"></span>cancel</a>
+                            </div>
+                        </div>
+                        <div class="editor-select-list">
+                            <table id="strategies"
+                                   data-role="extlistview"
+                                   data-edit-template="strategy-edit-template"
+                                   data-template="strategy-template"
+                                   data-bind="source: strategies, events: { save: saveStrategy, remove: removeStrategy, cancel: cancelEditStrategy }"></table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step tactics" data-bind="visible: isObjectiveStepSelected(3)">
+                    <h2><strong>Step 3 of 3:</strong> Select tactics to support your strategies</h2>
+                    <div class="editor-cycle">
+                        <div class="pull-left">
+                            <span class="current" data-bind="text: getCurrentStrategyName">Current Strategy</span> 
+                        </div>
+                        <div class="pull-right">
+                            <a class="btn btn-primary btn-icon-left btn-previous" data-bind="disabled: firstStrategySelected, click: previousStrategy">prev</a>
+                            <a class="btn btn-primary btn-icon btn-next" data-bind="disabled: lastStrategySelected, click: nextStrategy">next</a>
+                        </div>
+                        <div class="pull-right">
+                            <span class="count" data-bind="text: getStrategyCountText"></span>
+                        </div>
+                    </div>
+                    <div class="editor-manage-list" data-bind="attr: { class: getTacticManageListCssClass }">
+                        <div class="editor-add-new">
+                            <input type="text" placeholder="Create a name for your new tactic" data-bind="value: newTactic.Name, events: { focus: addTacticFocus }" maxlength="100" />
+                            <textarea placeholder="Describe your tactical plan (include process...)" maxlength="1000" data-bind="value: newTactic.Description"></textarea>
+                            <div class="edit-buttons">
+                                <a class="k-button k-button-icontext k-update-button" data-bind="click: addTactic"><span class="fa fa-floppy-o"></span>save</a>
+                                <a class="k-button k-button-icontext k-cancel-button" data-bind="click: resetAddTactic"><span class="fa fa-times"></span>cancel</a>
+                            </div>
+                        </div>
+                        <div class="editor-select-list">
+                            <table id="tactics"
+                                   data-role="extlistview"
+                                   data-edit-template="tactic-edit-template"
+                                   data-template="tactic-template"
+                                   data-bind="source: tactics, events: { save: saveTactic, remove: removeTactic, cancel: cancelEditTactic }"></table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="clearfix">
+                    <a class="btn btn-secondary pull-left" data-bind="click: closeObjectiveDialog">Cancel</a>
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-icon-left btn-previous" data-bind="click: previousObjectiveStep, disabled: isObjectiveStepSelected(1)">Previous</a>
+                        <a class="btn btn-primary btn-icon btn-next" data-bind="click: nextObjectiveStep, disabled: isObjectiveStepSelected(3)">Next</a>
+                        <a class="btn btn-primary btn-icon-left btn-done" data-bind="click: finishObjective, enabled: isObjectiveValid">Finish</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿@model Portal.Web.Areas.Pentameter.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Welcome to Pentameter";
+    ViewBag.BodyCssClass = "blue-bg";
+    ViewBag.DisableZoom = true;
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Default.cshtml";
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts 
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts 
+{
+    <script>
+        $(function() {
+            portal.dashboard.init();
+        });
+    </script>
+}
+
+<div class="container hero-toggle-wrap">
+    <div class="hero-toggle @string.Format("{0}", Model.IsBannerExpanded ? "" : "closed")">
+        <a data-role="toggle" data-target="#welcome">
+            @string.Format("{0}", Model.IsBannerExpanded ? "close" : "restore")
+        </a>
+    </div>
+</div>
+<section id="welcome" class="hero pointed" style="@string.Format("display: {0};", Model.IsBannerExpanded ? "" : "none")">
+    <div class="container">
+        @{ Html.RenderPartial("PentameterHero"); }
+    </div>
+</section>
+<section class="dashboard-panel">
+    <section class="results">
+        <div class="container">
+            <header class="row">
+                <div class="col-xs-9">
+                    <h2>Your assessment results</h2>    
+                </div>
+                <div class="col-xs-3">
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-assessment btn-lg btn-icon" href="@Url.PentameterSurveyUrl()">
+                            @Model.AssessmentText
+                        </a>
+                        <a class="btn btn-primary btn-mobile" href="@Url.PentameterSurveyUrl()">
+                            <i class="fa fa-check-square-o"></i>
+                            @Model.AssessmentShortText
+                        </a>
+                    </div>
+                </div>
+            </header>
+            <div class="gauges">
+                @foreach (var pillar in Model.Pillars)
+                {
+                    <div data-role="gauge" 
+                         data-score="@pillar.Score" 
+                         data-enabled="@pillar.Enabled.ToString().ToLower()"
+                         data-color="#fd3702" 
+                         data-title="@Html.Raw(pillar.Title.Replace(" ", "<br />"))" 
+                         data-title-url="@pillar.Url"
+                         data-tooltip="@Html.Raw(pillar.Tooltip)"></div>
+                }
+            </div>
+            <div class="progressbars">
+                @foreach (var pillar in Model.Pillars)
+                {
+                    <div data-role="progressbar" 
+                         data-score="@pillar.Score" 
+                         data-enabled="@pillar.Enabled.ToString().ToLower()"
+                         data-color="#fd3702" 
+                         data-title="@Html.Raw(pillar.Title)" 
+                         data-title-url="@pillar.Url"
+                         data-tooltip="@Html.Raw(pillar.Tooltip)"></div>
+                }
+            </div>
+        </div>
+    </section>
+    @if (Model.IsQlikViewDashboardEnabled)
+    {
+        <section>
+            <div class="container business-metrics">
+                <div
+                    data-role="qlikviewFrame"
+                    data-document-name="@Model.QlikViewDocument"
+                    data-height="620px"
+                    data-width="100%"
+                    data-timeout="60000"
+                    data-error-message="We're sorry.  Diagnostic data is currently unavailable.  Please try again later."
+                    data-loading-text="Loading Diagnostic data ..."
+                    data-loading-image="@Url.StaticContent("~/Assets/Images/ajax-loader-blue.gif")">
+                </div>
+            </div>
+        </section>
+    }
+</section>

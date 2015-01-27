@@ -1,0 +1,38 @@
+﻿
+<div id="editor-new-plan-dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create New Business Plan</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div>
+                        <label class="required">Select Planning Year:</label>
+                        <select data-text-field="Text"
+                                data-value-field="Value"
+                                data-value-primitive="true"
+                                data-bind="source: AvailablePlanYears, value: selectedNewYear"></select> 
+                    </div>
+                    <div data-bind="visible: ExistingPlanYears.length > 1">
+                        <label>Copy From Existing Year <small>(optional)</small>:</label>
+                        <select data-text-field="Text"
+                                data-value-field="Value"
+                                data-value-primitive="true"
+                                data-bind="source: ExistingPlanYears, value: selectedCopyFromYear"></select> 
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <a style="display: block;margin-top: 10px;" data-dismiss="modal" href="#">Cancel</a>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary" data-bind="click: createBusinessPlan, disabled: creatingNewPlan">Create Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

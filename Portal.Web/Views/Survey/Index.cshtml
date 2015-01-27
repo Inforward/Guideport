@@ -1,0 +1,52 @@
+﻿@model Survey
+@{
+    ViewBag.Title = Html.PageTitle(Model.SurveyName);
+    ViewBag.PageTitle = Model.SurveyName;
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Breadcrumb.cshtml";
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts 
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts 
+{
+    <script type="text/javascript">
+        $(function () {
+            portal.survey.init({
+                surveyName: '@Model.SurveyName'
+            });
+        });
+    </script>
+}
+
+<div class="container">
+    <div id="survey-wrap" style="display: none;">
+        <div class="page-header">
+            <h1 data-bind="text: Name"></h1>
+        </div>
+        <p class="survey-intro" data-bind="html: Introduction"></p>
+    
+        <div id="survey-status-wrap" data-bind="visible: IsStatusVisible">
+            <div>
+                <label data-bind="text: StatusTypeLabel"></label><span data-bind="text: Status"></span>
+            </div>
+        </div>
+
+        <div id="survey" tabindex="0" class="k-widget k-header k-tabstrip">
+            <ul class="k-tabstrip-items k-reset" data-template="survey-tab-template" data-bind="source: Pages">
+
+            </ul>
+            <div data-template="survey-page-template" data-bind="source: Pages">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ Html.RenderPartial("_PageTemplate"); }
+@{ Html.RenderPartial("_QuestionTemplate"); }
+@{ Html.RenderPartial("_ReviewTemplate"); }

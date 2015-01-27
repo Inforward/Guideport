@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Default.cshtml";
+}
+@section head 
+{
+    @RenderSection("head", required: false)
+}
+@section vendorScripts 
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts 
+{
+    @RenderSection("scripts", required: false)
+}
+
+<div class="container">
+    @RenderBody()
+</div>

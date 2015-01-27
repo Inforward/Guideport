@@ -1,0 +1,298 @@
+
+.pentameter-logo-wrap {
+	margin-top: 20px;
+	margin-bottom: 30px;
+
+	img {
+		height: 46px;
+		width: 250px;
+	}
+}
+
+.dashboard-header {
+	margin: 0 0 25px 0;
+
+	h1 {
+		margin: 0;
+		font-size: 36px;
+	}
+
+	p {
+		margin: 10px 0 0 0;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.dashboard-header h1 {
+		font-size: 48px;
+	}
+}
+
+.dashboard-panel {
+	border-top: solid 1px #195789;
+	background-color: $fasi-blue;
+
+	&>section {
+		margin-bottom: 30px;
+	}
+
+	h2 {
+		font-size: 26px;
+	}
+
+	h2,h3 {
+		color: $white;
+	}
+
+	.results {
+		padding-top: 45px;
+
+		header {
+			margin-top: 20px;
+			margin-bottom: 20px;
+
+			h2 {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+		}
+
+		.btn-assessment {
+			margin-top: 0;
+			display: none;
+		}
+	}	
+}
+
+@media only screen and (min-width: 480px) {
+	.dashboard-panel .results header h2 {
+		font-size: 30px;
+		margin-top: 10px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.dashboard-panel { 
+		.results {
+			header {
+				margin-bottom: 40px;
+
+				h2 {
+					font-size: 36px;
+				}			
+			}
+			
+			.btn-assessment {
+				display: block;
+			}
+
+			.btn-mobile {
+				display: none;
+			}	
+		}			
+	}
+
+	.hero-toggle {
+		left: 15px;
+		right: auto;
+	}
+}
+
+
+.hero-toggle-wrap {
+	position: relative;
+	z-index: 2000;
+}
+
+.hero-toggle {
+	position: absolute;
+	top: 0;
+	right: 15px;
+	padding: 0;
+	background-color: $fasi-blue;
+	border: solid 1px $fasi-blue;
+	border-top: none;
+	@include border-bottom-radius(4px);
+	color: #6798be;	
+	text-align: center;
+	width: 70px;	
+
+	a {
+		font-size: 12px;
+		font-family: $arial-font;
+		color: inherit;
+		cursor: pointer;
+		text-decoration: none;
+
+		&:after {
+			@include font-awesome();
+			content: "\f00d";
+			padding-left: 5px;
+		}		
+	}
+
+	&.closed {
+		border-color: $blue70;
+
+		a:after {
+			content: "\f0dc";
+		}
+	}
+}
+
+.gauges { 
+	display: none;
+	@include clearfix();
+
+	.gauge {
+		float: left;
+		width: 20%;	
+		
+		.title-wrap {			
+			color: $white;
+
+			a {
+				color: inherit;
+				text-decoration: none;	
+				@include hover-trans($white, #a3c3dd);
+			}
+		}
+	}	
+}
+
+@media only screen and (min-width: 1000px) {
+	.gauges {
+		display: block;
+	}
+
+	.progressbars {
+		display: none;
+	}
+}
+
+.progressbars {
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+.progressbar {
+	height: 45px;
+	width: 100%;
+	margin-bottom: 2px;
+	position: relative;
+	@include clearfix();
+	background: #b4b3b3;
+
+	.text-wrap .text,
+	.score-wrap .score {
+		line-height: 45px;
+		color: $white;
+	}
+
+	.text-wrap {
+		float: left;
+		margin-left: 15px;
+		text-transform: uppercase;
+		position: relative;
+		z-index: 100;
+
+		.text {
+			font-size: 12px;
+		}
+	}
+
+	.score-wrap {
+		float: right;
+		margin-right: 15px;
+		position: relative;
+		z-index: 100;
+
+		.score {
+			font-size: 16px;
+		}
+	}
+
+	.progress {
+		position: absolute;
+		z-index: 99;
+		height: 100%;
+		top: 0;
+		left: 0;
+		margin-bottom: 0;
+		border-radius: 0;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+
+	&.disabled {
+		background-color: #36658c;
+	}
+}
+
+.business-metrics {
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 25px;
+
+	.ajax-loading {
+		margin-top: 20px;
+
+		img {
+			display: inline-block;
+			margin-right: 15px;
+			width: 24px;
+		}
+	}
+
+	.ajax-error {
+		color: white;
+		font-size: 20px;
+	}
+}
+
+.business-valuation {
+	height: 100px;
+	font-size: 16px;
+	width: 50%; 
+	margin: 0 auto; 
+	text-align: left;
+
+	.ajax-loading {
+		margin-top: 35px;
+		color: $fasi-blue;
+
+		img {
+			display: inline-block;
+			margin-left: 115px;
+			margin-right: 15px;
+			width: 24px;
+		}
+	}
+
+	.ajax-error {
+		margin-top: 20px;
+	}
+}
+
+
+@media only screen and (min-width: 480px) {
+	.pentameter-logo-wrap img {
+		height: 65px;
+		width: 350px;
+	}
+}
+
+@media only screen and (min-width: 720px) {
+	.pentameter-logo-wrap img {
+		height: 83px;
+		width: 450px;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.pentameter-logo-wrap img {
+		height: 100px;
+		width: 539px;
+	}
+}

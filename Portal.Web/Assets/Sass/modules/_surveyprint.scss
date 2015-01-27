@@ -1,0 +1,55 @@
+
+.print-view {
+	.survey-page {
+		width: 1000px;
+		margin: 0 auto;
+	}
+
+	.survey-summary {
+		width: 1000px;
+		margin: 0 auto;
+
+		.title {
+			color: #27527E;
+			font-size: 18px;
+			font-weight: bold;
+			text-transform: uppercase;
+			border-bottom: 2px solid #C1CDE1;
+			padding-bottom: 5px;
+			width: 100%;
+			display: inline-block;
+		}
+
+		.title ~ .title {
+			display: none;
+		}
+	}
+}
+
+.user-summary {
+	padding: 15px;
+
+	table {
+		width: 700px;
+		margin: 0 auto;
+		border: solid 1px #8db3e2;
+
+		tr {
+		}
+		td {
+			vertical-align: top;
+			padding: 10px;
+
+			&.label {
+				font-weight: bold;
+				color: $blue30;
+				text-transform: uppercase;
+				width: 90px;
+				display: inline-block;
+				font-size: inherit;
+				line-height: inherit;
+				text-align: inherit;
+			}
+		}
+	}
+}

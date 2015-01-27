@@ -1,0 +1,264 @@
+﻿
+@using (Html.BeginHtmlTemplate("toolbar-year-template"))
+{
+    <li><a href="\\#" data-bind="click: gotoBusinessPlan" data-year="#:Value#">#:Text#</a></li>
+}
+
+@using (Html.BeginHtmlTemplate("role-row-template"))
+{
+    <tr>
+        <td>
+            #=Name#
+        </td>
+        <td>
+            #=Description#
+        </td>
+        <td>
+            #=Employees.length#
+        </td>
+        <td class="edit-buttons">
+            <a class="k-button k-button-icontext k-edit-button icon-only" title="Edit role"><span class="fa fa-pencil"></span></a>
+            <a class="k-button k-button-icontext k-delete-button icon-only" title="Delete role"><span class="fa fa-trash-o"></span></a>
+        </td>
+    </tr>
+}
+
+@using (Html.BeginHtmlTemplate("employee-template"))
+{
+    <tr>
+        <td>
+            <input type="checkbox" data-bind="checked: Selected, events: { change: addRemoveEmployeeToRole }" />    
+            <span style="display: none">#= Selected #</span>
+        </td>
+        <td>
+            #=FirstName# #if(MiddleInitial != null) {# #=MiddleInitial# #}# #=LastName#
+        </td>
+        <td class="edit-buttons">
+            <a class="k-button k-button-icontext k-delete-button icon-only"><span class="fa fa-trash-o"></span></a>
+            <a class="k-button k-button-icontext k-edit-button icon-only"><span class="fa fa-pencil"></span></a>
+        </td>
+    </tr>
+}
+
+@using (Html.BeginHtmlTemplate("employee-edit-template"))
+{
+    <tr>
+        <td colspan="3">
+            <div class="editor-name-parts-wrap">
+                <input type="text" maxlength="50" data-bind="value: FirstName" />
+                <input type="text" maxlength="1" class="mi" data-bind="value: MiddleInitial" />
+                <input type="text" maxlength="50" data-bind="value: LastName" />
+            </div>
+            <div class="edit-buttons">
+                <a class="k-button k-button-icontext k-update-button"><span class="fa fa-floppy-o"></span>save</a>
+                <a class="k-button k-button-icontext k-cancel-button"><span class="fa fa-times"></span>cancel</a>
+            </div>
+        </td>
+    </tr>
+}
+
+
+@using (Html.BeginHtmlTemplate("swot-template"))
+{
+    <li>
+        <div class="editor-list"> 
+            <div>       
+                <span>#:Description#</span>
+            </div>
+            <div class="edit-buttons">
+                <a class="k-button k-button-icontext k-edit-button icon-only" title="Edit swot"><span class="fa fa-pencil-square-o"></span></a>
+                <a class="k-button k-button-icontext k-delete-button icon-only" title="Delete swot"><span class="fa fa-times-circle"></span></a>
+            </div>       
+        </div>
+    </li>
+}
+
+@using (Html.BeginHtmlTemplate("swot-edit-template"))
+{
+    <li class="editor-list">
+        <div> 
+            <div class="field">
+                <input type="text" data-bind="value: Description" />
+            </div>
+            <div class="edit-buttons">
+                <a class="k-button k-button-icontext k-update-button"><span class="fa fa-floppy-o"></span>save</a>
+                <a class="k-button k-button-icontext k-cancel-button"><span class="fa fa-times"></span>cancel</a>
+            </div>
+        </div>        
+    </li>
+}
+
+@using (Html.BeginHtmlTemplate("tactic-template"))
+{
+    <tr>
+        <td>
+            <input type="checkbox" data-bind="checked: Selected, events: { change: addRemoveTacticToStrategy }" />    
+        </td>
+        <td>
+            #:Name#
+        </td>
+        <td class="edit-buttons">
+            #if(Editable)
+            {#
+                <a class="k-button k-button-icontext k-delete-button icon-only"><span class="fa fa-trash-o"></span></a>
+            #}
+            else
+            {#
+                <a title="Cannot delete system-defined tactics" class="k-button k-button-icontext icon-only disabled"><span class="fa fa-trash-o"></span></a>
+            #}#
+            <a class="k-button k-button-icontext k-edit-button icon-only"><span class="fa fa-pencil"></span></a>
+        </td>
+    </tr>
+}
+
+@using (Html.BeginHtmlTemplate("tactic-edit-template"))
+{
+    <tr>
+        <td colspan="3">
+            <input data-bind="value: Name, enabled: Editable" placeholder="Enter Tactic Name" maxlength="100" type="text" />
+            <textarea data-bind="value: Description" placeholder="Enter a Description" maxlength="1000"></textarea>
+            <div class="edit-buttons">
+                <a class="k-button k-button-icontext k-update-button"><span class="fa fa-floppy-o"></span>save</a>
+                <a class="k-button k-button-icontext k-cancel-button"><span class="fa fa-times"></span>cancel</a>
+            </div>
+        </td>
+    </tr>
+}
+
+@using (Html.BeginHtmlTemplate("strategy-template"))
+{
+    <tr>
+        <td>
+            <input type="checkbox" data-bind="checked: Selected, events: { change: addRemoveStrategyToObjective }" />    
+        </td>
+        <td>
+            #:Name#
+        </td>
+        <td class="edit-buttons">
+            #if(Editable)
+            {#
+                <a class="k-button k-button-icontext k-delete-button icon-only"><span class="fa fa-trash-o"></span></a>
+                <a class="k-button k-button-icontext k-edit-button icon-only"><span class="fa fa-pencil"></span></a>
+            #}
+            else
+            {#
+                <a title="Cannot delete system-defined strategies" class="k-button k-button-icontext icon-only disabled"><span class="fa fa-trash-o"></span></a>
+                <a title="Cannot edit system-defined strategies" class="k-button k-button-icontext icon-only disabled"><span class="fa fa-pencil"></span></a>
+            #}#
+        </td>
+    </tr>
+}
+
+@using (Html.BeginHtmlTemplate("strategy-edit-template"))
+{
+    <tr>
+        <td colspan="3">
+            <input type="text" data-bind="value: Name" placeholder="Enter Name" maxlength="100" />
+            <div class="edit-buttons">
+                <a class="k-button k-button-icontext k-update-button"><span class="fa fa-floppy-o"></span>save</a>
+                <a class="k-button k-button-icontext k-cancel-button"><span class="fa fa-times"></span>cancel</a>
+            </div>
+        </td>
+    </tr>
+}
+
+@using (Html.BeginHtmlTemplate("objective-row-template"))
+{
+    <tr>
+        <td>
+            #=Name#
+        </td>
+        <td>
+            #if(DataType == 'integer')
+            {#
+                #:kendo.toString(parseInt(Value), 'n0')#
+            #}
+            else if(DataType == 'decimal')
+            {#
+                #:kendo.toString(parseFloat(Value), 'c2')#
+            #}
+            else if(DataType == 'percent')
+            {#
+                #:kendo.toString(parseFloat(Value), 'n2')# %
+            #}
+            else
+            {#
+                #:Value#
+            #}#
+        </td>
+        <td>
+            #:kendo.toString(new Date(EstimatedCompletionDate), 'MM/dd/yyyy')#
+        </td>
+        <td>
+            #=Strategies.length#
+        </td>
+        <td class="edit-buttons">
+            <a class="k-button k-button-icontext k-edit-button icon-only" title="Edit goal"><span class="fa fa-pencil"></span></a>
+            <a class="k-button k-button-icontext k-delete-button icon-only" title="Delete goal"><span class="fa fa-trash-o"></span></a>
+        </td>
+    </tr>
+}
+
+@using (Html.BeginHtmlTemplate("review-roles"))
+{
+    <div>
+        <h4>#=Name#</h4>
+        <p class="description text-pre">#=Description#</p>
+        <ul data-bind="source: Employees" data-template="review-employees">
+            
+        </ul>
+    </div>
+}
+
+@using (Html.BeginHtmlTemplate("review-employees"))
+{
+    <li>
+        #=FirstName# #if(MiddleInitial != null) {# #=MiddleInitial# #}# #=LastName#
+    </li>
+}
+
+@using (Html.BeginHtmlTemplate("review-swot-item"))
+{
+    <li>
+        #=Description#
+    </li>
+}
+
+@using (Html.BeginHtmlTemplate("review-objective"))
+{
+    <div class="objective">
+        <h4>Objective: <span>#=Name#</span></h4>
+        <p class="goals">
+            Goal:<span class="text-pre" data-bind="text: getObjectiveValueFormatted"></span>
+        </p>
+        <p class="goals">
+            Est. Completion Date:<span class="text-pre">#:kendo.toString(new Date(EstimatedCompletionDate), 'MM/dd/yyyy')#</span>
+        </p>
+        <div data-bind="source: Strategies" data-template="review-strategy">
+            
+        </div>
+    </div>
+}
+
+@using (Html.BeginHtmlTemplate("review-strategy"))
+{
+    <div>
+        <p class="strategy">
+            Strategy: <span>#=Name#</span>
+        </p>
+        <div>
+            <p><strong>Tactics</strong></p>
+            <ul data-bind="source: Tactics" data-template="review-tactic">
+            
+            </ul>
+        </div>
+    </div>
+}
+
+@using (Html.BeginHtmlTemplate("review-tactic"))
+{
+    <li>
+        <span>#=Name#</span>
+        <p class="description text-pre" data-bind="text: Description"></p>
+    </li>
+}

@@ -1,0 +1,89 @@
+﻿
+@using (Html.BeginHtmlTemplate("survey-review-template"))
+{
+    <div class="q-review-wrap" data-bind="visible: isReviewVisible">
+        <h2><a data-bind="click: selectTab">#=Name#</a></h2>
+        <div data-template="survey-review-question-template" data-bind="source: Questions">
+
+        </div>
+    </div>
+}
+
+@using (Html.BeginHtmlTemplate("survey-review-question-template"))
+{
+    <div class="q-wrap #=Layout#" data-bind="visible: isReviewVisible">
+        <div class="q-text-wrap">
+            #if(Layout == "Right" || Layout == "Left")
+            {#
+            #if(Layout == "Right")
+            {#
+            <span data-bind="text: getReviewAnswer"></span>&nbsp;<span class="q-text">#=Text#</span>
+            #}
+            else
+            {#
+            <span class="q-text">#=Text#</span>:&nbsp;<span data-bind="text: getReviewAnswer"></span>
+            #}#
+            #}
+            else
+            {#
+            <span class="q-num-wrap">
+                <span class="q-num" data-bind="text: Number"></span><span class="q-text">#=Text#</span>                    
+            </span>
+            #}#
+        </div>
+        #if(Layout == "None")
+        {#
+        <div class="q-answers">
+            #if(AnswerType == "Text" || InputType == "Select")
+            {
+            if(InputType == "MultiText")
+            {#
+            <ul data-bind="source: Answers" data-template="survey-review-multi-answer-template"></ul>
+            #}
+            else
+            {#
+            <span data-bind="text: getReviewAnswer"></span>
+            #}#
+            #}
+            else
+            {#
+            <ul data-bind="source: PossibleAnswers" data-template="survey-review-answer-template">
+
+            </ul>
+            #}#
+        </div>
+        #}#
+    </div>
+}
+
+@using (Html.BeginHtmlTemplate("survey-review-answer-template"))
+{
+    <li data-bind="visible: IsSelected">#=ReviewText#</li>
+}
+
+@using (Html.BeginHtmlTemplate("survey-review-multi-answer-template"))
+{
+    <li>#=Text#</li>
+}
+
+@using (Html.BeginHtmlTemplate("survey-review-score-template"))
+{
+    <div class="survey-page-score">
+        <div class="page-score-header">
+            <h2 data-bind="text: Name"></h2>
+            <span>Your Score: <em data-bind="text: Score"></em></span>
+        </div>
+        <div>
+            <p data-bind="html: ScoreDescription"></p>
+            <div data-bind="visible: SuggestedContents.length" class="survey-page-suggested-content">
+                <p>The following resources are recommended to you based on your answers:</p>
+                <ul data-bind="source: SuggestedContents" data-template="survey-review-score-suggested-content-template"></ul>
+            </div>
+        </div>
+    </div>    
+}
+
+@using (Html.BeginHtmlTemplate("survey-review-score-suggested-content-template"))
+{
+    <li><a target="_blank" href="#=Url#">#=Title#</a></li>
+}

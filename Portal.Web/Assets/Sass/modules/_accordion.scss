@@ -1,0 +1,156 @@
+
+ul.accordion {
+	margin: 0 0 30px 0;
+	padding: 0;
+	list-style-type: none;
+	border: solid 1px #b2c7d7;
+	@include border-top-radius(4px);
+	@include border-bottom-radius(4px);
+
+	//
+	// Each level gets these styles
+	//
+	li {
+
+		.menu-icon {
+			color: $fasi-blue;
+			float: left;
+			font-size: 18px;
+			width: 30px;
+			
+			&:before,
+			&:after {
+				font-size: 18px;
+			}
+			
+			&.flaticon-peace:before,
+			&.flaticon-peace:after {
+				font-size: 14px;
+			}			
+
+			&.flaticon-person:before,
+			&.flaticon-person:after {
+				font-size: 22px;
+			}
+		}
+
+		.menu-link {
+			display: block;
+			text-decoration: none;
+			font-family: $arial-font;
+			font-size: 14px;
+			float: left;		
+		}
+
+
+		.menu-toggle-icon {
+			float: left;
+			display: none;			
+			font-size: 12px;
+			color: $fasi-light-blue;
+			padding-left: 10px;
+			margin-top: 10px;
+
+			&:after {
+				@include font-awesome();
+				content: "\f054";
+			}
+		}
+
+		.menu-item-container {
+			@include clearfix();
+		}
+
+		&.toggle {
+			& > .menu-item-container > .menu-toggle-icon {
+				display: block;
+			}			
+		}
+
+		&.expanded {
+			& > ul {
+				display: block;
+			}
+
+			& > .menu-item-container > .menu-toggle-icon:after {
+				content: "\f078";
+			}
+		}
+
+		&.active > .menu-item-container {
+			&> .menu-link,
+			&> .menu-icon,
+			&> .menu-toggle-icon {
+				color: $gray90 !important;
+			}
+		}
+	}	
+
+	//
+	// Top Level only styles
+	//
+	&>li {		
+		border-top: solid 1px #b2c7d7;		
+
+		&:first-child {
+			border-top: none;
+		}		
+
+		&> .menu-item-container {			
+			padding: 12px 0 12px 15px;
+
+			.menu-link {			
+				color: $fasi-blue;
+			}
+		}
+
+		&.expanded > .menu-item-container {
+			background-color: #e7f0f7;
+		}
+
+		&.toggle > .menu-item-container > .menu-toggle-icon {
+			float: right;
+			margin-right: 10px;
+			margin-top: 0;
+			color: $fasi-blue;
+		}
+
+		&:first-child .menu-link {
+			border-top: none;
+		}
+
+		//
+		// Sub-menu body
+		//
+		&>ul {
+			background-color: #f3f9fd;
+			padding-top: 5px;
+			padding-bottom: 15px;
+			border-top: solid 1px #b2c7d7;
+		}
+
+		//
+		// Sub-menus
+		//
+		ul {
+			padding-left: 15px;
+			padding-right: 15px;
+			list-style-type: none;
+			display: none;
+
+			li {
+				.menu-link {
+					padding-top: 10px;
+					color: $fasi-light-blue;
+				}
+				
+				.menu-icon {
+					color: $fasi-light-blue;
+					font-size: 14px;
+					width: 25px;
+					margin-top: 12px;
+				}				
+			}
+		}
+	}
+}

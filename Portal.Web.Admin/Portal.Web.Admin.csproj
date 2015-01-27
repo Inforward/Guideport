@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CEBBD9F0-2771-4EF1-988F-C65447E7B6D2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Portal.Web.Admin</RootNamespace>
+    <AssemblyName>Portal.Web.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentSpace.SAML2, Version=2.5.0.19, Culture=neutral, PublicKeyToken=7c51d97b3a0a8ff9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\ComponentSpace.SAML2.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.WebApi.MessageHandlers.Compression">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.MessageHandlers.Compression.1.2.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Microsoft.AspNet.WebApi.MessageHandlers.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi">
+      <HintPath>..\packages\Ninject.Web.WebApi.3.2.3.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\ConfigurationsController.cs" />
+    <Compile Include="Controllers\Api\ContentsController.cs" />
+    <Compile Include="Controllers\Api\GeoController.cs" />
+    <Compile Include="Controllers\Api\AffiliatesController.cs" />
+    <Compile Include="Controllers\Api\BaseApiController.cs" />
+    <Compile Include="Controllers\Api\GroupsController.cs" />
+    <Compile Include="Controllers\Api\ReportsController.cs" />
+    <Compile Include="Controllers\Api\SurveysController.cs" />
+    <Compile Include="Controllers\Mvc\HomeController.cs" />
+    <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\Mvc\LoginController.cs" />
+    <Compile Include="Filters\HandleExceptionsAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\FeatureViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\ReportViewModel.cs" />
+    <Compile Include="Models\SearchContentRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\CmsFileConstraint.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\app.js" />
+    <Content Include="App\Controllers\adminCtrl.js" />
+    <Content Include="App\Controllers\pageVersionCtrl.js" />
+    <Content Include="App\Controllers\fileDetailCtrl.js" />
+    <Content Include="App\Controllers\filesCtrl.js" />
+    <Content Include="App\Controllers\groupDetailCtrl.js" />
+    <Content Include="App\Controllers\affiliatesCtrl.js" />
+    <Content Include="App\Controllers\groupsCtrl.js" />
+    <Content Include="App\Controllers\groupSearchCtrl.js" />
+    <Content Include="App\Controllers\pageDetailCtrl.js" />
+    <Content Include="App\Controllers\pagesCtrl.js" />
+    <Content Include="App\Controllers\reportCtrl.js" />
+    <Content Include="App\Controllers\affiliateDetailCtrl.js" />
+    <Content Include="App\Controllers\userDetailCtrl.js" />
+    <Content Include="App\Controllers\userSearchCtrl.js" />
+    <Content Include="App\Controllers\surveyCtrl.js" />
+    <Content Include="App\Controllers\thirdPartyResourceDetailCtrl.js" />
+    <Content Include="App\Controllers\thirdPartyResourcesCtrl.js" />
+    <Content Include="App\Controllers\usersCtrl.js" />
+    <Content Include="App\Directives\clipboard.js" />
+    <Content Include="App\Directives\confirmOnExit.js" />
+    <Content Include="App\Directives\content-editor.js" />
+    <Content Include="App\Directives\navAccordion.js" />
+    <Content Include="App\Directives\processing.js" />
+    <Content Include="App\Directives\selectableGrid.js" />
+    <Content Include="App\Directives\pageSidebar.js" />
+    <Content Include="App\Filters\filters.js" />
+    <Content Include="App\Services\affiliateService.js" />
+    <Content Include="App\Services\cacheService.js" />
+    <Content Include="App\Services\configurationService.js" />
+    <Content Include="App\Services\contentService.js" />
+    <Content Include="App\Services\dataService.js" />
+    <Content Include="App\Services\geoService.js" />
+    <Content Include="App\Services\groupService.js" />
+    <Content Include="App\Services\reportService.js" />
+    <Content Include="App\Services\surveyService.js" />
+    <Content Include="App\Services\userService.js" />
+    <Content Include="App\Views\Content\page-version-modal.html" />
+    <Content Include="App\Views\Affiliates\affiliates.html" />
+    <Content Include="App\Views\Affiliates\affiliate-detail.html" />
+    <Content Include="App\Views\Content\file-detail.html" />
+    <Content Include="App\Views\Content\files.html" />
+    <Content Include="App\Views\Groups\group-detail.html" />
+    <Content Include="App\Views\Groups\group-search-modal.html" />
+    <Content Include="App\Views\Groups\groups.html" />
+    <Content Include="App\Views\home.html" />
+    <Content Include="App\Views\Content\page-detail.html" />
+    <Content Include="App\Views\Content\pages.html" />
+    <Content Include="App\Views\Reports\report.html" />
+    <Content Include="App\Views\Surveys\survey.html" />
+    <Content Include="App\Views\Content\third-party-resource-detail.html" />
+    <Content Include="App\Views\Content\third-party-resources.html" />
+    <Content Include="App\Views\Users\user-detail.html" />
+    <Content Include="App\Views\Users\user-search-modal.html" />
+    <Content Include="App\Views\Users\users.html" />
+    <Content Include="Assets\Css\admin.css" />
+    <Content Include="Assets\Css\bootstrap-switch.css" />
+    <Content Include="Assets\Css\bootstrap.css" />
+    <Content Include="Assets\Css\editor.css" />
+    <Content Include="Assets\Css\flaticon.css" />
+    <Content Include="Assets\Css\flextext.css" />
+    <Content Include="Assets\Css\font-awesome.css" />
+    <Content Include="Assets\Flash\ZeroClipboard.swf" />
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Fonts\flat-icon\flaticon.svg" />
+    <Content Include="Assets\Fonts\fontawesome\fontawesome-webfont.svg" />
+    <Content Include="Assets\Images\avatar-blank.jpg" />
+    <Content Include="Assets\Images\horizontal-rule-icon.png" />
+    <Content Include="Assets\Images\page-static.png" />
+    <Content Include="Assets\Images\page.png" />
+    <Content Include="Assets\Images\processing.gif" />
+    <Content Include="Assets\Images\suggested-reading-icon.png" />
+    <Content Include="Assets\Images\Templates\callout-image.jpg" />
+    <Content Include="Assets\Images\Templates\callout-video.jpg" />
+    <Content Include="Assets\Images\Templates\Pentameter-Default.jpg" />
+    <Content Include="Assets\Images\Templates\Pentameter-SubPage.jpg" />
+    <Content Include="Assets\Images\Templates\Retirement-Default.jpg" />
+    <Content Include="Assets\Images\Templates\Retirement-SubPage.jpg" />
+    <Content Include="Assets\Kendo\Black\editor.png" />
+    <Content Include="Assets\Kendo\Black\imagebrowser.png" />
+    <Content Include="Assets\Kendo\Black\indeterminate.gif" />
+    <Content Include="Assets\Kendo\Black\loading-image.gif" />
+    <Content Include="Assets\Kendo\Black\loading.gif" />
+    <Content Include="Assets\Kendo\Black\loading_2x.gif" />
+    <Content Include="Assets\Kendo\Black\slider-h.gif" />
+    <Content Include="Assets\Kendo\Black\slider-v.gif" />
+    <Content Include="Assets\Kendo\Black\sprite.png" />
+    <Content Include="Assets\Kendo\Black\sprite_2x.png" />
+    <Content Include="Assets\Kendo\Black\sprite_kpi.png" />
+    <Content Include="Assets\Kendo\Black\sprite_kpi_2x.png" />
+    <Content Include="Assets\Kendo\Default\editor.png" />
+    <Content Include="Assets\Kendo\Default\imagebrowser.png" />
+    <Content Include="Assets\Kendo\Default\indeterminate.gif" />
+    <Content Include="Assets\Kendo\Default\loading-image.gif" />
+    <Content Include="Assets\Kendo\Default\loading.gif" />
+    <Content Include="Assets\Kendo\Default\loading_2x.gif" />
+    <Content Include="Assets\Kendo\Default\markers.png" />
+    <Content Include="Assets\Kendo\Default\markers_2x.png" />
+    <Content Include="Assets\Kendo\Default\slider-h.gif" />
+    <Content Include="Assets\Kendo\Default\slider-v.gif" />
+    <Content Include="Assets\Kendo\Default\sprite.png" />
+    <Content Include="Assets\Kendo\Default\sprite_2x.png" />
+    <Content Include="Assets\Kendo\Default\sprite_kpi.png" />
+    <Content Include="Assets\Kendo\Default\sprite_kpi_2x.png" />
+    <Content Include="Assets\Kendo\kendo.angular.js" />
+    <Content Include="Assets\Kendo\kendo.common.css" />
+    <Content Include="Assets\Kendo\kendo.dataviz.css" />
+    <Content Include="Assets\Kendo\kendo.dataviz.default.css" />
+    <Content Include="Assets\Kendo\kendo.dataviz.js" />
+    <Content Include="Assets\Kendo\kendo.default.css" />
+    <Content Include="Assets\Kendo\kendo.web.js" />
+    <Content Include="Assets\Kendo\Textures\brushed-metal.png" />
+    <Content Include="Assets\Kendo\Textures\dots1.png" />
+    <Content Include="Assets\Kendo\Textures\dots10.png" />
+    <Content Include="Assets\Kendo\Textures\dots11.png" />
+    <Content Include="Assets\Kendo\Textures\dots12.png" />
+    <Content Include="Assets\Kendo\Textures\dots13.png" />
+    <Content Include="Assets\Kendo\Textures\dots2.png" />
+    <Content Include="Assets\Kendo\Textures\dots3.png" />
+    <Content Include="Assets\Kendo\Textures\dots4.png" />
+    <Content Include="Assets\Kendo\Textures\dots5.png" />
+    <Content Include="Assets\Kendo\Textures\dots6.png" />
+    <Content Include="Assets\Kendo\Textures\dots7.png" />
+    <Content Include="Assets\Kendo\Textures\dots8.png" />
+    <Content Include="Assets\Kendo\Textures\dots9.png" />
+    <Content Include="Assets\Kendo\Textures\glass-lighter.png" />
+    <Content Include="Assets\Kendo\Textures\glass.png" />
+    <Content Include="Assets\Kendo\Textures\highlight.png" />
+    <Content Include="Assets\Kendo\Textures\hsv-gradient.png" />
+    <Content Include="Assets\Kendo\Textures\hue.png" />
+    <Content Include="Assets\Kendo\Textures\leather1.png" />
+    <Content Include="Assets\Kendo\Textures\leather2.png" />
+    <Content Include="Assets\Kendo\Textures\noise.png" />
+    <Content Include="Assets\Kendo\Textures\stripe1.png" />
+    <Content Include="Assets\Kendo\Textures\stripe2.png" />
+    <Content Include="Assets\Kendo\Textures\stripe3.png" />
+    <Content Include="Assets\Kendo\Textures\stripe4.png" />
+    <Content Include="Assets\Kendo\Textures\stripe5.png" />
+    <Content Include="Assets\Kendo\Textures\stripe6.png" />
+    <Content Include="Assets\Kendo\Textures\transparency.png" />
+    <Content Include="Assets\Kendo\Textures\transtexture.png" />
+    <Content Include="Assets\Vendor\angular\angular-animate.js" />
+    <Content Include="Assets\Vendor\angular\angular-aria.js" />
+    <Content Include="Assets\Vendor\angular\angular-bootstrap.js" />
+    <Content Include="Assets\Vendor\angular\angular-cookies.js" />
+    <Content Include="Assets\Vendor\angular\angular-loader.js" />
+    <Content Include="Assets\Vendor\angular\angular-messages.js" />
+    <Content Include="Assets\Vendor\angular\angular-mocks.js" />
+    <Content Include="Assets\Vendor\angular\angular-resource.js" />
+    <Content Include="Assets\Vendor\angular\angular-route.js" />
+    <Content Include="Assets\Vendor\angular\angular-sanitize.js" />
+    <Content Include="Assets\Vendor\angular\angular-scenario.js" />
+    <Content Include="Assets\Vendor\angular\angular-touch.js" />
+    <Content Include="Assets\Vendor\angular\angular.js" />
+    <Content Include="Assets\Vendor\angular\directives\bsSwitch.js" />
+    <Content Include="Assets\Vendor\bootstrap-switch.js" />
+    <Content Include="Assets\Vendor\bootstrap\tooltip.js" />
+    <Content Include="Assets\Vendor\bootstrap\transition.js" />
+    <Content Include="Assets\Vendor\jquery-1.9.1.min.js" />
+    <Content Include="Assets\Vendor\jquery.flextext.js" />
+    <Content Include="Assets\Vendor\jszip.min.js" />
+    <Content Include="Assets\Vendor\underscore-1.4.4.js" />
+    <Content Include="Assets\Vendor\zeroclipboard.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\Fonts\fontawesome\fontawesome-webfont.eot" />
+    <Content Include="Assets\Fonts\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Fonts\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Assets\Fonts\fontawesome\FontAwesome.otf" />
+    <Content Include="Assets\Sass\admin.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <OutputFolder>..\Css</OutputFolder>
+    </Content>
+    <Content Include="Assets\Sass\modules\_angular.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_buttons.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_forms.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_global.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_kendo.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_mixins.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_modal.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_navigation.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_tabs.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Portal.Web.Admin.wpp.targets" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Assets\Sass\modules\_page.scss" />
+    <Content Include="Assets\Sass\modules\_accordion.scss" />
+    <Content Include="Assets\Fonts\flat-icon\flaticon.eot" />
+    <Content Include="Assets\Fonts\flat-icon\flaticon.ttf" />
+    <Content Include="Assets\Fonts\flat-icon\flaticon.woff" />
+    <Content Include="Assets\Sass\modules\_content.scss" />
+    <Content Include="Assets\Sass\modules\_promo.scss" />
+    <None Include="Assets\Sass\modules\_animations.scss" />
+    <None Include="Properties\PublishProfiles\Cetera-Prod.pubxml" />
+    <None Include="Properties\PublishProfiles\Cetera-QA.pubxml" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <None Include="Properties\PublishProfiles\First Allied-Prod.pubxml" />
+    <None Include="Properties\PublishProfiles\First Allied-QA.pubxml" />
+    <None Include="Web.CeteraProd.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.CeteraQA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.FirstAlliedProd.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.FirstAlliedQA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Portal.Data.Sql.EntityFramework\Portal.Data.Sql.EntityFramework.csproj">
+      <Project>{6d0c1305-8277-41a9-a4ed-9383c1d201f1}</Project>
+      <Name>Portal.Data.Sql.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Data\Portal.Data.csproj">
+      <Project>{9e31d6ad-b3cc-4891-a5b3-2ae83388eece}</Project>
+      <Name>Portal.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Domain\Portal.Domain.csproj">
+      <Project>{ea284634-6a41-40ef-852b-b89348e62465}</Project>
+      <Name>Portal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Infrastructure\Portal.Infrastructure.csproj">
+      <Project>{f47fd511-b038-440e-8ffe-e1cdcd03d373}</Project>
+      <Name>Portal.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Model\Portal.Model.csproj">
+      <Project>{a06a7a8a-0e6f-4010-ad8f-fb5ef7d39430}</Project>
+      <Name>Portal.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Services.Clients\Portal.Services.Clients.csproj">
+      <Project>{a140f6d5-15f1-4118-9fbc-9820c71df544}</Project>
+      <Name>Portal.Services.Clients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Services.Contracts\Portal.Services.Contracts.csproj">
+      <Project>{076acdca-19bd-45dc-97d9-c3bc425888bc}</Project>
+      <Name>Portal.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Web.Common\Portal.Web.Common.csproj">
+      <Project>{b9f6a24e-65c6-4cd0-8994-717a0b6481d7}</Project>
+      <Name>Portal.Web.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CeteraQA|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CeteraProd|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FirstAlliedProd|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FirstAlliedQA|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50978</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50970/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

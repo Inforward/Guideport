@@ -1,0 +1,118 @@
+﻿
+<script id="survey-question-template" type="text/template">
+    #if(Layout == "Section")
+    {#
+        <h2 data-bind="visible: IsVisible">#=Text#</h2>
+    #}
+    else
+    {#
+        <div data-bind="visible: IsVisible, attr: { class: questionClass }">
+            <div class="q-text-wrap">
+                #if(Layout == "Right" || Layout == "Left")
+                {#
+                    <span>
+                        #if(Layout == "Left")
+                        {#
+                            <label>#=Text#</label><input type="text" data-bind="value: Answer, disabled: IsDisabled, attr: { class: questionInputClass }, events: { change: clearError }" />
+                        #}
+                        else
+                        {#
+                            <input type="text" data-bind="value: Answer, disabled: IsDisabled, attr: { class: questionInputClass }, events: { change: clearError }" /><label>#=Text#</label>
+                        #}#
+                        
+                        #if(IsRequired)
+                        {# 
+                            <span class="q-req">*</span> 
+                        #}#
+                    </span>
+                #}
+                else
+                {#
+                    #if (InputType != "None")
+                    {#
+                        <span class="q-num-wrap">
+                            <span class="q-num" data-bind="text: Number"></span>
+                            <span class="q-text">#=Text# #if(IsRequired){# <span class="q-req">*</span> #}# </span>
+                        </span>
+                    #}
+                    else
+                    {#
+                        <span class="q-text">#=Text#</span>
+                    #}#
+                #}#
+            </div>
+            #if (AnswerType != "None" && Layout == "None") 
+            {#
+                <div class="q-answers">
+
+                    #if(AnswerType == "Text")
+                    {#
+                        #if(InputType == "TextArea")
+                        {#
+                            <textarea data-bind="value: Answer, disabled: IsDisabled, events: { change: clearError }"></textarea>
+                        #} 
+                        else if(InputType == "MultiText")
+                        {#
+                            <select 
+                                data-role="multiselect" 
+                                data-bind="source: Answers, value: Answers" 
+                                data-text-field="Text" 
+                                data-value-field="Value" 
+                                data-auto-bind="false" 
+                                data-min-length="2" 
+                                class="multi-text"></select>
+                        #}
+                        else
+                        {#
+                            <input type="text" data-bind="value: Answer, disabled: IsDisabled, attr: { class: questionInputClass }, events: { change: clearError }" />
+                        #}#
+                    #}#
+
+                    #if(AnswerType == "Select" && InputType == "Select")
+                    {#
+                        <select data-bind="value: Answer, source: PossibleAnswers, disabled: IsDisabled, events: { change: selectAnswerChanged }" data-template="survey-select-option-template">
+
+                        </select>
+                    #}#
+
+                    #if(AnswerType == "Select" && InputType == "RadioButtonList")
+                    {#
+                        <div data-bind="source: PossibleAnswers" data-template="survey-radiobutton-list-template">
+
+                        </div>
+                    #}#
+
+                    #if(AnswerType == "MultiSelect" && InputType == "CheckBoxList")
+                    {#
+                        <div data-bind="source: PossibleAnswers" data-template="survey-checkbox-list-template">
+
+                        </div>
+                    #}#
+
+                </div>
+            #}#
+            <div class="q-error-wrap">
+                <span data-bind="visible: hasError, text: errorMessage"></span>
+            </div>
+        </div>
+    #}#
+</script>
+
+@using (Html.BeginHtmlTemplate("survey-select-option-template"))
+{
+    <option data-bind="value: Text">#=Text#</option>
+}
+
+@using (Html.BeginHtmlTemplate("survey-radiobutton-list-template"))
+{
+    <span class="q-checkbox">
+        <input type="radio" id="#=uid#" name="#=QuestionId#" value="true" data-bind="checked: IsSelected, disabled: IsDisabled, events: { change: radioAnswerChanged }" /><label>#=Text#</label>
+    </span>
+}
+
+@using (Html.BeginHtmlTemplate("survey-checkbox-list-template"))
+{
+    <span class="q-checkbox">
+        <input type="checkbox" data-bind="checked: IsSelected, disabled: IsDisabled, events: { change: answerChanged }" /><label>#=Text#</label>
+    </span>
+}

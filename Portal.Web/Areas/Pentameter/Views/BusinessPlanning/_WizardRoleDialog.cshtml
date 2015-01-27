@@ -1,0 +1,77 @@
+﻿
+<div id="role-dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog editor-wizard-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Role Wizard</h4>
+                <span class="modal-context" data-bind="visible: currentRole.Name.length">
+                    (<span data-bind="text: currentRole.Name"></span>)
+                </span>
+            </div>
+            <div class="modal-body">
+                
+                <div class="step" data-bind="visible: isRoleStepSelected(1)">
+                    <h2><strong>Step 1 of 2:</strong> <span data-bind="text: getRoleStepOneText">Create a role</span></h2>
+                    <div>
+                        <label>Role name</label>
+                    </div>
+
+                    <div class="field" data-bind="invisible: isNewRole">
+                        <input type='text' data-bind="value: currentRole.Name" placeholder="Enter a role name" maxlength="100" />
+                    </div>
+
+                    <div class="field" data-bind="visible: isNewRole">
+                        <input type="text" maxlength="100"
+                               data-role="combobox"
+                               data-placeholder="Begin typing or click arrow to select..."
+                               data-value-field="uid" 
+                               data-text-field="Name" 
+                               data-value-primitive="true"
+                               data-bind="value: selectedRole, source: EmployeeRoles, events: { change: selectedRoleChanged }" />
+                    </div>
+                    <div class="field">
+                        <label>Briefly describe the responsibilities of this new role:</label>
+                        <textarea data-value-update="keyup" data-bind="value: currentRole.Description" maxlength="1000" style="height: 200px;"></textarea>    
+                    </div>
+                </div>
+                
+                <div class="step strategies" data-bind="visible: isRoleStepSelected(2)">
+                    <h2><strong>Step 2 of 2:</strong> Select employees who hold this role</h2>
+                    <div class="editor-manage-list" data-bind="attr: { class: getEmployeeManageListCssClass }">
+                        <div class="editor-add-new">
+                            
+                            <div class="editor-name-parts-wrap">
+                                <input type="text" placeholder="First name" data-bind="value: newEmployee.FirstName, events: { focus: addEmployeeFocus }" maxlength="50" />
+                                <input type="text" placeholder="MI" data-bind="value: newEmployee.MiddleInitial, events: { focus: addEmployeeFocus }" class="mi" maxlength="1" />
+                                <input type="text" placeholder="Last name" data-bind="value: newEmployee.LastName, events: { focus: addEmployeeFocus }" maxlength="50" />
+                            </div>
+                            
+                            <div class="edit-buttons">
+                                <a class="k-button k-button-icontext k-update-button" data-bind="click: addEmployee"><span class="fa fa-floppy-o"></span>save</a>
+                                <a class="k-button k-button-icontext k-cancel-button" data-bind="click: resetAddEmployee"><span class="fa fa-times"></span>cancel</a>
+                            </div>
+                        </div>
+                        <div class="editor-select-list">
+                            <table id="employees"
+                                   data-role="extlistview"
+                                   data-edit-template="employee-edit-template"
+                                   data-template="employee-template"
+                                   data-bind="source: employees, events: { save: saveEmployee, remove: removeEmployee, cancel: cancelEditEmployee }"></table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="clearfix">
+                    <a class="btn btn-secondary pull-left" data-bind="click: closeRoleDialog">Cancel</a>
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-icon-left btn-previous" data-bind="click: previousRoleStep, disabled: isRoleStepSelected(1)">Previous</a>
+                        <a class="btn btn-primary btn-icon btn-next" data-bind="click: nextRoleStep, disabled: isRoleStepSelected(2)">Next</a>
+                        <a class="btn btn-primary btn-icon-left btn-done" data-bind="click: finishRole, enabled: isRoleValid">Finish</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

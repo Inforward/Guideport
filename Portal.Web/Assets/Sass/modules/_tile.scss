@@ -1,0 +1,301 @@
+
+.tile {
+	@include radius(4px);
+	margin-bottom: 10px;
+	padding: 15px 10px;
+	text-align: left;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+
+	h1, h4, p {
+		color: $white;
+	}	
+
+	p {
+		font-size: 14px;
+		font-family: $arial-font;
+		line-height: 1.5em;
+		display: none;
+
+		strong {
+			font-weight: bold;
+		}
+
+		.break {
+			display: inline;
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.video {
+		float: right;
+	}
+
+	.tile-icon,
+	.tile-icon-md,
+	.tile-icon-lg {
+		color: $white;
+	}
+	
+	.tile-icon:before {
+		font-size: 24px;
+	}
+
+	.tile-icon-md:before {
+		font-size: 24px;
+	}
+
+	.tile-icon-lg:before {
+		font-size: 52px;
+	}
+
+	&.tile-sm {
+		height: 70px;
+	}
+
+	&.tile-sm,
+	&.tile-md {
+		h4 {
+			font-size: 14px;
+			margin-top: 5px;
+			margin-bottom: 0;
+		}
+	}
+
+	&.tile-md {
+		height: 94px;
+	}
+
+	&.tile-lg {
+		height: 150px;
+
+		h1 {
+			margin-top: 0;
+			font-size: 20px;
+		}
+
+		p {
+			font-size: 14px;
+		}
+
+		.fa {
+			font-size: 60px;
+			color: $white;
+		}
+
+		.video {
+			display: none;
+		}
+	}
+
+	&.tile-teal {
+		background-color: $teal;
+	}
+
+	&.tile-green {
+		background-color: $green;
+	}
+
+	&.tile-blue {
+		background-color: $blue110;
+	}
+
+	&.tile-orange {
+		background-color: $orange;
+	}
+
+	&.tile-mustard {
+		background-color: $mustard;
+	}
+
+	&.tile-lightblue {
+		background-color: $blue120;
+	}
+}
+
+.tiles {
+	[class^="col-"] {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	&.row {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.tile {
+		padding: 15px;
+		margin-bottom: 15px;
+		text-align: left;		
+
+		p {
+			display: block;
+		}
+
+		.tile-icon,
+		.tile-icon-md,
+		.tile-icon-lg {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+		}
+
+		.tile-icon:before,
+		.tile-icon-md:before {
+			font-size: 24px;
+		}
+
+		.tile-icon-lg:before {
+			font-size: 30px;
+		}
+
+		&.tile-sm {
+			height: 105px;
+		}
+
+		&.tile-md {
+			height: 150px;
+		}
+
+		&.tile-sm,
+		&.tile-md {
+			padding-top: 10px;
+
+			h4 {
+				font-size: 22px;
+				margin-top: 0;
+				margin-bottom: 8px;
+			}
+
+			p {
+				font-size: 14px;
+				line-height: 18px;
+			}
+		}
+
+		&.tile-lg {
+			height: 225px;
+
+			h1 {
+				font-size: 30px;
+				margin-bottom: 20px;
+			}
+
+			.fa {
+				position: absolute;
+				font-size: 85px;
+				top: 15px;
+				right: 15px;
+			}
+
+			.video {
+				display: block;
+				height: 110px;
+				width: 140px;
+			}
+		}
+	}
+
+	.tiles [class^="col-"] {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.tile {
+		margin-bottom: 20px;
+
+		p .break {
+			display: block;
+		}
+		
+		.tile-icon,
+		.tile-icon-lg {
+			top: 30px;
+			right: 30px;
+		}
+		
+		.tile-icon-md {
+			top: 60px;
+			right: 20px;
+		}			
+
+		.tile-icon:before {
+			font-size: 70px;
+		}
+
+		.tile-icon-md:before {
+			font-size: 110px;
+		}
+
+		.tile-icon-lg:before {
+			font-size: 100px;
+		}
+
+		&.tile-sm {
+			height: 140px;
+		}
+
+		&.tile-sm,
+		&.tile-md {
+			h4 {
+				font-size: 28px;
+			}
+			p {
+				font-size: 16px;
+				line-height: 24px;
+			}
+		}
+		
+		&.tile-md {
+			height: 200px;
+
+			h4 {
+				margin-top: 30px;
+			}
+
+			.tile-icon,
+			.tile-icon-md,
+			.tile-icon-lg {
+				top: 50px;
+				right: 15px;
+			}
+		}
+
+		&.tile-lg {
+			height: 300px;
+			padding: 30px;
+
+			h1 {
+				font-size: 44px;
+			}
+
+			p {
+				font-size: 18px;
+			}
+
+			.fa {
+				top: 20px;
+				right: 25px;
+				font-size: 120px;
+			}
+
+			.video {
+				height: 130px;
+				width: 200px;
+			}
+		}		
+	}
+}

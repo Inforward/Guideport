@@ -1,0 +1,130 @@
+
+.page-head {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-bottom: 1px solid #E9E9E9;
+	box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.05);
+	padding: 20px 25px;
+	position: relative;
+    @include clearfix();
+
+	.page-title {
+		margin: 0 0 8px 0;
+		padding: 0;
+		line-height: 1;
+		font-family: $source-sans-pro;
+		font-weight: 300;
+		font-size: 30px;
+		color: #484848;
+	}
+
+	.breadcrumb {
+		padding: 4px 4px 4px 2px;
+		margin-bottom: 0;
+		list-style: none;
+		background-color: transparent;
+		border-radius: 0;
+
+		&> .active {
+			color: #7f7f7f;
+		}
+
+		& > li {
+			font-size: 12px;
+		}
+	}
+}
+
+.page-content {	
+	color: inherit;
+	padding: 30px;
+	margin-top: 0;    
+}
+
+.page-sidebar {
+    background: none repeat scroll 0 0 #FFFFFF;
+
+    .title {
+        color: #7f7f7f;
+        margin:0;
+
+        .fa {
+            color: #e7e7e7;            
+            margin-right: 10px;
+            font-size: 28px;
+        }
+    }
+
+    .toggle-btn {
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        position: absolute;        
+        background-color: #007cdf;
+         padding: 15px;
+        font-size: 18px;
+        line-height: 1em;
+        top: 15px;
+        right: 0;           
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+
+        &:hover {
+            background-color: #0284eb;
+        }
+
+        &.close-btn {            
+            
+        }
+
+        &.open-btn {
+            
+        }
+    }
+
+    .sidebar-content {
+        padding: 25px;
+    }
+
+    &.open {
+        .sidebar-content {
+            display: block;
+        }
+
+        .open-btn {
+            display: none;
+        }
+    }
+
+    &.closed {
+        .sidebar-content {
+            display: none;
+        }
+
+        .close-btn {
+            display: none;
+        }
+    }
+}
+
+.page-container {
+    position: relative;
+
+    .page-content {
+        position: relative;
+        z-index: 100; 
+    }
+
+    .page-sidebar {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 101;
+        border-left: 1px solid #E9E9E9;  
+    }
+}
+
+.page-container,
+.page-content {
+    height: 100%;
+}

@@ -1,0 +1,358 @@
+
+
+@media only screen and (min-width: 750px) {
+	.business-plan-header {
+		@include clearfix();
+
+		.header {
+			float: left;
+		}
+	
+		.toolbar-wrap {
+			float: right;
+		}	
+	}
+}
+
+
+.businessplan {
+
+	.row {
+		page-break-inside:avoid;
+	}
+	
+	.page {
+		margin-bottom: 60px;
+	}
+	
+	.missing-data {
+		font-style: italic;
+		color: #666;
+	}
+	
+	.orgchart .k-orgchart {
+		margin-top: 70px;
+	}	
+
+	.section {
+		margin-top: 30px;
+		min-height: 200px;
+
+		&>header {
+			margin-top: 25px;
+			margin-bottom: 40px;
+
+			h2 {
+				margin-top: 0;
+				font-size: 30px;
+
+				strong {
+					font-weight: 400;
+				}
+			}
+		}
+
+		p,
+		ul {
+			color: $blue80;
+		}
+
+		ul {
+			list-style-type: square;
+			padding-left: 30px;
+
+			li {
+				margin-bottom: 5px;
+			}
+		}
+
+		p {
+			margin-bottom: 20px;
+
+			&.description {
+				margin-bottom: 10px;
+			}
+		}
+
+		h4 {
+			font-family: $arial-font;
+			font-weight: bold;
+			color: $blue80;
+			font-size: 18px;
+		}
+
+		&.mission,
+		&.vision {
+			header {
+				margin-bottom: 25px;
+			}
+		}
+
+		&.roles {
+			ul {
+				margin-bottom: 30px;
+			}
+		}
+
+		&.swots {
+			h2 {
+				//font-size: 35px;
+			}
+		}
+
+		&.objectives {
+			.objective {
+				padding-bottom: 30px;
+				margin-bottom: 30px;
+				border-bottom: solid 1px #eee;
+				page-break-inside:avoid;
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				h4 {
+					margin-top: 0;
+
+					span {
+						color: #00457c;
+						font-weight: normal;
+					}
+				}
+
+				p {
+					margin-bottom: 0;
+					line-height: 1.9em;
+				}
+				
+				p.goals, 
+				p.strategy {					
+					font-family: $arial-font;
+					font-weight: bold;
+
+					span {
+						margin-left: 5px;
+						font-weight: normal;
+
+						&.as-of {
+							font-size: .9em;
+							color: #b8b8b8;
+							margin-left: 10px;
+						}
+					}
+				}
+				
+				.tactics {
+					margin-left: 15px;
+
+					.checkmark { 
+						display: inline-block;
+						margin-left: 10px;
+						color: $gray90;
+						font-size: 18px;
+						cursor: pointer;
+
+						&:after {
+							@include font-awesome();
+							content: "\f058";
+							color: inherit;														
+						}
+
+						&.checked {
+							color: #019069;
+						}
+					}
+				}
+
+				.objective-progress {
+					margin: 20px 0;
+
+					&>strong {
+						display: block;
+						margin-bottom: 10px;
+					}
+
+					.k-slider-horizontal {
+						width: 250px;
+
+						.k-slider-items {
+							.k-tick {
+								.k-label {
+									display: none;
+									color: #b3b4b4;
+									font-size: 14px;
+								}
+
+								&.k-first,
+								&.k-last {
+									.k-label {
+										display: block;										
+									}
+								}
+
+								&.k-last .k-label {
+									position: relative;
+									left: -5px;
+									top: 30px;
+								}
+							}
+						}
+					}
+
+					.label-wrap {
+						width: 250px;
+						text-align: center;
+
+						label {
+							font-family: $source-sans-pro;
+							font-weight: 300;
+							font-size: 30px;
+						}
+
+						.done {
+							display: block;
+							color: $gray90;
+							font-size: 12px;
+							visibility: hidden;
+						}
+
+						&.complete {
+							label {
+								color: #019069;
+
+								&:after {
+									@include font-awesome();
+									content: "\f058";
+									margin-left: 5px;
+								}
+							}
+
+							.done {
+								visibility: visible;
+							}
+						}
+					}
+				}	
+			}
+		}
+
+		&.actions {
+			ul {
+				margin-top: 20px;
+				padding-left: 40px;
+			}
+
+			.row {
+				margin-bottom: 40px;
+			}
+		}
+	}	
+
+	.swot {
+		border: solid 1px #b3b3b3;
+		border-radius: 4px;
+		position: relative;
+		overflow: hidden;
+		margin-bottom: 15px;
+		padding: 10px 20px 20px 20px;
+		page-break-inside:avoid;
+		min-height: 210px;
+
+		ul {
+			padding-left: 20px;	
+
+			li {
+				float: left;
+				width: 30%;
+				margin-right: 25px;
+			}
+		}
+
+		.bg-letter {
+			font-size: 300px;
+			color: #e5ecf2;
+			position: absolute;
+			left: -35px;
+			top: 100px;
+			z-index: 100;
+		}
+
+		&.weakness .bg-letter {
+			left: -115px;
+		}
+
+		&.opportunity .bg-letter {
+			left: -90px;
+		}
+
+		&.threat .bg-letter {
+			left: -60px;
+			top: 95px;
+		}
+
+		h4,
+		ul {
+			position: relative;
+			z-index: 101;
+		}
+	}
+}
+
+@media only screen and (min-width: 480px) {
+
+	.businessplan .section.objectives .objective .objective-progress .label-wrap,
+	.businessplan .section.objectives .objective .objective-progress .k-slider-horizontal {
+		width: 400px;
+	}
+}
+
+.businessplan-export {
+	.businessplan {
+		.page {
+			width: 1000px;
+			margin: 0 auto;
+			padding: 0 50px;
+			page-break-after: always;
+		}
+
+		.orgchart {
+			page-break-before: always;
+			page-break-after: always;
+
+			.k-orgchart {
+				border: none;
+				height: 900px;
+			}
+		}
+
+		.section {
+			&>header {
+				h2 {
+					font-size: 36px;
+				}
+			}
+
+			p,
+			ul {
+				font-size: 16px;
+				line-height: 32px;			
+			}
+
+			h4 {
+				font-size: 26px;
+			}
+
+			&.objectives {
+				.objective {
+					.objective-progress {
+						display: none;
+					}
+
+					.tactics .checkmark {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

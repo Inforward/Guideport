@@ -1,0 +1,50 @@
+USE Innova
+GO
+
+IF EXISTS( SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'usr' AND TABLE_NAME = 'User' )
+	AND NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'usr' AND TABLE_NAME = 'User' 
+																AND COLUMN_NAME = 'BusinessConsultantUserID' )
+BEGIN
+	ALTER TABLE usr.[User] ADD BusinessConsultantUserID INT
+END
+GO
+
+IF EXISTS( SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'usr' AND TABLE_NAME = 'User' )
+	AND NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE 
+						WHERE TABLE_SCHEMA = 'usr' AND TABLE_Name = 'User' 
+								AND COLUMN_NAME = 'BusinessConsultantUserID' )
+BEGIN
+	ALTER TABLE usr.[User] ADD CONSTRAINT FK_User_BusinessConsultantUserID FOREIGN KEY( BusinessConsultantUserID ) 
+		REFERENCES usr.[User]( UserID )
+END
+GO
+
+IF EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'usr' AND TABLE_NAME = 'User' 
+							AND COLUMN_NAME = 'BusinessConsultantUserID' )
+	AND NOT EXISTS( SELECT * FROM sys.indexes WHERE name = 'IX_User_BusinessConsultantID' )
+BEGIN
+	CREATE NONCLUSTERED INDEX [IX_User_BusinessConsultantID] ON usr.[User]( BusinessConsultantUserID )
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'ApplicationRoleUser' AND COLUMN_NAME = 'CreateUserID' )
+BEGIN
+	ALTER TABLE usr.ApplicationRoleUser ADD CreateUserID INT NOT NULL CONSTRAINT [DF_ApplicationRoleUser_CreateUserID] DEFAULT 0
+END
+GO
+
+IF EXISTS( SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'usr' AND TABLE_NAME = 'User' )
+	AND NOT EXISTS( SELECT * FROM sys.indexes WHERE name = 'IX_User_UserProfileTypeID_AffiliateID_TerminateDate' )
+BEGIN
+CREATE NONCLUSTERED INDEX [IX_User_UserProfileTypeID_AffiliateID_TerminateDate]
+	ON [usr].[User] ([UserProfileTypeID], [AffiliateID], [TerminateDate])
+END
+GO
+
+IF EXISTS( SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'usr' AND TABLE_NAME = 'User' )
+	AND NOT EXISTS( SELECT * FROM sys.indexes WHERE name = 'IX_User_UserStatusID_TerminateDate' )
+BEGIN
+	CREATE NONCLUSTERED INDEX [IX_User_UserStatusID_TerminateDate]
+		ON [usr].[User] ([UserStatusID], [TerminateDate])
+END
+GO

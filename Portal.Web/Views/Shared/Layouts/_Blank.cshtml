@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/Layouts/_PortalBreadcrumb.cshtml";
+}
+@section head 
+{
+    @RenderSection("head", required: false)
+}
+@section vendorScripts 
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts 
+{
+    @RenderSection("scripts", required: false)
+}
+@section pageTitle 
+{
+    <h1>@(ViewBag.PageTitle ?? ViewBag.Title)</h1>
+}
+
+<div class="container">
+    @RenderBody()
+</div>

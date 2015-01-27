@@ -1,0 +1,20 @@
+﻿<div class="page-head">
+    <h2 class="page-title">Affiliates</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li class="active">Affiliates</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="block-flat">
+        <div ng-show="recordCount > 0">
+            <kendo-grid options="gridOptions"></kendo-grid>
+        </div>
+
+        <div ng-show="recordCount == 0" class="text-center">
+            <div class="alert alert-info inline-block">
+                No affiliates found.
+            </div>
+        </div>
+    </div>
+</div>

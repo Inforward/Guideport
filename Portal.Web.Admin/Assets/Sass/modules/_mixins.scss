@@ -1,0 +1,93 @@
+
+
+/*
+	Colors
+*/
+$white:   #fff;
+$fasi-blue:  #00457c;
+$fasi-light-blue: #0077b8;
+
+
+/*
+	Type
+*/
+$source-sans-pro: 'Source Sans Pro', sans-serif, Arial, Verdana;
+$default-font: $source-sans-pro;
+$arial-font: Arial, Verdana;
+
+@mixin font-awesome($content: '') {
+	display: inline-block;
+	font-family: FontAwesome !important;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@if $content != '' {
+		&:after {
+			content: $content;
+		}
+	}
+}
+
+@mixin radius($radius: 4px) {
+  -moz-border-radius:    $radius; 
+  -webkit-border-radius: $radius;
+  -ms-border-radius:     $radius; 
+  border-radius: $radius;
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+@mixin placeholderColor($color) {
+	&:-moz-placeholder {
+		color: $color;
+	}
+	&::-moz-placeholder {
+		color: $color;
+	}
+	&:-ms-input-placeholder {
+		color: $color;
+	}
+	&::-webkit-input-placeholder {
+		color: $color;
+	}
+}
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin ellipsis(){
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+    -webkit-box-shadow: $top $left $blur $color #{$inset};
+    -moz-box-shadow: $top $left $blur $color #{$inset};
+    box-shadow: $top $left $blur $color #{$inset};
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#{$color}', Direction=145, Strength=3);
+}
+
+@mixin opacity( $value: 0.5 ) {
+  opacity: $value;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" $value * 100 ")";
+  filter: alpha(opacity= $value * 100 );
+  zoom: 1;
+}

@@ -1,0 +1,27 @@
+﻿<div class="page-head">
+    <h2 class="page-title">Third Party Resources</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a>Content</a></li>
+        <li class="active">Third Party Resources</li>
+    </ol>
+</div>
+<div class="page-container">
+    <div class="page-content">
+
+        <div class="grid-toolbar">
+            <a href="#/content/third-party-resource" class="btn btn-primary btn-add"><i class="fa fa-plus-circle"></i>Add Third Party Resource</a>
+        </div>
+
+        <div ng-hide="recordCount == 0">
+            <div kendo-grid="grid" options="gridOptions" k-ng-delay="gridOptions"></div>
+        </div>
+
+        <div ng-show="recordCount == 0" class="text-center mt100">
+            <div class="alert alert-danger inline-block">
+                <strong>No results found.</strong>  Please check your search criteria and try again.
+            </div>
+        </div>
+
+    </div>
+</div>

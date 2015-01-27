@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+@import 
+	"modules/mixins",	
+	"modules/global",	
+	"modules/content";
+
+p {
+	margin-bottom: 20px;
+}
+
+img {
+	margin-bottom: 10px;
+}
+
+ul {
+	list-style-type: square;
+	margin-bottom: 15px;
+
+	li {
+		margin-top: 5px;
+
+		ul {
+			margin-bottom: 10px;
+		}
+	}
+}

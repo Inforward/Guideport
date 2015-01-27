@@ -1,0 +1,149 @@
+
+.status-widget {
+	position: relative;
+	min-height: 100px;
+	//@include box-shadow(2px, 2px, 2px, #787878);
+	margin-bottom: 30px;
+
+	&.disabled {
+		.status-wrap,
+		.title {
+			@include opacity(.5);
+		}
+
+		.manage,
+		.instance-wrap {
+			display: none;
+		}		
+	}
+
+	.title-wrap {
+		border: solid 1px #969696;
+		background-color: #e5e5e5;
+		//@include gradient(#c5c5c5, $white);
+		padding: 0 5px 0 15px;
+		position: relative;
+
+		.title {
+			font-size: 16px;
+			line-height: 32px;
+			display: block;
+			color: #353535;
+		}
+
+		.manage {
+			display: none;
+			position: absolute;
+			right: 2px;
+			top: 2px;
+
+			a {
+				font-size: .8em;
+				color: #797979;
+				text-decoration: none;
+				background: url('../Images/bullet-arrow-down.png') right center no-repeat;
+				display: block;
+				padding: 5px 15px 5px 5px;
+				border: solid 1px transparent;
+
+				&:hover {
+					border: solid 1px #969696;
+					color: #353535;
+				}
+			}
+		}		
+	}
+
+	.content {
+		padding: 15px;
+		font-size: .9em;
+		min-height: 140px;
+		border-bottom: solid 1px #969696;
+		border-right: solid 1px #969696;
+		border-left: solid 1px #969696;
+		position: relative;
+
+		.instructional-text {
+			margin-top: 10px;
+			line-height: 1.4em;
+		}
+
+		.progress-bar-wrap {
+			//float: left;
+			//width: 55%;
+		}
+
+		.instance-wrap {
+			position: absolute;
+			top: 0;
+			right: 0;
+			visibility: hidden;
+			padding: 3px;
+			border-left: solid 1px #969696;
+			border-bottom: solid 1px #969696;
+			color: #797979;
+		}
+	}
+
+	.sunburst {
+		display: none;
+		position: absolute;
+		top: -13px;
+		left: -13px;
+		background: url('../Images/sunburst.png') no-repeat;
+		height: 28px;
+		width: 28px;
+	}
+
+	&.highlighted {
+		.title-wrap {
+			@include gradient( #02528f, #0293f8 );
+			border: solid 1px #0293f8;
+		}
+		.title {
+			color: $white;
+			@include opacity(1);
+		}
+
+		.sunburst {
+			display: block;
+		}
+	}
+	
+	&.workflow-widget {
+		.content {
+			min-height: 380px;
+		}
+
+		.instructional-text {
+			margin-top: 10px !important;
+		}
+
+		&.disabled {
+			.gauge,
+			.gauge-status {
+				@include opacity(.5);
+			}
+		}
+	}
+	
+	.status-wrap {
+		@include clearfix();
+		min-height: 40px;	
+
+		.legend {
+
+			label {
+				display: inline-block;
+				margin-right: 5px;
+				font-weight: bold;
+				line-height: 1.2em;			
+				padding-left: 15px;
+
+				&.status {
+					background: url('../Images/magnify.png') no-repeat center left;
+				}
+			}
+		}	
+	}	
+}

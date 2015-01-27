@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/Layouts/_PortalDefault.cshtml";
+}
+
+@section head 
+{
+    @RenderSection("head", required: false)
+}
+@section logo
+{
+    @RenderSection("logo", required: false)
+}
+@section footerLogo
+{
+    @RenderSection("footerLogo", required: false)
+}
+@section vendorScripts 
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts 
+{
+    @RenderSection("scripts", required: false)
+}
+
+<section class="page-info-panel">
+    <div class="container">
+        <div>
+            @{ Html.RenderPartial("Breadcrumb"); }
+        </div>
+        @if (IsSectionDefined("pageTitle"))
+        {
+            <div>
+                @RenderSection("pageTitle")
+            </div>
+        }
+    </div>
+</section>
+
+@RenderBody()

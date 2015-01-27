@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Areas/Retirement/Views/Shared/Layouts/_Default.cshtml";
+    var siteMap = (Portal.Model.SiteMap)ViewBag.SiteMap;
+}
+@section head 
+{
+    @RenderSection("head", required: false)
+}
+@section vendorScripts 
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts 
+{
+    @RenderSection("scripts", required: false)
+}
+
+<section class="page-info-panel">
+    <div class="container">
+        <div>
+            @{ Html.RenderPartial("Breadcrumb"); }
+        </div>
+        <h1>
+            @Html.Raw(ViewBag.PageTitle ?? ViewBag.Title)
+        </h1>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-lg-9 col-sm-push-4 col-lg-push-3">
+            @if (IsSectionDefined("pageDescription"))
+            {
+                <div class="content-description">
+                    @RenderSection("pageDescription")
+                </div>
+            }
+            <div class="content-body">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-3 col-sm-pull-8 col-lg-pull-9 sidebar">
+            @Html.Menu(siteMap, new { id = "accordion", @class = "accordion" })
+
+            @RenderSection("belowMenu", required: false)
+        </div>
+    </div>
+</div>
+<div class="page-content-footer">
+    <div class="container">
+        <h3>Resources</h3>        
+        <div class="row">
+            @{ Html.RenderPartial("~/Areas/Retirement/Views/Shared/Resources.cshtml", new ResourcesViewModel() { SiteMap = ViewBag.SiteMap, Columns = 4, CssClass = "col-xs-12 col-sm-6 col-md-3"}); }
+        </div>
+    </div>
+</div>

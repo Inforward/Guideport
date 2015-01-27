@@ -1,0 +1,37 @@
+﻿@model IEnumerable<KnowledgeLibraryTopic>
+@{
+    ViewBag.Title = Html.PageTitle("Knowledge Library");
+    ViewBag.PageTitle = "Knowledge Library";
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_SubPage.cshtml";
+}
+@section head
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    <script>
+        $(function() {
+            portal.knowledgeLibrary.init({
+                url: '@Url.Action("JsonGetKnowledgeLibrary", "Resources", new { Area = "Pentameter", siteId = ViewBag.SiteID })',
+                topics: @Model.Select(m => new { m.Topic }).Distinct().ToHtmlJson(),
+                subtopics: @Model.Select(s => new { s.Subtopic, s.Topic }).Distinct().OrderBy(s => s.Subtopic).ToHtmlJson()
+            });
+        });
+    </script>
+}
+
+@if (ViewBag.CanEdit ?? false)
+{
+    <div class="mb10">
+        <a href="@Url.AdminConsoleUrl("/content/files")" class="btn btn btn-primary btn-icon-left btn-upload" target="_blank">Manage documents and files</a>
+    </div>
+}
+
+<div id="grid" class="portal-grid">
+    
+</div>

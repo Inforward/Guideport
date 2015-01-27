@@ -1,0 +1,52 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Search Users</h3>
+</div>
+<div class="modal-body">
+    <div class="block-flat">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="field">
+                    <label>Name:</label>
+                    <input type="text" ng-model="filter.Name" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="field">
+                    <label>Status:</label>
+                    <select ng-options="option.UserStatusID as option.Name for option in statuses" ng-model="filter.UserStatusID"></select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="field">
+                    <label>Affiliate:</label>
+                    <select ng-options="option.AffiliateID as option.Name for option in affiliates" ng-model="filter.AffiliateID"></select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="field">
+                    <label>Profile Type:</label>
+                    <select ng-options="option.ProfileTypeID as option.Name for option in profileTypes" ng-model="filter.ProfileTypeID"></select>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="pull-left" processing in-progress="isSearching" message="Searching"></div>
+            <div class="pull-right">
+                <a class="reset" ng-click="resetFilters()">Reset Filters</a>
+                <a class="btn btn-primary" ng-disabled="isSearching" ng-click="search()"><i class="fa fa-search"></i>Search</a>
+            </div>
+        </div>
+    </div>
+    <div ng-show="recordCount > 0" class="block-flat">
+        <div items="selectedUsers" selectable-grid kendo-grid k-options="gridOptions"></div>
+    </div>
+    <div ng-show="recordCount == 0" class="text-center">
+        <div class="alert alert-danger inline-block">
+            <strong>No results found.</strong>  Please check your search criteria and try again.
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary pull-right" ng-disabled="selectedUsers.length == 0" ng-click="ok()"><i class="fa fa-check-square-o"></i>Add Selected</button>
+    <a class="cancel pull-left" ng-click="cancel()">Cancel</a>
+</div>

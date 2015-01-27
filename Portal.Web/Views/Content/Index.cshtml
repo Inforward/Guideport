@@ -1,0 +1,38 @@
+﻿@model ContentViewModel
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.PageTitle = Model.PageTitle;
+    Layout = Model.LayoutPath;
+}
+@section head 
+{
+    @if (Model.Styles.IsNotNullOrEmpty())
+    {
+        <style type="text/css">
+            @Html.Raw(Model.Styles)
+        </style>
+    }
+}
+<div id="content">
+    @Html.Raw(Model.Html)
+</div>
+
+@section scripts 
+{
+    @if (Model.Scripts.IsNotNullOrEmpty())
+    {
+        <script type="text/javascript">
+            @Html.Raw(Model.Scripts)
+        </script>
+    }
+
+    <script type="text/javascript">
+        $(function () {
+            if (window.__ga) {
+                $('[data-track]').on('click', function () {
+                    __ga( 'send', 'event', 'Download', $(this).data("label"), $(this).data("value") );
+                });
+            }
+        });
+    </script>
+}

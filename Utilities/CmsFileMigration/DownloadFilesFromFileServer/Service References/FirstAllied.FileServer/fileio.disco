@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://fileserver.firstallied.com/fileio.asmx?wsdl" docRef="http://fileserver.firstallied.com/fileio.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://fileserver.firstallied.com/fileio.asmx" xmlns:q1="http://firstallied.com/webservices/" binding="q1:FileIOSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://fileserver.firstallied.com/fileio.asmx" xmlns:q2="http://firstallied.com/webservices/" binding="q2:FileIOSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

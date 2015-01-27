@@ -1,0 +1,26 @@
+﻿
+<nav id="slide-nav" class="slide-nav">
+    <ul>
+        <li class="Selected">
+            <a>Programs</a>
+            <ul>
+                <li><i class="fa fa-home"></i><a href="@Url.Content("~/")">Guideport</a></li>
+                <li><i class="icon-pentameter-dial"></i><a href="@Url.Content("~/pentameter")">Pentameter</a></li>
+                <li><i class="fa fa-clock-o"></i><a href="@Url.Content("~/guided-retirement-solutions")">Guided Retirement Solutions</a></li>
+            </ul>
+        </li>
+        @if (ViewBag.AdvisorViewEnabled ?? false)
+        {
+            <li><i class="fa fa-eye"></i><a href="@Url.RouteUrl("AdvisorView")">Advisor View</a></li>
+        }
+        @if (ViewBag.AdminEnabled ?? false)
+        {
+            <li><i class="fa fa-wrench"></i><a href="@Url.AdminConsoleUrl()" target="_blank">Admin Console</a></li>
+        }
+        @if (ViewBag.ContactUrl != null)
+        {
+            <li><i class="fa fa-envelope-o"></i><a href="@ViewBag.ContactUrl">Contact</a></li>
+        }
+        <li><i class="fa fa-sign-in"></i><a href="@Url.RouteUrl("Signout")">Sign out</a></li>
+    </ul>
+</nav>

@@ -1,0 +1,62 @@
+﻿@model MyBusinessPlansViewModel
+@{
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_SubPage.cshtml";
+    ViewBag.Title = Html.PageTitle("My Business Plans");
+    ViewBag.PageTitle = "My Business Plans";
+}
+@section head
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.GoJs)
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    <script>
+        $(function() {
+            portal.businessPlan.init({
+                baseUrl: '@Url.Content("~/pentameter/business-management/strategic-planning/business-planning")',
+                businessPlanId: @Model.BusinessPlan.BusinessPlanID,
+                employees: @Model.BusinessPlan.Employees.Select(e => new { e.EmployeeID, e.EmployeeParentID, e.FullName, e.Roles  }).ToHtmlJson()
+            });
+        });
+    </script>
+}
+@section pageDescription
+{
+    <div>
+        <div class="business-plan-header">
+            <div class="header">
+                <h3>@string.Format("{0} Business Plan", Model.BusinessPlan.Year)</h3>
+            </div>
+            <div class="toolbar-wrap">
+                <ul class="editor-toolbar">
+                    <li>
+                        <a href="@Model.EditUrl"><i class="fa fa-edit"></i>edit</a>
+                    </li>
+                    <li>
+                        <a href="@Model.ExportUrl" target="_blank"><i class="icon-file-pdf"></i>pdf</a>
+                    </li>
+                    <li class="dropdown my-plans">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            my plans 
+                            <span class="normal">(<span>@Model.BusinessPlan.Year</span>)</span>
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach (var planYear in Model.PlanYears)
+                            {
+                                <li><a href="@planYear.Value">@planYear.Text</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+@{ Html.RenderPartial("_BusinessPlan", Model.BusinessPlan); }

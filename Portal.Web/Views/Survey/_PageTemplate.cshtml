@@ -1,0 +1,51 @@
+﻿
+@using (Html.BeginHtmlTemplate("survey-tab-template"))
+{
+    <li data-bind="visible: IsVisible, attr: { class: tabClass }, events: { click: selectTab }">
+        <span class="k-link" data-bind="text: tabName"></span>
+    </li>
+}
+
+@using (Html.BeginHtmlTemplate("survey-page-template"))
+{
+    <div data-bind="attr: { class: tabContentClass }, fade: IsSelected">
+        #if(!IsSummary)
+        {#
+            <section class="survey-page" data-template="survey-question-template" data-bind="source: Questions">
+            
+            </section>
+            <div class="button-wrap">
+                <div class="buttons">
+                    <a href='\#' data-bind="events: { click: resetPage }">Reset</a>
+                    <a class="btn btn-secondary" data-bind="events: { click: savePage }">Save</a>
+                    <a class="btn btn-primary" data-bind="events: { click: nextPage }">Next</a>
+                </div>
+                <div class="auto-save-wrap" data-bind="saving: isSaving">
+                    
+                </div>
+            </div>
+        #}
+        else
+        {#
+            <a id="pdf-link" target="_blank" data-bind="attr: { href: getPdfUrl }" class="view-as-pdf">View as PDF</a>
+        
+            <div class="survey-page" data-bind="visible: hasScoreDescriptions">
+                <h2>Business Assessment Summary</h2>
+                <section class="survey-summary" data-template="survey-review-score-template" data-bind="source: getAllPagesWithScores">
+                </section>                
+            </div>
+
+            <section class="survey-page" data-template="survey-review-template" data-bind="source: getAllPages">            
+            </section>
+
+            <div class="button-wrap">
+                <div class="buttons">
+                    <a class="btn btn-primary" data-bind="events: { click: completeSurvey }">Complete</a>
+                </div>
+                <div class="auto-save-wrap" data-bind="saving: isSaving">
+                    
+                </div>
+            </div>
+        #}#
+    </div>
+}

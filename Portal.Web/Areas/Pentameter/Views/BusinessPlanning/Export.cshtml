@@ -1,0 +1,31 @@
+﻿@model BusinessPlan
+@{
+    ViewBag.Title = Model.Year + " Business Plan - Print View";
+    Layout = "~/Views/Shared/Layouts/_Default.cshtml";
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Portal)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.GoJs)
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    <script>
+        $(function() {
+            $("#orgchart").kendoOrgChart({
+                dataSource: @Model.Employees.Select(e => new { e.EmployeeID, e.EmployeeParentID, e.FullName, e.Roles  }).ToHtmlJson(),
+                keyField: "EmployeeID",
+                parentField: "EmployeeParentID",
+                nameField: "FullName",
+                titleField: "Roles"
+            });
+        });
+    </script>
+}
+<div class="businessplan-export">
+    @{ Html.RenderPartial("_BusinessPlan", Model); }
+</div>

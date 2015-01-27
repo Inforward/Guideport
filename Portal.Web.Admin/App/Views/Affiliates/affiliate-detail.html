@@ -1,0 +1,214 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{name}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/affiliates">Affiliates</a></li>
+        <li class="active">{{name}}</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="tab-container">
+        <tabset>
+            <tab heading="General">
+                <div class="block-header">
+                    <h3 class="title">General</h3>
+                </div>
+                <form name="affiliateForm" novalidate ng-submit="saveAffiliate(affiliateForm)" confirm-on-exit>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Name:</label>
+                            <input type="text" ng-model="affiliate.Name" maxlength="50" required />
+
+                            <label>Short Name:</label>
+                            <input type="text" ng-model="affiliate.ShortName" maxlength="10" required />
+
+                            <label>Phone No:</label>
+                            <input type="tel" ng-model="affiliate.Phone" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" placeholder="555-555-5555" maxlength="25" />
+
+                            <label>Website:</label>
+                            <input type="url" ng-model="affiliate.WebsiteUrl" placeholder='http://www.example.com' maxlength="50" />
+
+                            <label>External ID:</label>
+                            <input type="number" ng-model="affiliate.ExternalID" readonly />
+
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Address Line 1:</label>
+                            <input type="text" ng-model="affiliate.Address1" maxlength="100" />
+
+                            <label>Address Line 2:</label>
+                            <input type="text" ng-model="affiliate.Address2" maxlength="100" />
+
+                            <label>City:</label>
+                            <input type="text" ng-model="affiliate.City" maxlength="50" />
+
+                            <label>Country:</label>
+                            <select ng-options="option.CountryCode as option.Name for option in countries" ng-model="affiliate.Country" ng-change="changeCountry()"></select>
+
+                            <div ng-show="stateProvinces.length">
+                                <label>State / Province:</label>
+                                <select ng-options="option.StateCode as option.Name for option in stateProvinces" ng-model="affiliate.State"></select>
+                            </div>
+
+                            <label>Zip / Postal Code:</label>
+                            <input type="text" ng-model="affiliate.ZipCode" ng-attr-pattern="{{ postalCodeRegEx }}" maxlength="50" />
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button type="submit" class="btn btn-primary pull-left" ng-disabled="affiliateForm.$pristine || affiliateForm.$invalid || isSaving"><i class=" fa fa-floppy-o"></i>Save Affiliate</button>
+                        <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                    </div>
+                </form>
+                <div class="user-logo">
+                    <img ng-src="/get-file/{{ logo.FileID }}" />
+                </div>
+            </tab>
+            <tab heading="Features" select="populateFeatures()">
+                <div class="block-header">
+                    <h3 class="title">Features</h3>
+                </div>
+                <form name="featureForm" novalidate ng-submit="saveFeatures(featureForm)" confirm-on-exit>
+                    <ul class="role-list">
+                        <li ng-repeat="feature in features">
+                            <div class="role-container" ng-class="{ expanded: isFeatureExpanded(feature) }">
+                                <div class="clearfix">
+                                    <div class="role">
+                                        {{ feature.Name }}
+                                    </div>
+                                    <div class="switch">
+                                        <input bs-switch ng-model="feature.IsEnabled" type="checkbox" switch-on-color="success" switch-off-color="danger" switch-size="small" />
+                                    </div>
+                                    <div class="info">
+                                        <a tooltip="{{ feature.Tooltip }}"><span class="fa fa-info-circle"></span></a>
+                                    </div>
+                                </div>
+                                <div class="mt15" ng-show="isFeatureExpanded(feature)">
+                                    <ul>
+                                        <li ng-repeat="setting in feature.Settings">
+                                            <label ng-class="{ required: setting.IsRequired }">{{ setting.Name }}</label> <a tooltip="{{ setting.Tooltip }}"><span class="fa fa-info-circle"></span></a>
+                                            <input type="text" ng-model="setting.Value" placeholder="{{ setting.Placeholder }}" ng-required="setting.IsRequired && isFeatureExpanded(feature)" ng-pattern="setting.ValidationRegEx" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="button-row">
+                        <button type="submit" class="btn btn-primary pull-left" ng-disabled="featureForm.$pristine || featureForm.$invalid || isSaving"><i class=" fa fa-floppy-o"></i>Save Features</button>
+                        <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                    </div>
+                </form>
+            </tab>
+            
+            <tab heading="Logos">
+                <div class="block-header">
+                    <h3 class="title">Logos</h3>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group" ng-repeat="logo in affiliate.Logos">
+                        <label class="col-sm-2 control-label">
+                            {{ logo.LogoType.Name }}:
+                            <span class="fa fa-info-circle info-icon" tooltip="{{ logo.LogoType.Description }}"></span>
+                        </label>
+                        <div class="col-sm-10" ng-show="logo.uploader.visible">
+                            <div class="clearfix">
+                                <div class="pull-left">
+                                    <input id="file" name="file" type="file" kendo-upload k-options="logo.uploadOptions" />
+                                </div>
+                                <div class="pull-left cancel-wrap" ng-show="logo.FileID > 0">
+                                    <a ng-click="logo.uploader.visible=false">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-10" ng-hide="logo.uploader.visible">
+                            <i class="fa fa-file-o"></i>
+                            <a target="_blank" ng-href="/get-file/{{ logo.FileID }}">{{ logo.FileInfo.Name }}</a>
+                            <a class="btn btn-default btn-xs ml30" ng-click="logo.uploader.visible=true"><i class="fa fa-upload"></i>Update File</a>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+
+            <tab heading="Auto-Tracked Business Metrics" select="populateObjectives()">
+                <div class="block-header">
+                    <h3 class="title">Auto-Tracked Business Metrics</h3>
+                </div>
+                <form name="objectiveForm" novalidate ng-submit="saveObjectives(objectiveForm)" confirm-on-exit>
+                    <ul class="role-list">
+                        <li ng-repeat="objective in objectives">
+                            <div class="role-container" ng-class="{ expanded: !feature.AutoTrackingEnabled }">
+                                <div class="clearfix">
+                                    <div class="role">
+                                        {{ objective.ObjectiveName }}
+                                    </div>
+                                    <div class="switch">
+                                        <input bs-switch ng-model="objective.AutoTrackingEnabled" type="checkbox" switch-on-color="success" switch-off-color="danger" switch-size="small" />
+                                    </div>
+                                    <div class="info">
+                                        <a tooltip="Enable automated tracking of {{ objective.ObjectiveName }}"><span class="fa fa-info-circle"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="button-row">
+                        <button type="submit" class="btn btn-primary pull-left" ng-disabled="objectiveForm.$pristine || isSaving"><i class=" fa fa-floppy-o"></i>Save Objectives</button>
+                        <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                    </div>
+                </form>
+            </tab>
+            <tab heading="Single Sign On" select="populateSsoSettings()">
+                <div class="block-header">
+                    <h3 class="title">Single Sign On</h3>
+                </div>
+                <form name="ssoForm" novalidate ng-submit="saveSsoSettings(ssoForm)" confirm-on-exit>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>Login Page Order:</label>
+                            <input type="number" ng-model="affiliate.SamlDisplayOrder" />
+
+                            <label>Source Domain:</label>
+                            <input type="text" ng-model="affiliate.SamlSourceDomain" maxlength="50" readonly />
+                        </div>
+                    </div>
+                    <div class="block-header mt15">
+                        <h2 class="title">SAML Configuration Settings</h2>
+                        <a tooltip="This configuration set, {{ configuration.Name }}, can be shared across affiliates.  For example, the Cetera configuration set can be shared across all the Cetera affiliates."><span class="fa fa-info-circle"></span></a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="survey-accordion">
+                                <accordion close-others="true">
+                                    <accordion-group ng-repeat="environment in environments" is-open="status.open">
+                                        <accordion-heading>
+                                            <span class="table-row">
+                                                <span class="table-cell">
+                                                    <i class="pull-left fa" ng-class="{'fa-chevron-down': status.open, 'fa-chevron-right': !status.open}"></i>
+                                                </span>
+                                                <span class="table-cell" title="{{ environment.Description }}">
+                                                    {{ environment.Name }}
+                                                </span>
+                                            </span>
+                                        </accordion-heading>
+                                        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="appSetting in getEnvironmentSettings(environment.EnvironmentID)">
+                                            <div class="info">
+                                                <label>{{ appSetting.Setting.Name }}:</label>
+                                                <a tooltip="{{ appSetting.Setting.Description }}"><span class="fa fa-info-circle"></span></a>
+                                            </div>
+                                            <input type="text" ng-model="appSetting.Value" />
+                                        </div>
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button type="submit" class="btn btn-primary pull-left" ng-disabled="ssoForm.$pristine || isSaving"><i class=" fa fa-floppy-o"></i>Save Settings</button>
+                        <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                    </div>
+                </form>
+            </tab>
+        </tabset>
+    </div>
+    
+</div>

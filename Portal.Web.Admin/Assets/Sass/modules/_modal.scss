@@ -1,0 +1,23 @@
+
+.modal-title {
+	font-family: $source-sans-pro;
+	font-weight: 300;
+	font-size: 30px;
+	color: #484848;
+}
+
+.modal-body {
+	padding-bottom: 15px;
+	background-color: #f7f7f7;
+}
+
+.modal-footer {
+	@include clearfix();
+	margin-top: 0;
+
+	a.cancel {
+		cursor: pointer;
+		display: inline-block;
+		margin-top: 5px;
+	}
+}

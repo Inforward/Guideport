@@ -1,0 +1,46 @@
+﻿<div class="page-head">
+    <h2 class="page-title">Files</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a>Content</a></li>
+        <li class="active">Files</li>
+    </ol>
+</div>
+<div class="page-container">
+    <div class="page-sidebar closed" page-sidebar>
+        <div class="sidebar-content">
+            <h3 class="title"><i class="fa fa-filter"></i>Filters</h3>
+            <a title="Close Filters" class="toggle-btn close-btn"><i class="fa fa-close"></i></a>
+            <div class="filters">
+                <div class="filter">
+                    <select ng-options="option.SiteID as option.SiteName for option in sites" ng-model="filters.SiteID"></select>
+                </div>
+                <div class="filter">
+                    <input type="text" ng-model="filters.SearchText" placeholder="Search Content..." />
+                </div>
+            </div>
+            <div class="button-row">
+                <a class="btn btn-primary" ng-click="search()" ng-disabled="isSearching"><i class="fa fa-search"></i>Search</a>
+                <a class="reset" ng-click="resetFilters()">Reset Filters</a>
+            </div>
+        </div>
+        <a title="Open Filters" class="toggle-btn open-btn"><i class="fa fa-filter"></i></a>
+    </div>
+    <div class="page-content">
+
+        <div class="grid-toolbar">
+            <a href="#/content/{{filters.SiteID}}/file" class="btn btn-primary btn-add"><i class="fa fa-upload"></i>Upload New File</a>
+        </div>
+
+        <div ng-hide="recordCount == 0">
+            <div kendo-grid="grid" options="gridOptions" k-ng-delay="gridOptions"></div>
+        </div>
+
+        <div ng-show="recordCount == 0" class="text-center mt100">
+            <div class="alert alert-danger inline-block">
+                <strong>No results found.</strong>  Please check your search criteria and try again.
+            </div>
+        </div>
+
+    </div>
+</div>

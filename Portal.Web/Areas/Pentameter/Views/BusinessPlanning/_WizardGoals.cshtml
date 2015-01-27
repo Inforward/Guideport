@@ -1,0 +1,30 @@
+﻿
+<section class="editor-section">
+    <header class="clearfix">
+        <div class="pull-left mr30">
+            <h2><strong>Goals: </strong>Measurements of Change</h2>
+        </div>
+        <div class="pull-left">
+            <a data-bind="click: addObjective" class="btn btn-secondary btn-icon-left btn-add">Add New Goal</a>    
+        </div>
+    </header>
+    <div class="alert alert-info" data-bind="invisible: hasObjectives">
+        You currently do not have any goals set up.  Click <strong>Add New Goal</strong> above to get started.
+    </div>
+    <div data-bind="visible: hasObjectives">
+        <table class="editor-table">
+            <thead>
+                <tr>
+                    <th>Objective Title</th>
+                    <th>Goal</th>
+                    <th>Est. Completion Date</th>
+                    <th>No. of Strategies</th>
+                    <th class="edit-buttons">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody data-role="listview"
+                   data-template="objective-row-template"
+                   data-bind="source: objectives, events: { edit: editObjective, remove: removeObjective }"></tbody>
+        </table>
+    </div>
+</section>

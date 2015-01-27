@@ -1,0 +1,1436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{17EB29B8-08E1-487F-9F3C-B3837CBA12AC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Portal.Web</RootNamespace>
+    <AssemblyName>Portal.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>980e8058</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentSpace.SAML2">
+      <HintPath>..\Lib\ComponentSpace.SAML2.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="evohtmltopdf">
+      <HintPath>..\Lib\evohtmltopdf.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteDebugger">
+      <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.identitymodel.services" />
+    <Reference Include="System.IdentityModel.Tokens.ValidatingIssuerNameRegistry">
+      <HintPath>..\packages\System.IdentityModel.Tokens.ValidatingIssuerNameRegistry.4.5.1\lib\net45\System.IdentityModel.Tokens.ValidatingIssuerNameRegistry.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Spatial, Version=5.6.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Spatial.5.6.3\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.2\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.2\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionResults\JsonNetResult.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\BaseAreaRegistration.cs" />
+    <Compile Include="Areas\Pentameter\Controllers\BusinessPlanningController.cs" />
+    <Compile Include="Areas\Pentameter\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Pentameter\Controllers\PlanningController.cs" />
+    <Compile Include="Areas\Pentameter\Controllers\ResourcesController.cs" />
+    <Compile Include="Areas\Pentameter\Controllers\SuccessionController.cs" />
+    <Compile Include="Areas\Pentameter\Models\AssessmentPillarSummary.cs" />
+    <Compile Include="Areas\Pentameter\Models\BusinessPlanning\MyBusinessPlansViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\BusinessPlanning\WizardViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\DashboardViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\Planning\ActionItemViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\Planning\PhaseViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\Planning\ProgressViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\Planning\StatusViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\Planning\StepViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\Planning\WizardViewModel.cs" />
+    <Compile Include="Areas\Pentameter\Models\Succession\DashboardViewModel.cs" />
+    <Compile Include="Areas\Pentameter\PentameterAreaRegistration.cs" />
+    <Compile Include="Areas\Retirement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Retirement\Models\ResourcesViewModel.cs" />
+    <Compile Include="Areas\Retirement\RetirementAreaRegistration.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\AdvisorViewController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\GeoController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
+    <Compile Include="ActionResults\FileServiceResult.cs" />
+    <Compile Include="Filters\HandleExceptionsAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SamlHelper.cs" />
+    <Compile Include="Helpers\ExtensionHelpers.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\AdvisorView\AdvisorViewModel.cs" />
+    <Compile Include="Models\AdvisorView\UserSearchResultViewModel.cs" />
+    <Compile Include="Models\AjaxLoadingStyle.cs" />
+    <Compile Include="Models\ContentViewModel.cs" />
+    <Compile Include="Models\AnalyticsViewModel.cs" />
+    <Compile Include="Models\GridOptions.cs" />
+    <Compile Include="Models\SamlAttributesViewModel.cs" />
+    <Compile Include="Models\ExpandCollapseState.cs" />
+    <Compile Include="Models\JsonSettings.cs" />
+    <Compile Include="Models\JsonResponse.cs" />
+    <Compile Include="Models\SearchFilters.cs" />
+    <Compile Include="Models\Survey\SurveyAnswerViewModel.cs" />
+    <Compile Include="Models\Survey\SurveyPageViewModel.cs" />
+    <Compile Include="Models\Survey\SurveyQuestionViewModel.cs" />
+    <Compile Include="Models\Survey\SurveyResponseViewModel.cs" />
+    <Compile Include="Models\Survey\SurveyViewModel.cs" />
+    <Compile Include="Models\TermsAcceptance.cs" />
+    <Compile Include="PdfGenerators\Implementations\BasePdfGenerator.cs" />
+    <Compile Include="PdfGenerators\Implementations\BusinessPlanPdfGenerator.cs" />
+    <Compile Include="PdfGenerators\IPdfGenerator.cs" />
+    <Compile Include="PdfGenerators\PdfGeneratorFactory.cs" />
+    <Compile Include="PdfGenerators\Implementations\SurveyPdfGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\CmsUrlConstraint.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Css\admin.css" />
+    <Content Include="Assets\Css\bootstrap.css" />
+    <Content Include="Assets\Css\editor.css" />
+    <Content Include="Assets\Css\flaticon.css" />
+    <Content Include="Assets\Css\flextext.css" />
+    <Content Include="Assets\Css\font-awesome.css" />
+    <Content Include="Assets\Css\jquery.mmenu.all.css" />
+    <Content Include="Assets\Css\kendo-overrides.css" />
+    <Content Include="Assets\Css\nanoscroller.css" />
+    <Content Include="Assets\Css\normalize.css" />
+    <Content Include="Assets\Css\icomoon.css" />
+    <Content Include="Assets\Css\portal.css" />
+    <Content Include="Assets\Css\source-sans-pro.css" />
+    <Content Include="Assets\Flash\ZeroClipboard.swf" />
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Fonts\flat-icon\flaticon.svg" />
+    <Content Include="Assets\Fonts\font-awesome\fontawesome-webfont.svg" />
+    <Content Include="Assets\Fonts\icomoon\icomoon.svg" />
+    <Content Include="Assets\Images\ajax-loader-blue.gif" />
+    <Content Include="Assets\Images\ajax-loader.gif" />
+    <Content Include="Assets\Images\arrow-blue-sprite.png" />
+    <Content Include="Assets\Images\auto-save-loader.gif" />
+    <Content Include="Assets\Images\bullet-arrow-down.png" />
+    <Content Include="Assets\Images\c2c-button.png" />
+    <Content Include="Assets\Images\c2c-icon.png" />
+    <Content Include="Assets\Images\c2c-logo.png" />
+    <Content Include="Assets\Images\coloricons-sprite.png" />
+    <Content Include="Assets\Images\exclamation-red.png" />
+    <Content Include="Assets\Images\grs-button.png" />
+    <Content Include="Assets\Images\grs-logo-grey.png" />
+    <Content Include="Assets\Images\grs-logo-reverse-2.png" />
+    <Content Include="Assets\Images\grs-logo-reverse.png" />
+    <Content Include="Assets\Images\grs-logo.png" />
+    <Content Include="Assets\Images\horizontal-rule-icon.png" />
+    <Content Include="Assets\Images\info.png" />
+    <Content Include="Assets\Images\logo-blue.png" />
+    <Content Include="Assets\Images\logo-business-plan-print.png" />
+    <Content Include="Assets\Images\logo-print-view-large.png" />
+    <Content Include="Assets\Images\logo-print-view.gif" />
+    <Content Include="Assets\Images\logo-white.png" />
+    <Content Include="Assets\Images\magnify.png" />
+    <Content Include="Assets\Images\pdf-icon.png" />
+    <Content Include="Assets\Images\pentameter-button.png" />
+    <Content Include="Assets\Images\pentameter-logo-large.gif" />
+    <Content Include="Assets\Images\pentameter-logo-large.png" />
+    <Content Include="Assets\Images\pentameter-logo-medium.png" />
+    <Content Include="Assets\Images\pentameter-logo-white.png" />
+    <Content Include="Assets\Images\person.png" />
+    <Content Include="Assets\Images\planning-sprite.png" />
+    <Content Include="Assets\Images\search-results-icons.png" />
+    <Content Include="Assets\Images\sp-button.png" />
+    <Content Include="Assets\Images\sp-icon.png" />
+    <Content Include="Assets\Images\sp-logo-grey.png" />
+    <Content Include="Assets\Images\sp-logo-reverse.png" />
+    <Content Include="Assets\Images\sp-logo.png" />
+    <Content Include="Assets\Images\suggested-reading-icon.png" />
+    <Content Include="Assets\Images\sunburst.png" />
+    <Content Include="Assets\Images\widget-locked-bg.png" />
+    <Content Include="Assets\Kendo\Black\editor.png" />
+    <Content Include="Assets\Kendo\Black\imagebrowser.png" />
+    <Content Include="Assets\Kendo\Black\indeterminate.gif" />
+    <Content Include="Assets\Kendo\Black\loading-image.gif" />
+    <Content Include="Assets\Kendo\Black\loading.gif" />
+    <Content Include="Assets\Kendo\Black\loading_2x.gif" />
+    <Content Include="Assets\Kendo\Black\slider-h.gif" />
+    <Content Include="Assets\Kendo\Black\slider-v.gif" />
+    <Content Include="Assets\Kendo\Black\sprite.png" />
+    <Content Include="Assets\Kendo\Black\sprite_2x.png" />
+    <Content Include="Assets\Kendo\Default\editor.png" />
+    <Content Include="Assets\Kendo\Default\imagebrowser.png" />
+    <Content Include="Assets\Kendo\Default\indeterminate.gif" />
+    <Content Include="Assets\Kendo\Default\loading-image.gif" />
+    <Content Include="Assets\Kendo\Default\loading.gif" />
+    <Content Include="Assets\Kendo\Default\loading_2x.gif" />
+    <Content Include="Assets\Kendo\Default\markers.png" />
+    <Content Include="Assets\Kendo\Default\markers_2x.png" />
+    <Content Include="Assets\Kendo\Default\slider-h.gif" />
+    <Content Include="Assets\Kendo\Default\slider-v.gif" />
+    <Content Include="Assets\Kendo\Default\sprite.png" />
+    <Content Include="Assets\Kendo\Default\sprite_2x.png" />
+    <Content Include="Assets\Kendo\kendo.common.css" />
+    <Content Include="Assets\Kendo\kendo.dataviz.css" />
+    <Content Include="Assets\Kendo\kendo.dataviz.default.css" />
+    <Content Include="Assets\Kendo\kendo.dataviz.js" />
+    <Content Include="Assets\Kendo\kendo.datepicker.ex.js" />
+    <Content Include="Assets\Kendo\kendo.default.css" />
+    <Content Include="Assets\Kendo\kendo.listview.ex.js" />
+    <Content Include="Assets\Kendo\kendo.orgchart.js" />
+    <Content Include="Assets\Kendo\kendo.web.js" />
+    <Content Include="Assets\Kendo\Textures\brushed-metal.png" />
+    <Content Include="Assets\Kendo\Textures\dots1.png" />
+    <Content Include="Assets\Kendo\Textures\dots10.png" />
+    <Content Include="Assets\Kendo\Textures\dots11.png" />
+    <Content Include="Assets\Kendo\Textures\dots12.png" />
+    <Content Include="Assets\Kendo\Textures\dots13.png" />
+    <Content Include="Assets\Kendo\Textures\dots2.png" />
+    <Content Include="Assets\Kendo\Textures\dots3.png" />
+    <Content Include="Assets\Kendo\Textures\dots4.png" />
+    <Content Include="Assets\Kendo\Textures\dots5.png" />
+    <Content Include="Assets\Kendo\Textures\dots6.png" />
+    <Content Include="Assets\Kendo\Textures\dots7.png" />
+    <Content Include="Assets\Kendo\Textures\dots8.png" />
+    <Content Include="Assets\Kendo\Textures\dots9.png" />
+    <Content Include="Assets\Kendo\Textures\glass-lighter.png" />
+    <Content Include="Assets\Kendo\Textures\glass.png" />
+    <Content Include="Assets\Kendo\Textures\highlight.png" />
+    <Content Include="Assets\Kendo\Textures\hsv-gradient.png" />
+    <Content Include="Assets\Kendo\Textures\hue.png" />
+    <Content Include="Assets\Kendo\Textures\leather1.png" />
+    <Content Include="Assets\Kendo\Textures\leather2.png" />
+    <Content Include="Assets\Kendo\Textures\noise.png" />
+    <Content Include="Assets\Kendo\Textures\stripe1.png" />
+    <Content Include="Assets\Kendo\Textures\stripe2.png" />
+    <Content Include="Assets\Kendo\Textures\stripe3.png" />
+    <Content Include="Assets\Kendo\Textures\stripe4.png" />
+    <Content Include="Assets\Kendo\Textures\stripe5.png" />
+    <Content Include="Assets\Kendo\Textures\stripe6.png" />
+    <Content Include="Assets\Kendo\Textures\transparency.png" />
+    <Content Include="Assets\Kendo\Textures\transtexture.png" />
+    <Content Include="Assets\Kendo\kendo.data-binders.js" />
+    <Content Include="Assets\Scripts\advisor-view.js" />
+    <Content Include="Assets\Scripts\app.js" />
+    <Content Include="Assets\Scripts\flexheight.js" />
+    <Content Include="Assets\Scripts\keep-alive.js" />
+    <Content Include="Assets\Scripts\Pentameter\business-plan.js" />
+    <Content Include="Assets\Scripts\Pentameter\business-planning-wizard.js" />
+    <Content Include="Assets\Scripts\Pentameter\planning-wizard.js" />
+    <Content Include="Assets\Scripts\progressbar.js" />
+    <Content Include="Assets\Scripts\qlikview-frame.js" />
+    <Content Include="Assets\Scripts\Pentameter\knowledge-library.js" />
+    <Content Include="Assets\Scripts\Pentameter\dashboard.js" />
+    <Content Include="Assets\Scripts\data.js" />
+    <Content Include="Assets\Scripts\gauge.js" />
+    <Content Include="Assets\Kendo\kendo.grid.ex.js" />
+    <Content Include="Assets\Scripts\Pentameter\third-party-resources.js" />
+    <Content Include="Assets\Scripts\rolodex.js" />
+    <Content Include="Assets\Scripts\search.js" />
+    <Content Include="Assets\Scripts\session-monitor.js" />
+    <Content Include="Assets\Scripts\survey.js" />
+    <Content Include="Assets\Scripts\terms-dialog.js" />
+    <Content Include="Assets\Scripts\timer.js" />
+    <Content Include="Assets\Vendor\base64.min.js" />
+    <Content Include="Assets\Vendor\bootstrap\affix.js" />
+    <Content Include="Assets\Vendor\bootstrap\alert.js" />
+    <Content Include="Assets\Vendor\bootstrap\button.js" />
+    <Content Include="Assets\Vendor\bootstrap\carousel.js" />
+    <Content Include="Assets\Vendor\bootstrap\collapse.js" />
+    <Content Include="Assets\Vendor\bootstrap\dropdown.js" />
+    <Content Include="Assets\Vendor\bootstrap\modal.js" />
+    <Content Include="Assets\Vendor\bootstrap\popover.js" />
+    <Content Include="Assets\Vendor\bootstrap\scrollspy.js" />
+    <Content Include="Assets\Vendor\bootstrap\tab.js" />
+    <Content Include="Assets\Vendor\bootstrap\tooltip.js" />
+    <Content Include="Assets\Vendor\bootstrap\transition.js" />
+    <Content Include="Assets\Vendor\go-guideport-1.4.9.min.js" />
+    <Content Include="Assets\Vendor\go-guideportcfg-1.4.19.min.js" />
+    <Content Include="Assets\Vendor\html5shiv.js" />
+    <Content Include="Assets\Vendor\jquery.keyfilter.js" />
+    <Content Include="Assets\Vendor\jquery.mousewheel.js" />
+    <Content Include="Assets\Vendor\jquery.flextext.js" />
+    <Content Include="Assets\Vendor\jquery-1.9.1.min.js" />
+    <Content Include="Assets\Vendor\jquery.nanoscroller.js" />
+    <Content Include="Assets\Vendor\jquery.numeric.js" />
+    <Content Include="Assets\Vendor\jquery.scrollintoview.js" />
+    <Content Include="Assets\Vendor\modernizr.custom.js" />
+    <Content Include="Assets\Vendor\placeholder.js" />
+    <Content Include="Assets\Vendor\respond.js" />
+    <Content Include="Assets\Vendor\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.counters.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.counters.min.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.dragopen.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.dragopen.min.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.header.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.header.min.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.labels.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.labels.min.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.searchfield.js" />
+    <Content Include="Assets\Vendor\mmenu\addons\jquery.mmenu.searchfield.min.js" />
+    <Content Include="Assets\Vendor\mmenu\jquery.mmenu.js" />
+    <Content Include="Assets\Vendor\underscore-1.4.4.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Layouts\_PortalDefault.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Portal.Data.Sql.EntityFramework\Portal.Data.Sql.EntityFramework.csproj">
+      <Project>{6d0c1305-8277-41a9-a4ed-9383c1d201f1}</Project>
+      <Name>Portal.Data.Sql.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Data\Portal.Data.csproj">
+      <Project>{9e31d6ad-b3cc-4891-a5b3-2ae83388eece}</Project>
+      <Name>Portal.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Domain\Portal.Domain.csproj">
+      <Project>{ea284634-6a41-40ef-852b-b89348e62465}</Project>
+      <Name>Portal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Infrastructure\Portal.Infrastructure.csproj">
+      <Project>{f47fd511-b038-440e-8ffe-e1cdcd03d373}</Project>
+      <Name>Portal.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Model\Portal.Model.csproj">
+      <Project>{a06a7a8a-0e6f-4010-ad8f-fb5ef7d39430}</Project>
+      <Name>Portal.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Services.Clients\Portal.Services.Clients.csproj">
+      <Project>{a140f6d5-15f1-4118-9fbc-9820c71df544}</Project>
+      <Name>Portal.Services.Clients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Services.Contracts\Portal.Services.Contracts.csproj">
+      <Project>{076acdca-19bd-45dc-97d9-c3bc425888bc}</Project>
+      <Name>Portal.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Web.Common\Portal.Web.Common.csproj">
+      <Project>{b9f6a24e-65c6-4cd0-8994-717a0b6481d7}</Project>
+      <Name>Portal.Web.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\Fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\Fonts\font-awesome\fontawesome-webfont.eot" />
+    <Content Include="Assets\Fonts\font-awesome\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Fonts\font-awesome\fontawesome-webfont.woff" />
+    <Content Include="Assets\Fonts\font-awesome\FontAwesome.otf" />
+    <Content Include="Assets\Sass\bootstrap.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\Css</OutputFolder>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_alerts.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_badges.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_breadcrumbs.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_button-groups.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_buttons.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_carousel.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_close.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_code.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_component-animations.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_dropdowns.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_forms.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_glyphicons.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_grid.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_input-groups.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_jumbotron.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_labels.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_list-group.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_media.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_mixins.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_modals.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_navbar.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_navs.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_normalize.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_pager.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_pagination.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_panels.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_popovers.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_print.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_progress-bars.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_responsive-utilities.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_scaffolding.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_tables.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_theme.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_thumbnails.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_tooltip.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_type.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_utilities.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_variables.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bootstrap\_wells.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\Css</OutputFolder>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_bordered-pulled.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_core.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_fixed-width.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_icons.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_larger.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_list.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_mixins.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_path.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_rotated-flipped.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_spinning.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_stacked.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\font-awesome\_variables.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\addons\jquery.mmenu.counters.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\addons\jquery.mmenu.dragopen.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\addons\jquery.mmenu.header.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\addons\jquery.mmenu.labels.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\addons\jquery.mmenu.searchfield.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\extensions\jquery.mmenu.effects.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\extensions\jquery.mmenu.fullscreen.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\extensions\jquery.mmenu.ie8.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\extensions\jquery.mmenu.positioning.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\extensions\jquery.mmenu.themes.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\extensions\jquery.mmenu.widescreen.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\inc\_arrows.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\inc\_colors.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\inc\_sizing.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\inc\_variables.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\jquery.mmenu.all.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\..\Css</OutputFolder>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Assets\Sass\mmenu\jquery.mmenu.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\normalize.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\Css</OutputFolder>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Assets\Sass\portal.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\Css</OutputFolder>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Retirement\Views\Web.config" />
+    <Content Include="Areas\Pentameter\Views\Web.config" />
+    <Content Include="Assets\Sass\modules\_header.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_footer.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_mixins.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_global.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_forms.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Views\Content\Index.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Home\Dashboard.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Shared\Layouts\_SubPage.cshtml" />
+    <Content Include="Assets\Sass\modules\_panel.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Views\Survey\Index.cshtml" />
+    <Content Include="Views\Survey\Print.cshtml" />
+    <Content Include="Views\Survey\_PageTemplate.cshtml" />
+    <Content Include="Views\Survey\_QuestionTemplate.cshtml" />
+    <Content Include="Views\Survey\_ReviewTemplate.cshtml" />
+    <Content Include="Views\Shared\Layouts\_Default.cshtml" />
+    <Content Include="Assets\Sass\kendo-overrides.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <OutputFolder>..\Css</OutputFolder>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Assets\Sass\modules\_surveyprint.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_survey.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_hero.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_dashboard.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Fonts\icomoon\icomoon.eot" />
+    <Content Include="Assets\Fonts\icomoon\icomoon.ttf" />
+    <Content Include="Assets\Fonts\icomoon\icomoon.woff" />
+    <Content Include="Assets\Sass\modules\_content.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_jumbotron.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_list.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_buttons.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\Resources\ThirdParty.cshtml" />
+    <Content Include="Assets\Sass\modules\_rolodex.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\Resources\KnowledgeLibrary.cshtml" />
+    <Content Include="Assets\Sass\modules\_modal.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_accordion.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\Wizard.cshtml" />
+    <Content Include="Assets\Sass\modules\_editor.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\flextext\flextext.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\..\Css</OutputFolder>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardMission.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardRoles.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardSwot.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardGoals.cshtml" />
+    <Content Include="Assets\Sass\modules\_onoffswitch.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardTemplates.cshtml" />
+    <Content Include="Areas\Retirement\Views\Home\Index.cshtml" />
+    <Content Include="Assets\Sass\modules\_tile.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Fonts\flat-icon\flaticon.eot" />
+    <Content Include="Assets\Fonts\flat-icon\flaticon.ttf" />
+    <Content Include="Assets\Fonts\flat-icon\flaticon.woff" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardNewPlanDialog.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardToolbar.cshtml" />
+    <Content Include="Assets\Sass\modules\_businessplan.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\Export.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\MyBusinessPlans.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_BusinessPlan.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Shared\Layouts\_Default.cshtml" />
+    <Content Include="Assets\Sass\admin.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\Css</OutputFolder>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Assets\Sass\modules\_search.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_admin.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\Succession\BusinessValuation.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Shared\BusinessValuationTerms.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Shared\Layouts\_Blank.cshtml" />
+    <Content Include="Areas\Retirement\Views\Shared\Layouts\_Blank.cshtml" />
+    <Content Include="Areas\Retirement\Views\Shared\Resources.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Shared\PentameterHero.cshtml" />
+    <Content Include="Assets\Fonts\source-sans-pro\light.eot" />
+    <Content Include="Assets\Fonts\source-sans-pro\light.woff" />
+    <Content Include="Assets\Fonts\source-sans-pro\regular.eot" />
+    <Content Include="Assets\Fonts\source-sans-pro\regular.woff" />
+    <Content Include="Assets\Sass\editor.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+      <OutputFolder>..\Css</OutputFolder>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+    </Content>
+    <Content Include="Assets\Sass\modules\_slide-nav.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_breadcrumb.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Portal.Web.wpp.targets" />
+    <Content Include="Assets\Sass\modules\_gauge.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\bourbon\addons\_button.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_clearfix.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_directional-values.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_ellipsis.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_font-family.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_hide-text.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_html5-input-types.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_position.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_prefixer.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_retina-image.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_size.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_timing-functions.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_triangle.scss" />
+    <Content Include="Assets\Sass\bourbon\addons\_word-wrap.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_animation.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_appearance.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_backface-visibility.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_background-image.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_background.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_border-image.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_border-radius.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_box-sizing.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_calc.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_columns.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_filter.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_flex-box.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_font-face.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_font-feature-settings.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_hidpi-media-query.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_hyphens.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_image-rendering.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_keyframes.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_linear-gradient.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_perspective.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_placeholder.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_radial-gradient.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_transform.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_transition.scss" />
+    <Content Include="Assets\Sass\bourbon\css3\_user-select.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_assign.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_color-lightness.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_flex-grid.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_golden-ratio.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_grid-width.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_modular-scale.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_px-to-em.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_px-to-rem.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_strip-units.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_tint-shade.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_transition-property-name.scss" />
+    <Content Include="Assets\Sass\bourbon\functions\_unpack.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_convert-units.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_gradient-positions-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_is-num.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_linear-angle-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_linear-gradient-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_linear-positions-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_linear-side-corner-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_radial-arg-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_radial-gradient-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_radial-positions-parser.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_render-gradients.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_shape-size-stripper.scss" />
+    <Content Include="Assets\Sass\bourbon\helpers\_str-to-num.scss" />
+    <Content Include="Assets\Sass\bourbon\settings\_asset-pipeline.scss" />
+    <Content Include="Assets\Sass\bourbon\settings\_prefixer.scss" />
+    <Content Include="Assets\Sass\bourbon\settings\_px-to-em.scss" />
+    <Content Include="Assets\Sass\bourbon\_bourbon-deprecated-upcoming.scss" />
+    <Content Include="Assets\Sass\bourbon\_bourbon.scss" />
+    <Content Include="Assets\Sass\modules\_tabs.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardGoalDialog.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardReview.cshtml" />
+    <Content Include="Areas\Pentameter\Views\BusinessPlanning\_WizardRoleDialog.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Succession\Dashboard.cshtml" />
+    <Content Include="Assets\Sass\modules\_status-widget.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\Planning\Index.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Planning\_WizardActionItem.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Planning\_WizardPhase.cshtml" />
+    <Content Include="Areas\Pentameter\Views\Planning\_WizardStep.cshtml" />
+    <Content Include="Assets\Sass\modules\_planning.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_login.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\modules\_widget.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <IgnoreWarnings>False</IgnoreWarnings>
+      <IgnoreErrors>False</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Assets\Sass\nanoscroller.scss">
+      <Compile>True</Compile>
+      <Minify>False</Minify>
+      <OutputFolder>..\Css</OutputFolder>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </Content>
+    <Content Include="Areas\Pentameter\Views\Shared\Layouts\_Breadcrumb.cshtml" />
+    <Content Include="Assets\Sass\modules\_advisorview.scss" />
+    <None Include="Properties\PublishProfiles\Cetera-Prod.pubxml" />
+    <None Include="Properties\PublishProfiles\Cetera-QA.pubxml" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\AdvisorView\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\First Allied-PROD.pubxml" />
+    <None Include="Properties\PublishProfiles\First Allied-QA.pubxml" />
+    <Content Include="Views\Shared\AjaxLoading.cshtml" />
+    <Content Include="Views\Shared\Layouts\_PortalBreadcrumb.cshtml" />
+    <Content Include="Areas\Retirement\Views\Shared\Layouts\_Default.cshtml" />
+    <Content Include="Areas\Retirement\Views\Shared\Layouts\_SubPage.cshtml" />
+    <Content Include="Views\Shared\Breadcrumb.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\Analytics.cshtml" />
+    <Content Include="Views\Shared\Layouts\_Blank.cshtml" />
+    <Content Include="Views\Shared\SlideMenu.cshtml" />
+    <Content Include="Views\Auth\Test.cshtml" />
+    <Content Include="Views\Auth\IdpLogin.cshtml" />
+    <Content Include="Saml\Certificates\idp.cer" />
+    <Content Include="Saml\Certificates\idp.pfx" />
+    <Content Include="Saml\Certificates\qa-guideport.cer" />
+    <Content Include="Saml\Certificates\qa-guideport.pfx" />
+    <Content Include="Saml\saml.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Saml\saml.release.config" />
+    <None Include="Saml\saml.test.config" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Saml\Certificates\test.cetera.penta.cer" />
+    <None Include="Web.CeteraProd.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.CeteraQA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.FirstAlliedProd.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.FirstAlliedQA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CeteraQA|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CeteraProd|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FirstAlliedProd|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FirstAlliedQA|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58877</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44303/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

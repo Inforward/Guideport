@@ -1,0 +1,75 @@
+
+.content-description {
+	border-bottom: 1px solid #eeeeee;
+	margin-bottom: 35px;
+
+	h3 {
+		margin-top: 10px;
+		margin-bottom: 15px;
+		font-family: $arial-font;
+		font-size: 18px;
+		font-weight: bold;
+	}
+}
+
+.content-body {
+	p {
+		margin-bottom: 20px;
+	}
+
+	img {
+		margin-bottom: 10px;
+	}
+
+	ul {
+		list-style-type: square;
+		margin-bottom: 15px;
+
+		li {
+			margin-top: 5px;
+
+			ul {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	a.disabled {
+		text-decoration: none;
+		color: #666;
+	}
+}
+
+.suggested-reading {
+	margin-top: 10px;
+	margin-bottom: 30px;
+	@include clearfix();
+
+	.image {
+		margin-bottom: 20px;
+	}
+
+	.info {		
+
+		h4 {
+			margin-top: 0;
+			margin-bottom: 5px;
+		}	
+
+		.author {
+			margin-bottom: 5px;
+		}
+
+		.published {
+			color: #888;
+			margin-bottom: 10px;
+		}
+
+		.description {
+		}
+	}
+}
+
+.suggested-reading + hr {
+	margin: 0;
+}

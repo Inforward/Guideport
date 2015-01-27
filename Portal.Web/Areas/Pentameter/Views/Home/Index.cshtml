@@ -1,0 +1,41 @@
+﻿@model Portal.Model.SiteMap
+@{
+    ViewBag.Title = "Welcome to Pentameter";
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_Default.cshtml";
+    var items = Model.Items.Where(m => m.IsMenuVisible).ToList();
+}
+<section class="hero">
+    <div class="container">
+        @{ Html.RenderPartial("PentameterHero"); }
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            @for (var i = 0; i < items.Count; i++)
+            {
+                var cssClass = "col-xs-12 col-md-2";
+                var item = items[i];
+
+                if (i == 0)
+                {
+                    cssClass += " col-md-offset-1";
+                }
+                
+                <div class="@cssClass">
+                    <h4><a href="@item.Url">@Html.Raw(item.Title.Replace(" ", "<span class='break'> </span>"))</a></h4>
+                    
+                    @if (item.Children.Any())
+                    {
+                        <ul class="content-list">
+                            @foreach (var child in item.Children.Where(m => m.IsMenuVisible))
+                            {
+                                <li><a href="@child.Url">@child.Title</a></li>    
+                            }
+                        </ul>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</section>

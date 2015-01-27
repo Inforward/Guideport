@@ -1,0 +1,21 @@
+﻿<ul class="editor-toolbar">
+    <li data-bind="visible: AvailablePlanYears.length > 1">
+        <a data-bind="click: checkForChanges" data-toggle="modal" data-target="#editor-new-plan-dialog"><i class="fa fa-plus"></i>new</a>
+    </li>
+    <li>
+        <a data-bind="click: deleteBusinessPlan"><i class="fa fa-trash-o"></i>delete</a>
+    </li>
+    <li data-bind="visible: BusinessPlan.BusinessPlanID > 0">
+        <a data-bind="click: exportBusinessPlan, attr: { href: getExportUrl }" target="_blank"><i class="icon-file-pdf"></i>pdf</a>
+    </li>
+    <li class="dropdown my-plans">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+            my plans 
+            <span class="normal">(<span data-bind="text: selectedYear"></span>)</span>
+            <i class="fa fa-chevron-down"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu" data-bind="source: ExistingPlanYears" data-template="toolbar-year-template">
+
+        </ul>
+    </li>
+</ul>

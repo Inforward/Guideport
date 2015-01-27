@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = Html.PageTitle("Error");
+    Layout = "~/Views/Shared/Layouts/_PortalDefault.cshtml";
+}
+
+<div class="container">
+    <div id="error-content">
+        <div class="page-header">
+            <h1>Oops, something went wrong</h1>
+        </div>
+        <p class="error">
+            @Html.Raw(ViewBag.Message)
+        </p>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿@model AjaxLoadingStyle
+@{
+    var text = Model.Text ?? "Loading...";
+    var cssClass = Model.CssClass ?? "ajax-loading";
+    var imageFileName = Model.ImageFileName ?? "ajax-loader.gif";
+}
+<div class="@cssClass">
+    @Html.Image("~/Assets/Images/" + imageFileName, "loading")
+</div>

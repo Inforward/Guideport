@@ -1,0 +1,99 @@
+
+.slide-nav {
+	display: none;
+
+	ul {
+		li {
+		}
+	}
+}
+
+.slide-nav-menu-button {
+	display: block;
+	position: absolute;	
+	padding: 18px 15px 0 15px;
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 100%;
+	background-color: $blue70;
+
+	span {
+		display: block;
+		width: 20px;
+		height: 2px;
+		background-color: #94c0d3;
+		@include radius(4px);
+		margin-top: 2px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}
+
+@media only screen and (min-width: 720px) {
+	.slide-nav-menu-button {
+		display: none;
+	}
+}
+
+body {
+	.mm-menu {	
+		color: $white;
+	}
+
+	.mm-ismenu,
+	.mm-menu.mm-vertical .mm-list li.mm-opened > a.mm-subopen, 
+	.mm-menu.mm-vertical .mm-list li.mm-opened > ul {
+		background: $blue80;
+	}
+
+	.mm-list a.mm-subopen + a {
+		padding: 10px 5px 10px 20px;
+	}
+
+	.mm-menu .mm-list > li > a.mm-subopen:after, 
+	.mm-menu .mm-list > li > a.mm-subclose:before {
+		border-color: $fasi-light-blue;
+	}
+
+	.mm-list a.mm-subopen::before {
+		border-left: none;
+	}
+
+	.mm-list > li {
+		border-bottom: solid 1px #1a3f5c;
+		padding: 5px 0;
+
+		i {
+			color: $fasi-light-blue;
+			padding-left: 12px;
+			font-size: 18px;
+			width: 40px;
+		}
+
+		a {
+			display: inline-block;
+			padding: 3px 20px 3px 0;
+			clear: both;
+			font-size: 14px;
+			font-weight: normal;
+			line-height: 1.42857;
+			color: #fff;
+			white-space: nowrap;
+			text-decoration: none;
+			overflow: inherit;
+		}
+
+		&> ul > li {
+			border-bottom: none;
+			padding: 0;
+		}
+
+		.mm-list.mm-panel {
+			padding-top: 0 !important;
+			padding-bottom: 3px !important;
+		}
+	}
+}

@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/Layouts/_PortalDefault.cshtml";
+}
+@section head 
+{
+    @RenderSection("head", required: false)
+}
+@section logo
+{
+    <div class="logo-wrap pentameter-logo">
+        <a href="@Url.Content("~/pentameter")">
+            <img src="@Url.StaticContent("~/Assets/Images/pentameter-logo-white.png")" alt="Pentameter" />
+        </a>
+    </div>
+}
+@section footerLogo
+{
+    <div class="footer-logo-wrap pentameter-logo">
+        <img src="@Url.StaticContent("~/Assets/Images/pentameter-logo-large.png")" alt="Pentameter" />
+    </div>
+}
+@section vendorScripts
+{
+    @RenderSection("vendorScripts", required: false)
+}
+@section scripts
+{
+    @Scripts.Render(ScriptBundleNames.Pentameter)
+    @RenderSection("scripts", required: false)
+}
+
+@RenderBody()

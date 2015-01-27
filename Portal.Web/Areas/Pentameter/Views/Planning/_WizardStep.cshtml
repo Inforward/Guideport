@@ -1,0 +1,58 @@
+﻿
+@using (Html.BeginHtmlTemplate("step-nav-template"))
+{
+    <li data-bind="click: selectStep, attr: { class: stepNavCssClass }">
+        
+        <span class="step-number">Step #= StepNo #</span>
+        <span class="step-name">#= Name #</span>
+        <span class="step-status" data-bind="text: stepStatusText"></span>
+        <span class="step-triangle"></span>
+    </li>
+}
+
+@using (Html.BeginHtmlTemplate("step-template"))
+{
+    <section class="planning-step" data-bind="fade: Selected">
+        
+        <header>
+            <h3 class="name">#= Name #</h3>
+            <p class="description">#= Description #</p>
+        </header>
+
+        <div class="planning-step-body">
+            <span class="strong" data-bind="text: actionItemHeaderText">Action Items:</span>
+
+            <table class="action-items">
+                <colgroup>
+                    <col style="width: 40px;" />
+                    <col style="width: 22px;" />
+                </colgroup>
+                <tbody data-template="action-item-template" data-bind="source: ActionItems">
+        
+                </tbody>
+            </table>            
+        </div>
+
+        <footer>
+            <div class="step-notes">
+                <span>Notes:</span>
+                <textarea data-bind="value: Notes, events: { change: notesChanged }" maxlength="500"></textarea>
+            </div>
+            <div class="button-wrap">
+                <div class="pull-left">
+                    <div class="clearfix">
+                        <a class="btn btn-primary btn-icon-left btn-save pull-left" data-bind="click: saveProgress, enabled: isDirty">Save Progress</a>
+                        <div class="auto-save-wrap pull-left" data-bind="saving: isSaving"></div>
+                    </div>                
+                </div>
+                <div class="pull-right">
+                    <a data-bind="click: goToPrevious, enabled: isPreviousEnabled" class="btn btn-primary btn-icon-left btn-previous">Previous</a>
+                    <a data-bind="click: goToNext, enabled: isNextEnabled, invisible: isVeryLastStep" class="btn btn-primary btn-icon btn-next">Next</a>
+                    <a data-bind="click: completeClicked, enabled: isWizardComplete, visible: isVeryLastStep" class="btn btn-secondary">Complete</a>
+                </div>
+            </div>
+        </footer>
+
+    </section>
+    
+}

@@ -1,0 +1,55 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{report.FullName}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#">Reports</a></li>
+        <li class="active">{{report.FullName}}</li>
+    </ol>
+</div>
+<div class="page-container">
+    <div class="page-sidebar open" page-sidebar>
+        <div class="sidebar-content">
+            <h3 class="title"><i class="fa fa-filter"></i>Filters</h3>
+            <a title="Close Filters" class="toggle-btn close-btn"><i class="fa fa-close"></i></a>
+            <div class="filters">
+                <div class="filter" ng-repeat="filter in report.Filters | filter: { InputType: 'TextBox' }">
+                    <input type="text" placeholder="{{filter.Label}}" ng-model="filter.Value" />
+                </div>
+                <div class="filter" ng-repeat="filter in report.Filters | filter: { InputType: 'DropDownList' }">
+                    <select ng-options="option.Value as option.Name for option in filter.Options" ng-model="filter.Value"></select>
+                </div>
+                <div class="filter" ng-repeat="filter in report.Filters | filter: { InputType: 'DatePicker' }">
+                    <input kendo-date-picker placeholder="{{filter.Label}}" ng-model="filter.Value" />
+                </div>
+                <div class="filter" ng-repeat="filter in report.Filters | filter: { InputType: 'CheckBox' }">
+                    <input name="{{filter.Name}}" type="checkbox" ng-model="filter.Value" /><label for="{{ filter.Name }}">{{filter.Label}}</label>
+                </div>
+            </div>
+            <div class="button-row">
+                <a class="btn btn-primary" ng-click="executeReport()" ng-disabled="reportExecuting"><i class="fa fa-arrow-circle-right"></i>Run Report</a>
+                <a class="reset" ng-click="resetFilters()">Reset Filters</a>
+            </div>
+        </div>
+        <a title="Open Filters" class="toggle-btn open-btn"><i class="fa fa-filter"></i></a>
+    </div>
+    <div class="page-content">
+        
+        <div ng-show="recordCount > 0">
+            <a class="btn btn-success btn-grid-top" ng-click="exportReport()" ng-disabled="reportExecuting"><i class="fa fa-file-excel-o"></i>Export to Excel</a>
+            <div kendo-grid="grid" k-options="gridOptions" k-ng-delay="gridOptions"></div>
+        </div>
+        
+        <div ng-show="recordCount == -1" class="text-center mt100">
+            <div class="alert alert-info inline-block">
+                To view this report, use the optional filters on the right and click <strong>Run Report</strong>.
+            </div>
+        </div>
+
+        <div ng-show="recordCount == 0" class="text-center mt100">
+            <div class="alert alert-danger inline-block">
+                <strong>No results found.</strong>  Please check your filter criteria and try again.
+            </div>
+        </div>
+
+    </div>    
+</div>

@@ -1,0 +1,39 @@
+
+.advisor-view-results {
+
+	.k-pager-wrap {
+		border-top: 0;
+        border-bottom: inherit;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+
+		color: inherit;
+		border-color: inherit;
+		background-color: inherit;
+
+		.k-pager-numbers {
+
+			.k-link {
+				color: $fasi-blue;
+				border-color: $gray70;
+			}
+
+			.k-state-selected {
+				font-weight: bold;
+				color: $fasi-blue;
+				background-color: $white10;
+                border-color: $gray70;
+			    margin-left: 3px;
+			    margin-right: 3px;
+			    border-radius: 0.3em;
+			}
+		}
+
+		.k-link {
+			margin-left: 3px;
+			margin-right: 3px;
+			border-radius: 0.3em;
+		}
+	}
+
+}

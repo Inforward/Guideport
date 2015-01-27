@@ -1,0 +1,143 @@
+﻿@using Portal.Model
+@model HomeViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="adminApp" class="@Html.AdminCssClass(Model.CurrentUser)">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title ng-bind="$root.title">Admin Console</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css" />
+    @Styles.Render(StyleBundleNames.Kendo)
+    @Styles.Render(StyleBundleNames.App)
+</head>
+<body ng-class="$root.bodyClass" ng-controller="adminCtrl">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <span class="navbar-brand">Admin Console</span>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right user-nav">
+                <li class="dropdown" dropdown>
+                    <a href class="dropdown-toggle" dropdown-toggle><img alt="Avatar" src="@Url.Content("~/Assets/Images/avatar-blank.jpg")"><span>@Model.CurrentUser.DisplayName</span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.RouteUrl("Signout")">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="navigation-wrap">
+                <ul class="navigation" nav-accordion>
+                    <li>
+                        <a href="#/">
+                            <i class="fa fa-home m-icon"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    @if (Model.CurrentUser.IsInRole(PortalRoleValues.ContentAdmin))
+                    {
+                        <li class="parent content">
+                            <a>
+                                <i class="fa fa-edit m-icon"></i>
+                                <span>Content</span>
+                                <span class="toggle"></span>
+                            </a>
+                            <ul>
+                                <li><a href="#/content/pages">Pages</a></li>
+                                <li><a href="#/content/files">Files</a></li>
+                                <li><a href="#/content/third-party-resources">Third Party Resources</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (Model.CurrentUser.IsInRole(PortalRoleValues.SurveyAdmin))
+                    {
+                        <li class="parent survey">
+                            <a>
+                                <i class="fa fa-check-square-o m-icon"></i>
+                                <span>Surveys</span>
+                                <span class="toggle"></span>
+                            </a>
+                            <ul>
+                                @foreach (var survey in Model.Surveys.OrderBy(s => s.SurveyName))
+                                {
+                                    <li><a href="#/surveys/@survey.SurveyID">@survey.SurveyName</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (Model.CurrentUser.IsInRole(PortalRoleValues.AffiliateAdmin))
+                    {
+                        <li>
+                            <a href="#/affiliates">
+                                <i class="fa fa-institution m-icon"></i>
+                                <span>Affiliates</span>
+                            </a>
+                        </li>
+                    }                    
+                    @if (Model.CurrentUser.IsInRole(PortalRoleValues.UserAdmin))
+                    {
+                        <li>
+                            <a href="#/users">
+                                <i class="fa fa-user m-icon"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                    }
+                    @if (Model.CurrentUser.IsInRole(PortalRoleValues.GroupAdmin))
+                    {
+                        <li>
+                            <a href="#/groups">
+                                <i class="fa fa-group m-icon"></i>
+                                <span>Groups</span>
+                            </a>
+                        </li>
+                    }
+                    @if (Model.CurrentUser.IsInRole(PortalRoleValues.Reporting))
+                    {
+                        <li class="parent reporting">
+                            <a>
+                                <i class="fa fa-bar-chart-o m-icon"></i>
+                                <span>Reports</span>
+                                <span class="toggle"></span>
+                            </a>
+                            <ul>
+                                @foreach (var report in Model.Reports.OrderBy(r => r.Name))
+                                {
+                                    <li><a href="#/reports/@report.ViewID">@report.FullName</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div id="main" class="container-fluid">
+            <div class="view-container">
+                <div class="view-frame" ng-view>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render(ScriptBundleNames.Vendor)
+    @Scripts.Render(ScriptBundleNames.Angular)
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+    @Scripts.Render(ScriptBundleNames.App)
+    
+    <script>
+        angular.module("adminApp").constant('appConfig', @Model.ConfigJson);
+    </script>
+
+</body>
+</html>

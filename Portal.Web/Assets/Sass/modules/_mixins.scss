@@ -1,0 +1,174 @@
+
+@import "../bourbon/bourbon";
+
+/*
+	Colors
+*/
+$white:   #fff;
+$white10: #f0f0f0; 
+$white20: #fcfcfc; 
+
+$red20:	  #c81111;
+
+$fasi-blue:  #00457c;
+$fasi-light-blue: #0077b8;
+
+$blue20:  #012e57;
+$blue30:  #27527E;
+$blue40:  #0068b1;
+$blue50:  #0183ca;
+$blue60:  #9ac6d7;
+$blue70:  #195789;
+$blue80:  #002949;
+$blue90:  #264964;
+$blue100:  #002039;
+$blue110:  #046ba8;
+$blue120:  #2986c9;
+$blue130:  #185789;
+
+$gray10:  #6a6a6a;
+$gray20:  #b4b4b4;
+$gray30:  #666666;
+$gray40:  #848484;
+$gray50:  #716f70;
+$gray60:  #ebebeb;
+$gray70:  #c5c5c5;
+$gray80:  #e0e0e0;
+$gray90:  #b4b3b3;
+
+$teal: #05798c;
+$light-green: #019069;
+$green:  #057c71;
+$lime-green: #709001;
+$mustard: #a68c4c;
+$orange: #b56728;
+
+
+$header-bg-color:  $fasi-blue;
+$footer-bg-color:  $white;
+
+/*
+	Dimensions
+*/
+$footer-height: 110px;
+
+/*
+	Type
+*/
+$default-font: 'Source Sans Pro', sans-serif, Arial, Verdana;
+$arial-font: Arial, Verdana;
+$source-sans-pro: 'Source Sans Pro', sans-serif, Arial, Verdana;
+
+
+@mixin button-list() {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	@include clearfix();
+
+	li {
+		float: left;
+	}
+}
+
+@mixin font-awesome($content: '') {
+	display: inline-block;
+	font-family: FontAwesome !important;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@if $content != '' {
+		&:after {
+			content: $content;
+		}
+	}
+}
+
+@mixin iconmoon(){
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin radius($radius: 4px) {
+  -moz-border-radius:    $radius; 
+  -webkit-border-radius: $radius;
+  -ms-border-radius:     $radius; 
+  border-radius: $radius;
+}
+
+@mixin hover-trans($color, $hover-color) {
+  color: $color;
+  @include transition (color 0.2s ease);
+
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+@mixin vertical-text(){
+	@include transform(rotate(-90deg));
+}
+
+@mixin placeholderColor($color) {
+	&:-moz-placeholder {
+		color: $color;
+	}
+	&::-moz-placeholder {
+		color: $color;
+	}
+	&:-ms-input-placeholder {
+		color: $color;
+	}
+	&::-webkit-input-placeholder {
+		color: $color;
+	}
+}
+
+@mixin ellipsis(){
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+    -webkit-box-shadow: $top $left $blur $color #{$inset};
+    -moz-box-shadow: $top $left $blur $color #{$inset};
+    box-shadow: $top $left $blur $color #{$inset};
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#{$color}', Direction=145, Strength=3);
+}
+
+@mixin gradient($from, $to, $image-url: '') {
+
+	@if $image-url == '' {
+		background-image: linear-gradient(bottom, $from 0%, $to 100%);
+		background-image: -o-linear-gradient(bottom, $from 0%, $to 100%);
+		background-image: -moz-linear-gradient(bottom, $from 0%, $to 100%);
+		background-image: -webkit-linear-gradient(bottom, $from 0%, $to 100%);
+		background-image: -ms-linear-gradient(bottom, $from 0%, $to 100%);
+		background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, $from), color-stop(1, $to) );
+		background-color: $to;
+		filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$to}', endColorstr='#{$from}');
+	}
+	@else {
+		background-image: url($image-url);
+		filter: none;
+		background-color: $to;
+	}
+}
+
+@mixin opacity( $value: 0.5 ) {
+  opacity: $value;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" $value * 100 ")";
+  filter: alpha(opacity= $value * 100 );
+  zoom: 1;
+}

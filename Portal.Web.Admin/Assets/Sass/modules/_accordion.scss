@@ -1,0 +1,51 @@
+
+
+.survey-accordion {
+
+    .accordion-toggle {
+        text-decoration: none;
+        font-family: $arial-font;
+        font-size: 14px;
+
+        .fa {
+            color: #808080;
+            font-size: 12px;
+            margin-right: 10px;
+            position: relative;
+            top: 1px;
+        }
+    }
+
+    .inner-list {
+        list-style-type: none;
+        padding-left: 10px;
+
+        input[type='text'] {
+            width: auto;
+        }
+
+        .k-multiselect-wrap {
+            .k-input {
+                color: #A1A1A1;
+            }
+
+            li {
+                float: none;
+                display: block;
+            }
+
+            .k-button {
+                text-align:left;
+            }
+        }
+    }
+
+    .panel-default > .panel-heading {
+        background-color: #f7f7f7;
+    }
+
+    .answer-label {
+        display: block;
+        margin: 10px 0 5px 0;
+    }
+}

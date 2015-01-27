@@ -1,0 +1,50 @@
+﻿<div class="page-head">
+    <h2 class="page-title">Users</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li class="active">Users</li>
+    </ol>
+</div>
+<div class="page-container">
+    <div class="page-sidebar closed" page-sidebar>
+        <div class="sidebar-content">
+            <h3 class="title"><i class="fa fa-filter"></i>Filters</h3>
+            <a title="Close Filters" class="toggle-btn close-btn"><i class="fa fa-close"></i></a>
+            <div class="filters">
+                <div class="filter">
+                    <input type="text" ng-model="filters.FirstName" placeholder="First Name" />
+                </div>
+                <div class="filter">
+                    <input type="text" ng-model="filters.LastName" placeholder="Last Name" />
+                </div>
+                <div class="filter">
+                    <select ng-options="option.AffiliateID as option.Name for option in affiliates" ng-model="filters.AffiliateID"></select>
+                </div>
+                <div class="filter">
+                    <select ng-options="option.ProfileTypeID as option.Name for option in profileTypes" ng-model="filters.ProfileTypeID"></select>
+                </div>
+                <div class="filter">
+                    <select ng-options="option.UserStatusID as option.Name for option in statuses" ng-model="filters.UserStatusID"></select>
+                </div>
+            </div>
+            <div class="button-row">
+                <a class="btn btn-primary" ng-click="search()" ng-disabled="isSearching"><i class="fa fa-search"></i>Search</a>
+                <a class="reset" ng-click="resetFilters()">Reset Filters</a>
+            </div>
+        </div>
+        <a title="Open Filters" class="toggle-btn open-btn"><i class="fa fa-filter"></i></a>
+    </div>
+    <div class="page-content">
+        
+        <div ng-hide="recordCount == 0">
+            <div kendo-grid="grid" k-options="gridOptions"></div>
+        </div>
+
+        <div ng-show="recordCount == 0" class="text-center mt100">
+            <div class="alert alert-danger inline-block">
+                <strong>No results found.</strong>  Please check your search criteria and try again.
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@using ComponentSpace.SAML2.Configuration
+@model Portal.Web.Controllers.AuthController.IdpLoginModel
+@{
+    ViewBag.Title = "Identity Provider Login";
+    Layout = "~/Views/Shared/Layouts/_Default.cshtml";
+
+    var affiliates = ViewBag.Affiliates as List<Affiliate> ?? new List<Affiliate>();
+    var users = ViewBag.Users as List<User> ?? new List<User>();
+    var user = ViewBag.User as User;
+}
+@section head 
+{
+    @Styles.Render(StyleBundleNames.Portal)
+}
+@if (user != null)
+{    
+<div class="login">
+    <div class="login-header">
+    </div>    
+    <div class="container">
+        <h3>You are logged in @user.DisplayName</h3>                
+        <p>
+            @Html.ActionLink("Log in to Guideport", "IdpSingleSignOn", new { partnerSp = SAMLConfiguration.Current.ServiceProviderConfiguration.Name })
+        </p>
+        <p>
+            @Html.ActionLink("Log out of Identity Provider", "IdpLogout")
+        </p>
+    </div>
+</div>
+}
+else
+{
+    <section id="loginForm">
+    @using (Html.BeginForm(new { ViewBag.ReturnUrl })) 
+    {
+        @Html.AntiForgeryToken()
+    
+        <div class="login">
+        
+            <div class="login-header">
+            </div>
+            <div class="container">
+                <h2>Identity Provider Login</h2>                    
+                <table border="0">
+                    <tr>
+                        <td>
+                            <p>Available Users:</p>
+                        </td>
+                        <td>
+                            <select data-val="true" data-val-required="The Available User field is required." id="ProfileID" name="ProfileID">
+                                @foreach (var u in users)
+                                {
+                                    <option value="@u.ProfileID" title="@u.ApplicationRoles.AsString("Roles:", "\n")">@u.DisplayName (@u.ProfileTypeName)</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Affiliate:</p>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.SourceDomain, affiliates.Where(a => a.Features.Any(f => f.FeatureID == (int)Features.LoginPage)).OrderBy(a => a.AffiliateID).Select(a => new SelectListItem { Text = a.Name, Value = a.SamlSourceDomain, Selected = a.SamlSourceDomain == ViewBag.SourceDomain }))
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="Login" />
+                        </td>
+                    </tr>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <tr>
+                            <td colspan="2">
+                                <div class="alert alert-danger clearfix" role="alert" style="margin-top: 10px;">
+                                    <div>
+                                        @Html.ValidationSummary(true)
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        }
+    </section>     
+}

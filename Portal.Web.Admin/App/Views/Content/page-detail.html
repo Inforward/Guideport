@@ -1,0 +1,209 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{title}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a>Content</a></li>
+        <li><a href="#/content/pages">Pages</a></li>
+        <li class="active">{{title}}</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="tab-container">
+        <tabset>
+
+            <tab heading="Settings">
+                <div>
+                    <form name="settingsForm" novalidate ng-submit="savePage(settingsForm)" class="form-horizontal" confirm-on-exit>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Site:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates the site this page belongs in."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select ng-options="option.SiteID as option.SiteName for option in sites" ng-model="content.SiteID" ng-change="siteChanged()" ng-show="isNew()"></select>
+                                <div class="value-only" ng-hide="isNew()">
+                                    {{ content.Site.SiteName }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Title:
+                                <span class="fa fa-info-circle info-icon" tooltip="The title of the page that will appear at the top as well as in the browser's title bar."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="content.Title" ng-blur="setPermalink()" required />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="content.Permalink.length">
+                            <label class="col-sm-2 control-label">
+                                Permalink:
+                                <span class="fa fa-info-circle info-icon" tooltip="This is the permanent URL to this web page."></span>
+                            </label>
+                            <div class="col-sm-10">
+                                <div ng-hide="editingPermalink" class="value-only permalink-label-wrap">
+                                    https://{{ content.Site.DomainName }}{{ content.Permalink }}
+                                    <a class="k-button btn-edit" ng-click="editPermalink()" tooltip="Edit Permalink"></a>
+                                    <a class="k-button btn-copy" ui-zeroclip zeroclip-model="content.Permalink"></a>
+                                </div>
+                                <div ng-show="editingPermalink" class="permalink-input-wrap">
+                                    <input type="text" class="form-control" ng-model="content.CurrentPermalink" ng-show="editingPermalink" />
+                                    <a ng-click="changePermalink()" ng-disabled="content.CurrentPermalink.length==0" class="btn btn-success">Ok</a>
+                                    <a ng-click="cancelPermalinkEdit()">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Page Type:
+                                <span class="fa fa-info-circle info-icon" tooltip="Content pages are CMS driven whereas static pages are developer driven and physically exist on the web server."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select ng-model="content.SiteContentTypeID" ng-show="isNew()">
+                                    <option value="1">Content</option>
+                                    <option value="2">Static</option>
+                                </select>
+                                <div class="value-only" ng-hide="isNew()">
+                                    {{ content.SiteContentType.ContentTypeName }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Parent Page:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates which page this page will appear under within the main navigation (menu)."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select ng-options="page.SiteContentID as page.Path for page in parentPages" ng-model="content.SiteContentParentID" ng-change="setPermalink()"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Order:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates the order in which this page will appear under its parent."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input kendo-numeric-text-box k-min="1" k-decimals="0" k-format="'n0'" ng-model="content.SortOrder" />
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Visible in Menu?
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates whether or not this page will appear in the main navigation (menu)."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="content.MenuVisible">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="content.MenuVisible && content.SiteContentParentID == -1">
+                            <label class="col-sm-2 control-label">
+                                Menu Icon:
+                                <span class="fa fa-info-circle info-icon" tooltip="This is the icon associated to the page within the main navigation (menu).  Icons only appear for top-most items in the menu hierarchy."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select kendo-drop-down-list k-options="menuIconOptions" ng-model="content.MenuIconCssClass" style="width:100%;"></select>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Profile Types:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates which profile types can access this page.  Blank indicates all profiles types can access this page."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <select kendo-multi-select
+                                        k-data-source="profileTypes"
+                                        k-rebind="profileTypes"
+                                        k-data-text-field="'Name'"
+                                        k-data-value-field="'ProfileTypeID'"
+                                        k-ng-model="content.ProfileTypes"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Affiliates:
+                                <span class="fa fa-info-circle info-icon" tooltip="Indicates which affiliates can access this page.  Blank indicates all affiliates can access this page."></span>
+                            </label>
+                            <div class="col-sm-6">
+                                <select kendo-multi-select
+                                        k-data-source="affiliates"
+                                        k-rebind="affiliates"
+                                        k-data-text-field="'Name'"
+                                        k-data-value-field="'AffiliateID'"
+                                        k-ng-model="content.Affiliates"></select>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Status:
+                                <span class="fa fa-info-circle info-icon" tooltip="Published indicates the page is publicly viewable.  Draft indicates a work-in-progress and cannot be seen publicly."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select ng-model="content.SiteContentStatusID" ng-change="setPublishDate()">
+                                    <option value="1">Published</option>
+                                    <option value="2">Draft</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="content.SiteContentStatusID==1">
+                            <label class="col-sm-2 control-label">
+                                Publish Date:
+                                <span class="fa fa-info-circle info-icon" tooltip="Specify at which date and time you want the page to be published.  At the specified time the page will automatically be published to the site."></span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input kendo-date-time-picker k-ng-model="content.PublishDateUtc" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <div class="button-row">
+                                    <button type="submit" class="btn btn-primary pull-left" ng-disabled="settingsForm.$invalid"><i class="fa fa-save"></i>Save Page</button>
+                                    <div class="pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </tab>
+            
+            <tab heading="Content" disabled="isNew() || content.SiteContentTypeID != 1" active="activateContentTab">
+                <div class="row">
+                    <div class="content-toolbar">
+                        <div class="form-inline clearfix">
+                            <div class="form-group">
+                                <label>Version:</label>
+                                <select kendo-drop-down-list k-options="versionOptions" k-ng-model="options.Version" k-rebind="content.Versions" style="width: 200px"></select>
+                                <a class="btn btn-default btn-icon-only" title="Add version" ng-click="addVersion()"><i class="fa fa-plus"></i></a>
+                                <a class="btn btn-default btn-icon-only" title="Edit version" ng-click="editVersion()" ng-disabled="options.Version.VersionName == 'Default'"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-default btn-icon-only" title="Delete selected version" ng-disabled="options.Version.VersionName == 'Default'" ng-click="deleteSelectedVersion()"><i class="fa fa-trash"></i></a>
+                            </div>
+                            <div class="form-group">
+                                <label>Template:</label>
+                                <select ng-options="option.SiteTemplateID as option.TemplateName for option in content.Site.SiteTemplates" ng-model="options.Version.SiteTemplateID" ng-change="changeTemplate()"></select>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-default" ng-disabled="options.Version.ContentText.length == 0" ng-click="previewVersion()"><i class="fa fa-search"></i>Preview</a>
+                            </div>
+                            <div class="pull-right">
+                                <div class="clearfix">
+                                    <a class="btn btn-primary pull-right" ng-click="savePage(settingsForm)" ng-disabled="isSaving"><i class="fa fa-floppy-o"></i>Save Changes</a>
+                                    <div class="pull-right" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div content-editor content="options.Version.ContentText"></div>
+                    </div>
+                </div>
+            </tab>
+
+        </tabset>
+    </div>
+</div>

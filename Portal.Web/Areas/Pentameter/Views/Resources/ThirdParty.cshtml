@@ -1,0 +1,98 @@
+﻿@model List<string>
+@{
+    ViewBag.Title = Html.PageTitle("Third-Party Resources");
+    ViewBag.PageTitle = "Third-Party Resources";
+    Layout = "~/Areas/Pentameter/Views/Shared/Layouts/_SubPage.cshtml";
+}
+@section head
+{
+    @Styles.Render(StyleBundleNames.Kendo)
+}
+@section vendorScripts
+{
+    @Scripts.Render(ScriptBundleNames.KendoWeb)
+}
+@section scripts
+{
+    <script>
+        $(function() {
+            portal.thirdPartyResources.init({
+                baseUrl: '@Url.Action("Index", "Resources")',
+                tooltipTemplate: '#modal-body-template',
+                services: @Model.Select(m => new { ServiceName = m }).ToHtmlJson()
+            });
+        });
+    </script>
+}
+
+@if (ViewBag.CanEdit ?? false)
+{
+    <div class="mb10">
+        <a href="@Url.AdminConsoleUrl("/content/third-party-resources")" class="btn btn btn-primary btn-icon-left btn-edit" target="_blank">Manage Third Party Resources</a>
+    </div>
+}
+<div class="rolodex-wrap">
+    <div data-role="rolodex"></div>
+</div>
+<div id="grid" class="portal-grid">
+    
+</div>
+
+<div id="service-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@using (Html.BeginHtmlTemplate("modal-body-template"))
+{
+    <div class='service-detail'>
+        <p>
+            #=Description#
+        </p>
+        #if(AddressHtml && AddressHtml.length)
+        {#
+        <p>
+            #=AddressHtml#
+        </p>
+        #}#
+        #if(PhoneNo || FaxNo)
+        {#
+        <p>
+            #if(PhoneNo)
+            {#
+                <span class='label'>phone:</span> #=PhoneNo# #if(PhoneNoExt) {# #=PhoneNoExt# #}#
+            <br/>
+            #}#
+            #if(FaxNo)
+            {#
+                <span class='label'>fax:</span> #=FaxNo#
+            #}#
+        </p>
+        #}#
+        #if(Email || WebsiteUrl)
+        {#
+        <p>
+            #if(Email)
+            {#
+                <span class='label'>email:</span> <a href='mailto:#=Email#'>#=Email#</a><br/>
+            #}#
+            #if(WebsiteUrl)
+            {#
+                <span class='label'>website:</span> <a href='#=WebsiteUrl#' target='_blank'>#=WebsiteUrl#</a>
+            #}#
+        </p>
+        #}#
+    </div>
+}

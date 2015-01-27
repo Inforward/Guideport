@@ -1,0 +1,34 @@
+﻿
+@using (Html.BeginHtmlTemplate("action-item-template"))
+{
+    <tr>
+        <td>
+            <span class="checkbox" data-bind="click: actionItemClicked, attr: { class: actionItemCheckBoxClass }"></span>
+        </td>
+        <td data-bind="attr: { class: actionItemCssClass }">
+            #= ListNumber #.
+        </td>
+        <td data-bind="attr: { class: actionItemCssClass }">
+            <span>#= Text #</span>
+
+            <div class="resources">
+                @if (ViewBag.ContentAdminEnabled ?? false)
+                {
+                    <div data-role="editor" 
+                         data-tools="['bold','italic','underline','createLink','unlink','insertImage','insertUnorderedList', 'insertOrderedList','viewHtml', 'formatting','fontName','fontSize']"
+                         data-bind="value: ResourceHtml, events: { change: resourcesChanged }">
+                    </div>
+                }
+                else
+                {
+                    <text>
+                        #if (ResourceHtml != null) 
+                        {# 
+                        #= ResourceHtml #
+                        #}#
+                    </text>
+                }
+            </div>
+        </td>
+    </tr>
+}

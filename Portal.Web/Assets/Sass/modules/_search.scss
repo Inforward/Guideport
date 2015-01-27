@@ -1,0 +1,157 @@
+
+.search-results {
+	.page-header {
+		position: relative;
+		
+		span {
+			color: $fasi-blue;
+			position: absolute;
+			right: 5px;
+			bottom: 10px;
+			display: none;
+		}
+	}
+
+	.alert {
+		display: inline-block;
+	}
+
+	.k-pager-wrap {
+		margin: 30px 0 0 0;
+		padding: 0;
+		border: 0;
+		color: inherit;
+		border-color: inherit;
+		background-color: inherit;
+
+		.k-pager-numbers {
+
+			.k-link {
+				color: $fasi-blue;
+				border-color: $gray70;
+			}
+
+			.selected-page {
+				font-weight: bold;
+				color: $fasi-blue;
+				background-color: $white10;
+			}
+		}
+	 
+		.k-pager-first {
+			display: none;
+		}
+
+		.k-pager-last {
+			display: none;
+		}
+
+		.k-link {
+			margin-left: 3px;
+			margin-right: 3px;
+			border-radius: 0.3em;
+		}
+	}
+
+}
+
+@media only screen and (min-width: 430px) {
+	.search-results {
+		.page-header {
+			span {
+				display: block;
+			}
+		}
+	}
+}
+
+.search-result-item {
+	padding-top: 25px;
+	margin-bottom: 2px;
+	position: relative;
+	border: 1px solid transparent;
+	@include radius(4px);	
+
+	.title {
+		margin-bottom: 5px;
+
+		i {
+			display: inline-block;
+			width: 24px;
+			height: 24px;
+			vertical-align: bottom;
+
+			&.pentameter { background: url(../images/search-results-icons.png) 0px 0px; }
+			&.guided-retirement-solutions { background: url(../images/search-results-icons.png) -26px 0px; }
+			&.guideport { background: url(../images/search-results-icons.png) -52px 0px; }
+		}
+
+		a {
+			text-decoration: none;
+			font-size: 20px;
+			font-weight: 400;
+			margin-bottom: 5px;
+			padding-left: 5px;
+
+			&.item-title {
+				color: $fasi-light-blue;
+			}
+		}
+	}
+
+	.meta {
+		color: $gray40;
+		font-size: 12px;
+		margin-bottom: 5px;
+
+		.item-path {
+			font-size: 12px;
+			width: 250px;
+			display: block;
+			@include ellipsis();
+
+			&:before {
+				@include font-awesome();	
+				margin-right: 5px;		
+				font-size: 16px;	
+			}
+
+			&.image:before {
+				content: "\f03e";
+			}
+
+			&.document:before {
+				content: "\f0f6";
+			}
+
+			&.link:before {
+				content: "\f0c1";
+			}
+		}
+	}
+
+	.item-description {
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	.item-text {
+		font-size: 12px;
+	}
+
+	.highlight {
+		font-weight: bold;
+	}
+}
+
+@media only screen and (min-width: 430px) {
+	.search-result-item .meta .item-path {
+		width: 390px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.search-result-item .meta .item-path {
+		width: 690px;
+	}
+}

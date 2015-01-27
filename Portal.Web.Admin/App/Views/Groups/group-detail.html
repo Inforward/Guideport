@@ -1,0 +1,109 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{groupName}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/groups">Groups</a></li>
+        <li class="active">{{groupName}}</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="tab-container" ng-cloak>
+        <tabset>
+            <tab heading="General">
+                <div class="block-header">
+                    <h3 class="title">General</h3>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <form name="groupForm" novalidate ng-submit="saveGroup(model)">
+                            <div class="field">
+                                <label ng-class="{ required: !isReadOnly }">Group Name:</label>
+                                <input type="text" ng-model="model.Name" ng-hide="isReadOnly" required />
+                                <span class="field-value" ng-show="isReadOnly">{{ model.Name }}</span>
+                            </div>
+                            <div class="field">
+                                <label>Description:</label>
+                                <textarea ng-model="model.Description" ng-hide="isReadOnly"></textarea>
+                                <span class="field-value" ng-show="isReadOnly">{{ model.Description | defaultNull }}</span>
+                            </div>
+                            <div class="button-row" ng-hide="isReadOnly">
+                                <button type="submit" class="btn btn-primary pull-left" ng-disabled="groupForm.$invalid || isSaving"><i class=" fa fa-floppy-o"></i>Save Group</button>
+                                <div class=" pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="field">
+                            <label>Last Updated:</label>
+                            <span>{{ model.ModifyDateUtc | date:'MM/dd/yyyy hh:mm a' | defaultNull }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-row" ng-show="isReadOnly">
+                    <div class="alert alert-info inline-block">
+                        <i class="fa fa-info-circle"></i> This group is systematically managed.  Only accessibility can be modified through this application.
+                    </div>
+                </div>
+            </tab>
+
+            <tab heading="User Members" select="populate()" disabled="model.GroupID <= 0" ng-controller="groupMemberUsersCtrl">
+                <div class="block-header">
+                    <h3 class="title">User Members<a tooltip="Indicates the list of users that are members of this group.  These users will then appear in the results of Advisor View and Reports when this group is selected as part of the search criteria." class="tool-tip"><span class="fa fa-info-circle"></span></a></h3>
+                    <button class="btn btn-primary" ng-click="addUsers()" ng-hide="isReadOnly"><i class="fa fa-plus-circle"></i>Add Users</button>
+                </div>
+                
+                <div ng-show="recordCount > 0">
+                    <div items="selectedMembers" 
+                         selectable-grid 
+                         kendo-grid 
+                         k-options="gridOptions" 
+                         k-ng-delay="gridOptions">
+                    </div>
+                    <button class="btn btn-default" ng-hide="isReadOnly" ng-disabled="selectedMembers.length == 0" ng-click="removeUsers()"><i class="fa fa-trash-o"></i>Remove Selected</button>
+                </div>
+
+                <div ng-show="recordCount == 0" class="text-center">
+                    <div class="alert alert-info inline-block">
+                        <i class="fa fa-info-circle"></i> This group does not contain any users.  <span ng-hide="isReadOnly">Click <strong>Add Users</strong> above.</span>  
+                    </div>
+                </div>
+            </tab>
+
+            <tab heading="Group Members" select="populate()" disabled="model.GroupID <= 0" ng-controller="groupMemberGroupsCtrl">
+                <div class="block-header">
+                    <h3 class="title">Group Members<a tooltip="Indicates the list of groups that are members of this group.  The users within these groups will then appear in the results of Advisor View and Reports when this group is selected as part of the search criteria." class="tool-tip"><span class="fa fa-info-circle"></span></a></h3>
+                    <button class="btn btn-primary" ng-click="addGroups()" ng-hide="isReadOnly"><i class="fa fa-plus-circle"></i>Add Groups</button>
+                </div>
+
+                <div ng-show="recordCount > 0">
+                    <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
+                </div>
+
+                <div ng-show="recordCount == 0" class="text-center">
+                    <div class="alert alert-info inline-block">
+                        <i class="fa fa-info-circle"></i> This group does not contain any groups. <span ng-hide="isReadOnly">Click <strong>Add Groups</strong> above.</span>  
+                    </div>
+                </div>
+            </tab>
+
+            <tab heading="Accessibility" select="populate()" disabled="model.GroupID <= 0" ng-controller="groupAccessibilityCtrl">
+                <div class="block-header">
+                    <h3 class="title">Accessibility<a tooltip="Indicates the list of users that will be able to view this group in Advisor View and Reports" class="tool-tip"><span class="fa fa-info-circle"></span></a></h3>
+                    <button class="btn btn-primary" ng-click="addUsers()"><i class="fa fa-plus-circle"></i>Add Users</button>
+                </div>
+
+                <div ng-show="recordCount > 0">
+                    <kendo-grid options="gridOptions"></kendo-grid>
+                </div>
+
+                <div ng-show="recordCount == 0" class="text-center">
+                    <div class="alert alert-info inline-block">
+                        <i class="fa fa-info-circle"></i> This group does not have any accessible users.  Click <strong>Add Users</strong> above.
+                    </div>
+                </div>
+
+            </tab>
+
+        </tabset>
+    </div>
+</div>

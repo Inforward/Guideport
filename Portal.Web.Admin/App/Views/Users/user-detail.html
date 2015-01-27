@@ -1,0 +1,292 @@
+﻿<div class="page-head">
+    <h2 class="page-title">{{user.DisplayName}}</h2>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/users">Users</a></li>
+        <li class="active">{{user.DisplayName}}</li>
+    </ol>
+</div>
+<div class="page-content">
+    <div class="tab-container">
+        <tabset>
+            
+            <tab heading="General">
+                <div class="block-header">
+                    <h3 class="title">General</h3>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-5">
+                        <table class="table-detail">
+                            <tr>
+                                <td>Preferred Name:</td>
+                                <td>{{ user.DisplayName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td>{{ user.FirstName }} {{ user.LastName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Profile Type:</td>
+                                <td>{{ user.ProfileTypeName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Affiliate:</td>
+                                <td>{{ user.AffiliateName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Profile ID:</td>
+                                <td>{{ user.ProfileID }}</td>
+                            </tr>
+                            <tr>
+                                <td>Status:</td>
+                                <td>{{ user.UserStatusName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Start Date:</td>
+                                <td>{{ user.StartDate | date:'MM/dd/yyyy' | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Terminate Date:</td>
+                                <td>{{ user.TerminateDate | date:'MM/dd/yyyy' | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Last Updated:</td>
+                                <td>{{ user.ModifyDate | date:'MM/dd/yyyy hh:mm a' | defaultNull }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-sm-6 col-md-5">
+                        <table class="table-detail">
+                            <tr>
+                                <td>Business Consultant:</td>
+                                <td>{{ user.BusinessConsultantDisplayName | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>DBA Name:</td>
+                                <td>{{ user.DBAName | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td><span ng-bind-html="user.Address | breakLines | defaultNull"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td>{{ user.Email | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Primary Phone:</td>
+                                <td>{{ user.PrimaryPhone | phone | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Home Phone:</td>
+                                <td>{{ user.HomePhone | phone | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Work Phone:</td>
+                                <td>{{ user.WorkPhone | phone | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Fax:</td>
+                                <td>{{ user.Fax | phone | defaultNull }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="user-logo">
+                    <img width="{{ logo.SmallWidth }}" height="{{ logo.SmallHeight }}" ng-src="data:{{ logo.MIMEType }};base64,{{ logo.Base64Encoded }}" />
+                </div>
+            </tab>
+
+            <tab heading="Roles" select="populateRoles()">
+                <div class="block-header">
+                    <h3 class="title">Roles</h3>
+                </div>
+                <form name="roleForm" novalidate ng-submit="saveRoles(roleForm)">
+                    <ul class="role-list">
+                        <li ng-repeat="role in roles">
+                            <div class="role-container" ng-class="{ expanded: role.Enabled && role.ApplicationRoleAccesses.length }">
+                                <div class="role">
+                                    {{ role.DisplayName }}
+                                    <div ng-show="role.Enabled && role.ApplicationRoleAccesses.length">
+                                        <ul>
+                                            <li ng-repeat="level in role.ApplicationRoleAccesses">
+                                                <input type="radio" name="{{role.Name}}" id="{{role.Name}}_{{ level.ApplicationAccess.Name }}" ng-value="level.ApplicationAccessID" ng-model="role.ApplicationAccessID" />
+                                                <label for="{{role.Name}}_{{ level.ApplicationAccess.Name }}">{{ level.ApplicationAccess.Name }}</label>
+                                                <a tooltip="{{ level.Description }}"><span class="fa fa-info-circle"></span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="switch">
+                                    <input bs-switch ng-model="role.Enabled" type="checkbox" switch-on-color="success" switch-off-color="danger" switch-size="small" />
+                                </div>
+                                <div class="info">
+                                    <a tooltip="{{ role.Description }}"><span class="fa fa-info-circle"></span></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="button-row">
+                        <button type="submit" class="btn btn-primary pull-left" ng-disabled="roleForm.$pristine || isSaving"><i class="fa fa-floppy-o"></i>Save Changes</button>
+                        <div class="pull-left" processing in-progress="isSaving" message="Saving..." complete-message="All changes saved"></div>
+                    </div>
+                </form>
+            </tab>
+
+            <tab heading="Licensing">
+                <div class="block-header">
+                    <h3 class="title">Licensing</h3>
+                </div>
+
+                <div ng-show="user.Licenses.length">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>License Type</th>
+                                <th>Description</th>
+                                <th>Exam Type</th>
+                                <th>Registration Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="license in user.Licenses | orderBy: LicenseTypeName">
+                                <td>{{ license.LicenseTypeName }}</td>
+                                <td>{{ license.Description }}</td>
+                                <td>{{ license.LicenseExamTypeName }}</td>
+                                <td>{{ license.RegistrationCategory }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div ng-hide="user.Licenses.length" class="text-center">
+                    <div class="alert alert-info inline-block">
+                        <i class="fa fa-info-circle"></i> License information is not available for this user.
+                    </div>
+                </div>
+
+            </tab>
+            
+            <tab heading="Branches">
+                <div class="block-header">
+                    <h3 class="title">Branches</h3>
+                </div>
+                <div ng-show="user.Branches.length">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Branch No</th>
+                                <th>Address</th>
+                                <th>Mailing Address</th>
+                                <th>Phone</th>
+                                <th>Fax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in user.Branches">
+                                <td>{{ branch.BranchNo }}</td>
+                                <td><span ng-bind-html="branch.Address | breakLines"></span></td>
+                                <td><span ng-bind-html="branch.MailingAddress | breakLines"></span></td>
+                                <td>{{ branch.Phone | phone | defaultNull }}</td>
+                                <td>{{ branch.Fax | phone | defaultNull }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div ng-hide="user.Branches.length" class="text-center">
+                    <div class="alert alert-info inline-block">
+                        <i class="fa fa-info-circle"></i> Branch information is not available for this user.
+                    </div>
+                </div>
+            </tab>
+            
+            <tab heading="Groups">
+                <div class="block-header">
+                    <h3 class="title">Groups</h3>
+                </div>
+                <div class="row">
+                    <section class="col-sm-4">
+                        <header>
+                            Memberships ({{ user.Groups.length }})
+                        </header>
+                        <div ng-repeat="group in user.Groups">
+                            {{ group.Name }}
+                        </div>
+                    </section>
+                    <section class="col-sm-4">
+                        <header>
+                            Accessible ({{ user.AccessibleGroups.length }})
+                        </header>
+                        <div ng-repeat="group in user.AccessibleGroups">
+                            {{ group.Name }}
+                        </div>
+                    </section>
+                </div>
+            </tab>
+
+            <tab heading="Business Metrics">
+                <div class="block-header">
+                    <h3 class="title">Business Metrics</h3>
+                </div>
+                <div ng-show="user.MetricsUpdateDate" class="row">
+                    <div class="col-sm-6 col-md-5">
+                        <table class="table-detail">
+                            <tr>
+                                <td>GDC - T12:</td>
+                                <td class="text-right">{{ user.GDCT12 | number:2 | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>GDC - Prior Year:</td>
+                                <td class="text-right">{{ user.GDCPriorYear | number:2 | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>AUM:</td>
+                                <td class="text-right">{{ user.AUM | number:2 | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Return on AUM:</td>
+                                <td class="text-right">{{ user.ReturnOnAUM | number:2 | defaultNull }} %</td>
+                            </tr>
+                            <tr>
+                                <td>Revenue - Recurring:</td>
+                                <td class="text-right">{{ user.RevenueRecurring | number:2 | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Revenue - Non-Recurring:</td>
+                                <td class="text-right">{{ user.RevenueNonRecurring | number:2 | defaultNull }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-sm-6 col-md-5">
+                        <table class="table-detail">
+                            <tr>
+                                <td>Business Valuation:</td>
+                                <td class="text-right">{{ user.BusinessValuationLow | number:2 }} - {{ user.BusinessValuationHigh | number:2 }}</td>
+                            </tr>
+                            <tr>
+                                <td>Number of Clients:</td>
+                                <td class="text-right">{{ user.NoOfClients | number | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Number of Accounts:</td>
+                                <td class="text-right">{{ user.NoOfAccounts | number | defaultNull }}</td>
+                            </tr>
+                            <tr>
+                                <td>Last Updated:</td>
+                                <td class="text-right">{{ user.MetricsUpdateDate | date:'MM/dd/yyyy hh:mm a' }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div ng-hide="user.MetricsUpdateDate" class="text-center">
+                    <div class="alert alert-info inline-block">
+                        <i class="fa fa-info-circle"></i> Business Metrics are not available for this user.
+                    </div>
+                </div>
+            </tab>
+
+        </tabset>
+    </div>
+</div>

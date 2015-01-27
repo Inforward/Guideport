@@ -1,0 +1,133 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Model", "..\..\Portal.Model\Portal.Model.csproj", "{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Data", "..\..\Portal.Data\Portal.Data.csproj", "{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A413C53E-EED2-4205-B6EF-83ADA1EFB5AD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Data.Sql.EntityFramework", "..\..\Portal.Data.Sql.EntityFramework\Portal.Data.Sql.EntityFramework.csproj", "{6D0C1305-8277-41A9-A4ED-9383C1D201F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373} = {F47FD511-B038-440E-8FFE-E1CDCD03D373}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Infrastructure", "..\..\Portal.Infrastructure\Portal.Infrastructure.csproj", "{F47FD511-B038-440E-8FFE-E1CDCD03D373}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{8745F34F-A86E-4547-B706-0EB86EDE5A7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portal", "Portal", "{CF41CDF9-8E66-4993-99AB-DD19BA249F38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadFilesToDb", "UploadFilesToDb\UploadFilesToDb.csproj", "{7D6AE46B-9522-4A34-87B8-27423AA3A6C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC} = {076ACDCA-19BD-45DC-97D9-C3BC425888BC}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownloadFilesFromFileServer", "DownloadFilesFromFileServer\DownloadFilesFromFileServer.csproj", "{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Services.Contracts", "..\..\Portal.Services.Contracts\Portal.Services.Contracts.csproj", "{076ACDCA-19BD-45DC-97D9-C3BC425888BC}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://pcoltfs01.ad.corp:8080/tfs/defaultcollection
+		SccProjectUniqueName0 = ..\\..\\Portal.Model\\Portal.Model.csproj
+		SccProjectTopLevelParentUniqueName0 = CmsFileMigration.sln
+		SccProjectName0 = ../../Portal.Model
+		SccLocalPath0 = ..\\..\\Portal.Model
+		SccProjectUniqueName1 = ..\\..\\Portal.Data\\Portal.Data.csproj
+		SccProjectTopLevelParentUniqueName1 = CmsFileMigration.sln
+		SccProjectName1 = ../../Portal.Data
+		SccLocalPath1 = ..\\..\\Portal.Data
+		SccProjectUniqueName2 = ..\\..\\Portal.Data.Sql.EntityFramework\\Portal.Data.Sql.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName2 = CmsFileMigration.sln
+		SccProjectName2 = ../../Portal.Data.Sql.EntityFramework
+		SccLocalPath2 = ..\\..\\Portal.Data.Sql.EntityFramework
+		SccProjectUniqueName3 = ..\\..\\Portal.Infrastructure\\Portal.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName3 = CmsFileMigration.sln
+		SccProjectName3 = ../../Portal.Infrastructure
+		SccLocalPath3 = ..\\..\\Portal.Infrastructure
+		SccLocalPath4 = .
+		SccProjectUniqueName5 = UploadFilesToDb\\UploadFilesToDb.csproj
+		SccProjectTopLevelParentUniqueName5 = CmsFileMigration.sln
+		SccProjectName5 = UploadFilesToDb
+		SccLocalPath5 = UploadFilesToDb
+		SccProjectUniqueName6 = DownloadFilesFromFileServer\\DownloadFilesFromFileServer.csproj
+		SccProjectTopLevelParentUniqueName6 = CmsFileMigration.sln
+		SccProjectName6 = DownloadFilesFromFileServer
+		SccLocalPath6 = DownloadFilesFromFileServer
+		SccProjectUniqueName7 = ..\\..\\Portal.Services.Contracts\\Portal.Services.Contracts.csproj
+		SccProjectTopLevelParentUniqueName7 = CmsFileMigration.sln
+		SccProjectName7 = ../../Portal.Services.Contracts
+		SccLocalPath7 = ..\\..\\Portal.Services.Contracts
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Test|Any CPU = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430}.Test|Any CPU.Build.0 = Test|Any CPU
+		{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE}.Test|Any CPU.Build.0 = Test|Any CPU
+		{6D0C1305-8277-41A9-A4ED-9383C1D201F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D0C1305-8277-41A9-A4ED-9383C1D201F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D0C1305-8277-41A9-A4ED-9383C1D201F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D0C1305-8277-41A9-A4ED-9383C1D201F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D0C1305-8277-41A9-A4ED-9383C1D201F1}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{6D0C1305-8277-41A9-A4ED-9383C1D201F1}.Test|Any CPU.Build.0 = Test|Any CPU
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373}.Test|Any CPU.Build.0 = Test|Any CPU
+		{7D6AE46B-9522-4A34-87B8-27423AA3A6C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D6AE46B-9522-4A34-87B8-27423AA3A6C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D6AE46B-9522-4A34-87B8-27423AA3A6C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D6AE46B-9522-4A34-87B8-27423AA3A6C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D6AE46B-9522-4A34-87B8-27423AA3A6C0}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{7D6AE46B-9522-4A34-87B8-27423AA3A6C0}.Test|Any CPU.Build.0 = Release|Any CPU
+		{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62}.Test|Any CPU.Build.0 = Release|Any CPU
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC}.Test|Any CPU.Build.0 = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A06A7A8A-0E6F-4010-AD8F-FB5EF7D39430} = {CF41CDF9-8E66-4993-99AB-DD19BA249F38}
+		{9E31D6AD-B3CC-4891-A5B3-2AE83388EECE} = {CF41CDF9-8E66-4993-99AB-DD19BA249F38}
+		{6D0C1305-8277-41A9-A4ED-9383C1D201F1} = {CF41CDF9-8E66-4993-99AB-DD19BA249F38}
+		{F47FD511-B038-440E-8FFE-E1CDCD03D373} = {CF41CDF9-8E66-4993-99AB-DD19BA249F38}
+		{7D6AE46B-9522-4A34-87B8-27423AA3A6C0} = {8745F34F-A86E-4547-B706-0EB86EDE5A7A}
+		{AB8057A8-D96C-4876-B72B-DDD3A2D9EB62} = {8745F34F-A86E-4547-B706-0EB86EDE5A7A}
+		{076ACDCA-19BD-45DC-97D9-C3BC425888BC} = {CF41CDF9-8E66-4993-99AB-DD19BA249F38}
+	EndGlobalSection
+EndGlobal
